@@ -134,8 +134,5 @@ prompt_context() {
 # Powerline usage
 . /usr/share/powerline/bindings/zsh/powerline.zsh
 
-# alias for dotfiles git bare repo
-alias config='/usr/bin/git --git-dir=/home/nedsi/.cfg/ --work-tree=/home/nedsi'
-
 # alias for tmux-hints
 alias hints='cd /home/nedsi/git_repos/tmux-hints/ && ./tmux-hints.sh'
