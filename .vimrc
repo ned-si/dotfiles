@@ -97,12 +97,12 @@ nnoremap ,F :find <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
 nnoremap ,V :vert sfind <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
 
 " More manageable brace expansions
-inoremap (; (<CR>);<C-c>O
+inoremap (; (<CR>);<C-c>O 
 inoremap (, (<CR>),<C-c>O
 inoremap {; {<CR>};<C-c>O
 inoremap {, {<CR>},<C-c>O
 inoremap [; [<CR>];<C-c>O 
-inoremap [, [<CR>],<C-c>O
+inoremap [, [<CR>],<C-c>O 
 
 " Useful for accessing commonly-used files
 nnoremap <leader>v :e ~/.vimrc<CR>
@@ -215,8 +215,11 @@ Plugin 'tpope/vim-commentary'
 " Ctrl P
 Plugin 'ctrlpvim/ctrlp.vim'
 
+" Lively Previewing LaTeX PDF Output
+Plugin 'xuhdev/vim-latex-live-preview'
+
 " Autoclose
-Plugin 'somini/vim-autoclose'
+"Plugin 'somini/vim-autoclose'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
