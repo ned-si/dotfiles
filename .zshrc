@@ -7,7 +7,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/nedsi/.oh-my-zsh"
+export ZSH="/home/$USER/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -135,4 +135,4 @@ prompt_context() {
 . /usr/share/powerline/bindings/zsh/powerline.zsh
 
 # alias for tmux-hints
-alias hints='cd /home/nedsi/git_repos/tmux-hints/ && ./tmux-hints.sh'
+alias hints='cd /home/$USER/git_repos/tmux-hints/ && ./tmux-hints.sh'
