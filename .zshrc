@@ -136,3 +136,10 @@ prompt_context() {
 
 # alias for tmux-hints
 alias hints='cd /home/$USER/git_repos/tmux-hints/ && ./tmux-hints.sh'
+
+# alias for start/stop scripts
+alias start='cd && ./Documents/startup_script.sh'
+alias stop='cd && ./Documents/shutdown_script.sh'
+
+# path for snap shortcuts access in launcher
+PATH=/home/nedsi/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin
