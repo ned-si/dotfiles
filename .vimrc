@@ -39,7 +39,7 @@ set noshowmode                    " Hide the default mode text
 
 " Change leader key
 let mapleader = " "
-
+ 
 " Self-explanatory convenience mappings
 imap jj <Esc>
 vmap jj <Esc>
@@ -53,19 +53,44 @@ nnoremap : ;
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+" tabularize
+if exists(":Tabularize")
+      nmap <Leader>a= :Tabularize /=<CR>
+      vmap <Leader>a= :Tabularize /=<CR>
+      nmap <Leader>a: :Tabularize /:\zs<CR>
+      vmap <Leader>a: :Tabularize /:\zs<CR>
+    endif
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
+
 " nerdtree
 nnoremap <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" vim-tmux-navigator
-let g:tmux_navigator_no_mappings = 1
+" windows navigation
+nnoremap <c-h> <c-w>k
+nnoremap <c-j> <c-w>j 
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-\> <c-w>w
 
-nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
+" resize windows
+nnoremap <c-Left> :vertical resize -5<CR>
+nnoremap <c-Down> :resize +5<CR>
+nnoremap <c-Up> :resize -5<CR>
+nnoremap <c-Right> :vertical resize +5<CR>
 
 " format code automatically
 nnoremap <leader>F :FormatCode<CR>
@@ -111,10 +136,6 @@ nnoremap <leader>z :e ~/.zshrc<CR>
 nnoremap <leader>C :e ~/.examples<CR>
 nnoremap <leader>t :e ~/TODO<CR>
 
-" Window management
-nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 6/5)<CR>
-nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 5/6)<CR>
-
 " Access file name data
 cnoremap \fp <C-R>=expand("%:p:h")<CR>
 tnoremap \fp <C-R>=expand("%:p:h")<CR>
@@ -154,6 +175,7 @@ augroup FileMarks
   autocmd BufLeave *.vim  normal! mV
   autocmd Bufleave *.yml  normal! mY
 augroup END
+
 " }}}
  
 " Vundle Plugin Manager {{{
@@ -187,9 +209,6 @@ Plugin 'tpope/vim-surround'
 " Polyglot
 Plugin 'sheerun/vim-polyglot'
 
-" tmux Navigator
-Plugin 'christoomey/vim-tmux-navigator'
-
 " Pandoc syntax
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
@@ -218,8 +237,14 @@ Plugin 'ctrlpvim/ctrlp.vim'
 " Lively Previewing LaTeX PDF Output
 Plugin 'xuhdev/vim-latex-live-preview'
 
-" Autoclose
-"Plugin 'somini/vim-autoclose'
+" Indent-guides
+Plugin 'yggdroot/indentline'
+
+" YouCompleteMe
+Plugin 'valloric/youcompleteme'
+
+" Tabular - align text
+Plugin 'godlygeek/tabular'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
