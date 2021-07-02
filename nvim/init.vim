@@ -10,7 +10,7 @@ set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 set noswapfile
-set shell=/usr/bin/zsh
+set shell=/bin/zsh
 set nohlsearch
 
 if &term =~ '256color'
@@ -59,6 +59,7 @@ Plug 'yggdroot/indentline'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 call plug#end()
 
