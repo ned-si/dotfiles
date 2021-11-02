@@ -167,6 +167,8 @@ function () {
   fi
 }
 
+export RPROMPT=$RPROMPT_BASE
+
 #
 # History
 #
