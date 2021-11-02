@@ -16,7 +16,7 @@ case $- in *i*)
 esac
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/nedsi/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -167,9 +167,6 @@ function () {
   fi
 }
 
-export RPROMPT=$RPROMPT_BASE
-export SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
-
 #
 # History
 #
@@ -187,8 +184,6 @@ setopt AUTO_PARAM_SLASH        # tab completing directory appends a slash
 setopt AUTO_PUSHD              # [default] cd automatically pushes old dir onto dir stack
 setopt AUTO_RESUME             # allow simple commands to resume backgrounded jobs
 setopt CLOBBER                 # allow clobbering with >, no need to use >!
-setopt CORRECT                 # [default] command auto-correction
-setopt CORRECT_ALL             # [default] argument auto-correction
 setopt NO_FLOW_CONTROL         # disable start (C-s) and stop (C-q) characters
 setopt NO_HIST_IGNORE_ALL_DUPS # don't filter non-contiguous duplicates from history
 setopt HIST_FIND_NO_DUPS       # don't show dupes when searching
@@ -350,3 +345,5 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 
 # fall through to cd if cdr is passed a non-recent dir as an argument
 zstyle ':chpwd:*' recent-dirs-default true
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
