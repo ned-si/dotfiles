@@ -12,6 +12,8 @@ set softtabstop=2
 set noswapfile
 set shell=/bin/zsh
 set nohlsearch
+set so=10
+set incsearch
 
 if &term =~ '256color'
   set t_ut=
@@ -33,10 +35,22 @@ nnoremap <c-Down> :resize +5<CR>
 nnoremap <c-Up> :resize -5<CR>
 nnoremap <c-Right> :vertical resize +5<CR>
 
-" Auto source .vimrc on save
-augroup Vimrc
-  autocmd! bufwritepost .vimrc source %
-augroup END
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y gg"+yG
+
+" Spell check
+set spelllang=en,fr
+nnoremap <silent> <leader>s :set spell!<cr>
+nnoremap <leader>sn ]s
+nnoremap <leader>sp [s
+
+" vimdiff
+nnoremap <leader>dn ]c
+nnoremap <leader>dp [c
+
+" Automatically source vimrc on save.
+autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " Plugin
 
