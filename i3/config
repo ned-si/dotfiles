@@ -55,7 +55,8 @@ bindsym $mod+q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-bindsym $mod+space exec --no-startup-id ~/.config/rofi/bin/launcher_colorful
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/bin/launcher_colorful
+
 # bindsym $mod+space exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
@@ -92,7 +93,7 @@ bindsym $mod+c split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -100,7 +101,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+f floating toggle
 
 # change focus between tiling / floating windows
 # bindsym $mod+d focus mode_toggle
@@ -204,8 +205,8 @@ exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id feh --bg-scale ~/images/wallpaper_abstract_colors.png
 
 # i3-layout-manager
-bindsym $mod+Shift+d exec kitty; exec standardnotes-desktop; exec firefox; exec signal-desktop-beta; exec spotify; exec whatsapp-for-linux; exec $HOME/git_repos/i3-layout-manager/layout_manager.sh default
-bindsym $mod+d exec $HOME/git_repos/i3-layout-manager/layout_manager.sh
+bindsym $mod+shift+space exec kitty; exec firefox; exec signal-desktop-beta; exec spotify; exec whatsapp-for-linux; exec standard-notes; exec $HOME/git_repos/i3-layout-manager/layout_manager.sh default
+bindsym $mod+space exec $HOME/git_repos/i3-layout-manager/layout_manager.sh
 
 # screenshots
 
@@ -219,3 +220,6 @@ bindsym $mod+mod1+g exec maim -s ~/images/screenshots/zone-$(date +%s).png
 bindsym $mod+g exec maim -s | xclip -selection clipboard -t image/png
 ## fancy zone to file 
 bindsym $mod+t exec maim -s | convert - \( +clone -background black -shadow 80x3+5+5 \) +swap -background none -layers merge +repage ~/images/screenshots/fancy-zone-$(date +%s).png
+
+# shutdown 
+bindsym $mod+ctrl+$mod1+shift+p exec --no-startup-id sudo shutdown now

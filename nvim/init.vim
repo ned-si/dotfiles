@@ -13,6 +13,7 @@ set noswapfile
 set shell=/bin/zsh
 set nohlsearch
 set so=10
+set incsearch
 
 if &term =~ '256color'
   set t_ut=
@@ -43,6 +44,10 @@ set spelllang=en,fr
 nnoremap <silent> <leader>s :set spell!<cr>
 nnoremap <leader>sn ]s
 nnoremap <leader>sp [s
+
+" vimdiff
+nnoremap <leader>dn ]c
+nnoremap <leader>dp [c
 
 " Automatically source vimrc on save.
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
