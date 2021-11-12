@@ -10,13 +10,13 @@ alias vi="nvim"
 alias vim="nvim"
 alias pip="pip3"
 
-# tmux --> testing without as iterm has it incorporated
-# case $- in *i*)
-#   if [ -z "$TMUX" ]; then exec tmux; fi;;
-# esac
+# tmux
+case $- in *i*)
+  if [ -z "$TMUX" ]; then exec tmux; fi;;
+esac
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/jsu/.oh-my-zsh"
+export ZSH="/home/nedsi/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -35,7 +35,6 @@ plugins=(
   ansible 
   colorize 
   common-aliases 
-  debian 
   docker 
   docker-compose 
   docker-machine 
@@ -50,6 +49,7 @@ plugins=(
   tmux 
   vi-mode 
   vundle
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -58,8 +58,8 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-   export EDITOR='nvim'
- fi
+  export EDITOR='nvim'
+fi
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
