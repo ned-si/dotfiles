@@ -6,6 +6,7 @@ alias k=kubectl
 complete -F __start_kubectl k
 
 # aliases
+alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias pip="pip3"
@@ -76,16 +77,6 @@ typeset -A __NEDSI
 
 __NEDSI[ITALIC_ON]=$'\e[3m'
 __NEDSI[ITALIC_OFF]=$'\e[23m'
-
-#
-# Correction
-#
-
-# exceptions to auto-correction
-alias man='nocorrect man'
-alias mkdir='nocorrect mkdir'
-alias mv='nocorrect mv'
-alias sudo='nocorrect sudo'
 
 #
 # Prompt
@@ -349,3 +340,9 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 zstyle ':chpwd:*' recent-dirs-default true
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jsu/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jsu/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jsu/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jsu/google-cloud-sdk/completion.zsh.inc'; fi
