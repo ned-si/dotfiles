@@ -1,4 +1,3 @@
-filetype plugin indent on
 syntax on
 
 let mapleader = " "
@@ -79,6 +78,13 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
+
+Plug 'neovim/nvim-lspconfig'
+
+Plug 'nvim-lua/completion-nvim'
+
 call plug#end()
 
 " Plug-in conf
@@ -114,3 +120,33 @@ nnoremap <leader>grom :Git rebase origin/master<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR> #this doesn't work for some reason
+
+" git branch in status line
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'gitbranch#name'
+  \ },
+  \ }
+
+" LSP
+" Use completion-nvim in every buffer
+autocmd BufEnter * lua require'completion'.on_attach()
+lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
+
+lua require'lspconfig'.ansiblels.setup{}
+lua require'lspconfig'.dockerls.setup{}
+lua require'lspconfig'.dotls.setup{}
+lua require'lspconfig'.flux-lsp.setup{}
+lua require'lspconfig'.fsautocomplete.setup{}
+lua require'lspconfig'.groovyls.setup{}
+lua require'lspconfig'.hls.setup{}
+lua require'lspconfig'.jsonls.setup{}
+lua require'lspconfig'.gopls.setup{}
+lua require'lspconfig'.yamlls.setup{}
+
+set completeopt=menuone,noinsert,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']

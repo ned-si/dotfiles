@@ -64,7 +64,9 @@ fi
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
+
 export PATH=$HOME/.config/rofi/bin:$PATH
+
 
 # ssh-agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
@@ -86,17 +88,6 @@ typeset -A __NEDSI
 
 __NEDSI[ITALIC_ON]=$'\e[3m'
 __NEDSI[ITALIC_OFF]=$'\e[23m'
-
-#
-# Correction
-#
-
-# exceptions to auto-correction
-alias man='nocorrect man'
-alias mkdir='nocorrect mkdir'
-alias mv='nocorrect mv'
-alias sudo='nocorrect sudo'
-alias qmk='nocorrect qmk'
 
 #
 # Prompt
@@ -198,8 +189,6 @@ setopt AUTO_PARAM_SLASH        # tab completing directory appends a slash
 setopt AUTO_PUSHD              # [default] cd automatically pushes old dir onto dir stack
 setopt AUTO_RESUME             # allow simple commands to resume backgrounded jobs
 setopt CLOBBER                 # allow clobbering with >, no need to use >!
-setopt CORRECT                 # [default] command auto-correction
-setopt CORRECT_ALL             # [default] argument auto-correction
 setopt NO_FLOW_CONTROL         # disable start (C-s) and stop (C-q) characters
 setopt NO_HIST_IGNORE_ALL_DUPS # don't filter non-contiguous duplicates from history
 setopt HIST_FIND_NO_DUPS       # don't show dupes when searching
