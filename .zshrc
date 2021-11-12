@@ -6,6 +6,7 @@ alias k=kubectl
 complete -F __start_kubectl k
 
 # aliases
+alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias pip="pip3"
@@ -16,7 +17,7 @@ case $- in *i*)
 esac
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/nedsi/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -170,7 +171,6 @@ function () {
 }
 
 export RPROMPT=$RPROMPT_BASE
-export SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 
 #
 # History
@@ -350,3 +350,11 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 
 # fall through to cd if cdr is passed a non-recent dir as an argument
 zstyle ':chpwd:*' recent-dirs-default true
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jsu/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jsu/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jsu/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jsu/google-cloud-sdk/completion.zsh.inc'; fi

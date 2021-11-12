@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+filetype plugin indent on
+
+>>>>>>> macos
 syntax on
 
 let mapleader = " "
@@ -7,12 +12,14 @@ set nu rnu
 set expandtab
 set shiftwidth=2
 set tabstop=2
-set softtabstop=2
-set noswapfile
 set shell=/bin/zsh
 set nohlsearch
 set so=10
 set incsearch
+set nocompatible
+set noshowmode
+set hidden
+let g:indentLine_fileTypeExclude = ['markdown']
 
 if &term =~ '256color'
   set t_ut=
@@ -48,7 +55,7 @@ nnoremap <leader>sp [s
 nnoremap <leader>dn ]c
 nnoremap <leader>dp [c
 
-" Automatically source vimrc on save.
+" Automatically source `.vimrc` on save.
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " Plugin
@@ -78,12 +85,20 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
-Plug 'itchyny/lightline.vim'
-Plug 'itchyny/vim-gitbranch'
 
 Plug 'neovim/nvim-lspconfig'
 
 Plug 'nvim-lua/completion-nvim'
+Plug 'sheerun/vim-polyglot'
+
+Plug 'ThePrimeagen/harpoon'
+
+Plug 'sbdchd/neoformat'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 call plug#end()
 
@@ -91,20 +106,8 @@ call plug#end()
 
 "" easymotion
 
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <Leader>l <Plug>(easymotion-bd-jk)
-nmap <Leader>l <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " telescope
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
@@ -116,21 +119,6 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>ga :Git fetch --all<CR>
 nnoremap <leader>grum :Git rebase upstream/master<CR>
 nnoremap <leader>grom :Git rebase origin/master<CR>
-
-nmap <leader>gj :diffget //3<CR>
-nmap <leader>gf :diffget //2<CR>
-nmap <leader>gs :G<CR> #this doesn't work for some reason
-
-" git branch in status line
-let g:lightline = {
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'gitbranch#name'
-  \ },
-  \ }
 
 " LSP
 " Use completion-nvim in every buffer
@@ -150,3 +138,83 @@ lua require'lspconfig'.yamlls.setup{}
 
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+nnoremap <leader>dj :diffget //3<CR>
+nnoremap <leader>df :diffget //2<CR>
+nnoremap <leader>ds :G<CR>
+
+" harpoon
+nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>d :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>e :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
+
+nnoremap <leader>j :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <leader>k :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <leader>l :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>; :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
+nnoremap <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
+nnoremap <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
+
+" nerdtree
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+
+" Neoformat
+nnoremap <leader>f :Neoformat<CR>
+let g:neoformat_enabled_yaml = ['prettier']
+let g:neoformat_enabled_markdown = ['prettier']
+let g:neoformat_enabled_json = ['prettier']
+let g:neoformat_enabled_go = ['gofmt']
+let g:shfmt_opt="-ci"
+
+lua << END
+require'lualine'.setup{
+  options = {
+    theme = 'dracula',
+    component_separators = '|',
+    section_separators = { left = '', right = '' }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff',
+                  {'diagnostics', sources={'nvim_lsp', 'coc'}}},
+    lualine_c = {
+      {
+      'filename',
+      file_status = true,
+      path = 1,
+      shorting_target = 40
+      }
+    },
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+END
+
+nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+command! TrimWhitespace call TrimWhitespace()
+
+:noremap <leader>w :call TrimWhitespace()<CR>
