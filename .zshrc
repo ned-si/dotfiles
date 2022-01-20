@@ -1,4 +1,5 @@
 # k8s
+autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit
 compinit
 source <(kubectl completion zsh)
@@ -62,7 +63,6 @@ else
   export EDITOR='nvim'
 fi
 
-autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
 

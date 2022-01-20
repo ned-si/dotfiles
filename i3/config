@@ -205,7 +205,7 @@ exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id feh --bg-scale ~/images/wallpaper_abstract_colors.png
 
 # i3-layout-manager
-bindsym $mod+shift+space exec kitty; exec firefox; exec signal-desktop-beta; exec spotify; exec whatsapp-for-linux; exec standard-notes; exec $HOME/git_repos/i3-layout-manager/layout_manager.sh default
+bindsym $mod+shift+space exec kitty; exec firefox; exec signal-desktop; exec spotify; exec whatsapp-for-linux; exec standard-notes; exec $HOME/git_repos/i3-layout-manager/layout_manager.sh default
 bindsym $mod+space exec $HOME/git_repos/i3-layout-manager/layout_manager.sh
 
 # screenshots

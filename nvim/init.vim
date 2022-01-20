@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 filetype plugin indent on
 
->>>>>>> macos
 syntax on
 
 let mapleader = " "
@@ -21,6 +18,8 @@ set noshowmode
 set hidden
 let g:indentLine_fileTypeExclude = ['markdown']
 
+autocmd FileType go setlocal shiftwidth=4 expandtab! tabstop=4
+
 if &term =~ '256color'
   set t_ut=
 endif
@@ -30,6 +29,8 @@ vnoremap ; :
 vnoremap : ;
 nnoremap ; :
 nnoremap : ;
+
+inoremap jj <Esc>
 
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
@@ -73,6 +74,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 Plug 'easymotion/vim-easymotion'
 
@@ -83,22 +85,34 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
-
 Plug 'neovim/nvim-lspconfig'
+Plug 'tami5/lspsaga.nvim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'tamago324/cmp-zsh'
 
-Plug 'nvim-lua/completion-nvim'
-Plug 'sheerun/vim-polyglot'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+
+Plug 'onsails/lspkind-nvim'
 
 Plug 'ThePrimeagen/harpoon'
 
 Plug 'sbdchd/neoformat'
+Plug 'cohama/lexima.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+
+" Plug 'sheerun/vim-polyglot', { 'do' : './build' }
 
 call plug#end()
 
@@ -116,25 +130,11 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " vim fugitive
+nnoremap <leader>gs :G<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
+nnoremap <leader>gp :Git push<CR>
 nnoremap <leader>grum :Git rebase upstream/master<CR>
 nnoremap <leader>grom :Git rebase origin/master<CR>
-
-" LSP
-" Use completion-nvim in every buffer
-autocmd BufEnter * lua require'completion'.on_attach()
-lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
-
-lua require'lspconfig'.ansiblels.setup{}
-lua require'lspconfig'.dockerls.setup{}
-lua require'lspconfig'.dotls.setup{}
-lua require'lspconfig'.flux-lsp.setup{}
-lua require'lspconfig'.fsautocomplete.setup{}
-lua require'lspconfig'.groovyls.setup{}
-lua require'lspconfig'.hls.setup{}
-lua require'lspconfig'.jsonls.setup{}
-lua require'lspconfig'.gopls.setup{}
-lua require'lspconfig'.yamlls.setup{}
 
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
@@ -165,49 +165,11 @@ autocmd FileType nerdtree setlocal relativenumber
 
 " Neoformat
 nnoremap <leader>f :Neoformat<CR>
-let g:neoformat_enabled_yaml = ['prettier']
-let g:neoformat_enabled_markdown = ['prettier']
-let g:neoformat_enabled_json = ['prettier']
-let g:neoformat_enabled_go = ['gofmt']
-let g:shfmt_opt="-ci"
 
-lua << END
-require'lualine'.setup{
-  options = {
-    theme = 'dracula',
-    component_separators = '|',
-    section_separators = { left = '', right = '' }
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff',
-                  {'diagnostics', sources={'nvim_lsp', 'coc'}}},
-    lualine_c = {
-      {
-      'filename',
-      file_status = true,
-      path = 1,
-      shorting_target = 40
-      }
-    },
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  extensions = {}
-}
-END
-
-nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
@@ -218,3 +180,9 @@ endfun
 command! TrimWhitespace call TrimWhitespace()
 
 :noremap <leader>w :call TrimWhitespace()<CR>
+
+" Plugin stuff
+
+lua << EOF
+require'lspconfig'.gopls.setup{}
+EOF
