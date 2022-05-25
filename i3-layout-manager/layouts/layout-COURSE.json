@@ -1,0 +1,263 @@
+{
+"border": "pixel",
+"floating": "auto_off",
+"fullscreen_mode": 0,
+"layout": "splith",
+"marks": [],
+"percent": null,
+"type": "workspace",
+"nodes": [
+{
+"border": "pixel",
+"floating": "auto_off",
+"fullscreen_mode": 0,
+"layout": "splith",
+"marks": [],
+"percent": null,
+"type": "workspace",
+"nodes": [
+// vim:ts=4:sw=4:et
+{
+    // stacked split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "stacked",
+    "marks": [],
+    "percent": 0.2,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1387,
+               "width": 1003,
+               "x": 10,
+               "y": 10
+            },
+            "marks": [],
+            "name": "WhatsApp for Linux",
+            "percent": 0.5,
+            "swallows": [
+               {
+               // "class": "^Whatsapp-for-linux$",
+               // "instance": "^whatsapp-for-linux$",
+               // "machine": "^nedsi-home$",
+               // "title": "^WhatsApp for Linux$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1387,
+               "width": 5094,
+               "x": 10,
+               "y": 10
+            },
+            "marks": [],
+            "name": "Signal",
+            "percent": 0.5,
+            "swallows": [
+               {
+               // "class": "^Signal$",
+               // "instance": "^signal$",
+               // "machine": "^nedsi-home$",
+               // "title": "^Signal$",
+               // "window_role": "^browser-window$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 3,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1387,
+       "width": 1685,
+       "x": 10,
+       "y": 10
+    },
+    "marks": [],
+    "name": "Lab 8. Secure Deployment and DAST with ArgoCD and OWASP ZAP - y5t1x85oc0xc-Lab8.SecureDeploymentandDASTwithArgoCDandOWASPZAP.pdf — Mozilla Firefox",
+    "percent": 0.333333333333333,
+    "swallows": [
+       {
+       // "class": "^firefox$",
+       // "instance": "^Navigator$",
+       // "machine": "^nedsi-home$",
+       // "title": "^Lab 8. Secure Deployment and DAST with ArgoCD and OWASP ZAP - y5t1x85oc0xc-Lab8.SecureDeploymentandDASTwithArgoCDandOWASPZAP.pdf — Mozilla Firefox$",
+       // "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    // stacked split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "stacked",
+    "marks": [],
+    "percent": 0.266666666666667,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1387,
+               "width": 833,
+               "x": 10,
+               "y": 10
+            },
+            "marks": [],
+            "name": "zsh",
+            "percent": 0.5,
+            "swallows": [
+               {
+               // "class": "^kitty$",
+               // "instance": "^kitty$",
+               // "machine": "^nedsi-home$",
+               // "title": "^zsh$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1387,
+               "width": 1691,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "klaxalk/i3-layout-manager: Saving, loading and managing layouts for i3wm. — Mozilla Firefox",
+            "percent": 0.5,
+            "swallows": [
+               {
+               // "class": "^firefox$",
+               // "instance": "^Navigator$",
+               // "machine": "^nedsi-home$",
+               // "title": "^klaxalk/i3-layout-manager: Saving, loading and managing layouts for i3wm. — Mozilla Firefox$",
+               // "window_role": "^browser$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    // stacked split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "stacked",
+    "marks": [],
+    "percent": 0.2,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1387,
+               "width": 2539,
+               "x": 10,
+               "y": 10
+            },
+            "marks": [],
+            "name": "Standard Notes",
+            "percent": 0.5,
+            "swallows": [
+               {
+               // "class": "^Standard Notes$",
+               // "instance": "^standard notes$",
+               // "machine": "^nedsi-home$",
+               // "title": "^Standard Notes$",
+               // "window_role": "^browser-window$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1387,
+               "width": 1259,
+               "x": 10,
+               "y": 10
+            },
+            "marks": [],
+            "name": "Spotify",
+            "percent": 0.5,
+            "swallows": [
+               {
+               // "class": "^Spotify$",
+               // "instance": "^spotify$",
+               // "machine": "^nedsi-home$",
+               // "title": "^Spotify$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    // floating_con with 1 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splith",
+    "marks": [],
+    "percent": null,
+    "rect": {
+       "height": 786,
+       "width": 1393,
+       "x": 12,
+       "y": 11
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_on",
+            "geometry": {
+               "height": 780,
+               "width": 1387,
+               "x": 11,
+               "y": 11
+            },
+            "marks": [],
+            "name": "Picture-in-Picture",
+            "percent": 1,
+            "swallows": [
+               {
+               // "class": "^firefox$",
+               // "instance": "^Toolkit$",
+               // "machine": "^nedsi-home$",
+               // "title": "^Picture-in-Picture$",
+               // "window_role": "^PictureInPicture$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+

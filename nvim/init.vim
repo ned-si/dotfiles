@@ -16,6 +16,7 @@ set incsearch
 set nocompatible
 set noshowmode
 set hidden
+set noswapfile
 let g:indentLine_fileTypeExclude = ['markdown']
 
 autocmd FileType go setlocal shiftwidth=4 expandtab! tabstop=4
@@ -97,20 +98,18 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'tamago324/cmp-zsh'
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-
 Plug 'onsails/lspkind-nvim'
 
 Plug 'ThePrimeagen/harpoon'
 
-Plug 'sbdchd/neoformat'
 Plug 'cohama/lexima.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+
+Plug 'xuhdev/vim-latex-live-preview'
 
 " Plug 'sheerun/vim-polyglot', { 'do' : './build' }
 
@@ -162,14 +161,6 @@ nnoremap <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
 let NERDTreeShowLineNumbers=1
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
-
-" Neoformat
-nnoremap <leader>f :Neoformat<CR>
-
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
