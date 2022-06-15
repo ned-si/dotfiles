@@ -11,7 +11,7 @@ set shiftwidth=2
 set tabstop=2
 set shell=/bin/zsh
 set nohlsearch
-set so=10
+set so=5
 set incsearch
 set nocompatible
 set noshowmode
@@ -87,6 +87,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'tami5/lspsaga.nvim'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
@@ -110,7 +111,13 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'xuhdev/vim-latex-live-preview'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
+Plug 'kdheepak/lazygit.nvim'
+
+Plug 'ckipp01/nvim-jenkinsfile-linter' " not sure if it's working as a running Jenkins server is needed
+
+" Plug 'brymer-meneses/grammar-guard.nvim' --> not working so far
 " Plug 'sheerun/vim-polyglot', { 'do' : './build' }
 
 call plug#end()
@@ -127,6 +134,8 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fe <cmd>lua require('telescope.builtin').diagnostics()<cr>
+nnoremap <leader>fr <cmd>lua require('telescope.builtin').lsp_references()<cr>
 
 " vim fugitive
 nnoremap <leader>gs :G<CR>
@@ -172,8 +181,12 @@ command! TrimWhitespace call TrimWhitespace()
 
 :noremap <leader>w :call TrimWhitespace()<CR>
 
+"" lazygit
+" setup mapping to call :LazyGit
+nnoremap <silent> <leader>gg :LazyGit<CR>
+
 " Plugin stuff
 
 lua << EOF
-require'lspconfig'.gopls.setup{}
+require("nvim-lsp-installer").setup{}
 EOF

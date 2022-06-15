@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# feh
+exec --no-startup-id feh --bg-scale ~/personal/images/wallpaper_abstract_colors.png
+
+# polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh --forest
+
+# echo 
+notify-send -i display "Display profile" "$AUTORANDR_CURRENT_PROFILE"

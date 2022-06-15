@@ -11,6 +11,7 @@ alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias pip="pip3"
+alias lg="lazygit"
 
 # tmux
 case $- in *i*)
@@ -52,6 +53,7 @@ plugins=(
   vi-mode 
   vundle
   zsh-autosuggestions
+  gcloud
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -76,6 +78,10 @@ fi
 if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
+
+# keychain
+
+eval $(keychain --eval --quiet --noask nedsi)
 
 ##### shameless copy of part of Greg Hurell's config: https://www.github.com/wincent/wincent #####
 
