@@ -5,6 +5,7 @@ compinit
 source <(kubectl completion zsh)
 alias k=kubectl
 complete -F __start_kubectl k
+complete -C '/usr/bin/aws_completer' aws
 
 # aliases
 alias v="nvim"

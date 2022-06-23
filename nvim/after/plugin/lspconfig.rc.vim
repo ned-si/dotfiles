@@ -25,45 +25,12 @@ local on_attach = function(client, bufnr)
   end
 end
 
-nvim_lsp.gopls.setup {
-  on_attach = on_attach
+local servers = {'gopls', 'ansiblels', 'terraformls', 'ltex', 'marksman', 'groovyls', 'jsonls', 'pylsp', 'dockerls', 'yamlls'}
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
   }
-
-nvim_lsp.ansiblels.setup {
-  on_attach = on_attach
-  }
-
-nvim_lsp.terraformls.setup {
-  on_attach = on_attach
-  }
-
-nvim_lsp.ltex.setup {
-  on_attach = on_attach
-  }
-
-nvim_lsp.marksman.setup {
-  on_attach = on_attach
-  }
-
-nvim_lsp.groovyls.setup {
-  on_attach = on_attach
-  }
-
-nvim_lsp.jsonls.setup {
-  on_attach = on_attach
-  }
-
-nvim_lsp.pylsp.setup {
-  on_attach = on_attach
-  }
-
-nvim_lsp.dockerls.setup {
-  on_attach = on_attach
-  }
-
-nvim_lsp.yamlls.setup {
-  on_attach = on_attach
-  }
+end
 
 require('lspconfig').yamlls.setup {
   settings = {
@@ -73,3 +40,10 @@ require('lspconfig').yamlls.setup {
   }
 }
 EOF
+
+" if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+"       vim.diagnostic.disable(bufnr)
+"       vim.defer_fn(function()
+"         vim.diagnostic.reset(nil, bufnr)
+"       end, 1000)
+"     end

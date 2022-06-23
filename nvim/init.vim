@@ -117,7 +117,10 @@ Plug 'kdheepak/lazygit.nvim'
 
 Plug 'ckipp01/nvim-jenkinsfile-linter' " not sure if it's working as a running Jenkins server is needed
 
-" Plug 'brymer-meneses/grammar-guard.nvim' --> not working so far
+Plug 'towolf/vim-helm'
+
+Plug 'someone-stole-my-name/yaml-companion.nvim'
+
 " Plug 'sheerun/vim-polyglot', { 'do' : './build' }
 
 call plug#end()
@@ -189,4 +192,7 @@ nnoremap <silent> <leader>gg :LazyGit<CR>
 
 lua << EOF
 require("nvim-lsp-installer").setup{}
+local cfg = require("yaml-companion").setup({})
+require("lspconfig")["yamlls"].setup(cfg)
+require("telescope").load_extension("yaml_schema")
 EOF
