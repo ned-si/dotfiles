@@ -60,76 +60,8 @@ nnoremap <leader>dp [c
 " Automatically source `.vimrc` on save.
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
-" Plugin
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'tpope/vim-surround'
-
-Plug 'scrooloose/nerdtree'
-
-Plug 'airblade/vim-gitgutter'
-
-Plug 'tpope/vim-repeat'
-
-Plug 'tpope/vim-commentary'
-
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-
-Plug 'easymotion/vim-easymotion'
-
-Plug 'yggdroot/indentline'
-
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
-Plug 'tami5/lspsaga.nvim'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-nvim-lua'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'tamago324/cmp-zsh'
-
-Plug 'onsails/lspkind-nvim'
-
-Plug 'ThePrimeagen/harpoon'
-
-Plug 'cohama/lexima.vim'
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-
-Plug 'xuhdev/vim-latex-live-preview'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-
-Plug 'kdheepak/lazygit.nvim'
-
-Plug 'ckipp01/nvim-jenkinsfile-linter' " not sure if it's working as a running Jenkins server is needed
-
-Plug 'towolf/vim-helm'
-
-Plug 'someone-stole-my-name/yaml-companion.nvim'
-
-" Plug 'sheerun/vim-polyglot', { 'do' : './build' }
-
-call plug#end()
-
-" Plug-in conf
-
 "" easymotion
 
-" s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
 
 " telescope
@@ -139,6 +71,7 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fe <cmd>lua require('telescope.builtin').diagnostics()<cr>
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+nnoremap <leader>fs <cmd>Telescope yaml_schema<cr>
 
 " vim fugitive
 nnoremap <leader>gs :G<CR>
@@ -191,8 +124,6 @@ nnoremap <silent> <leader>gg :LazyGit<CR>
 " Plugin stuff
 
 lua << EOF
+require('plugins')
 require("nvim-lsp-installer").setup{}
-local cfg = require("yaml-companion").setup({})
-require("lspconfig")["yamlls"].setup(cfg)
-require("telescope").load_extension("yaml_schema")
 EOF
