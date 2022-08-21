@@ -1,6 +1,6 @@
 require'lualine'.setup{
   options = {
-    theme = 'dracula',
+    theme = 'tokyonight',
     component_separators = '|',
     section_separators = { left = '', right = '' }
   },

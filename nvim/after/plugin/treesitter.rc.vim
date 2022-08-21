@@ -14,6 +14,9 @@ require 'nvim-treesitter.configs'.setup {
     },
   ensure_installed = {
       "bash",
+      "bibtex",
+      "c",
+      "comment",
       "dockerfile",
       "go",
       "hcl",
@@ -24,8 +27,13 @@ require 'nvim-treesitter.configs'.setup {
       "python",
       "regex",
       "rust",
+      "rego",
+      "sql",
       "vim",
       "yaml"
+    },
+    matchup = {
+      enable = true,      -- mandatory, false will disable the whole extension
     }
   }
 EOF

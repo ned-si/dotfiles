@@ -1,3 +1,15 @@
+<!--toc:start-->
+- [dotfiles](#dotfiles)
+ - [i3(-gaps)](#i3-gaps)
+ - [i3-layout-manager](#i3-layout-manager)
+ - [kitty](#kitty)
+ - [nvim](#nvim)
+ - [zsh](#zsh)
+ - [tmux](#tmux)
+ - [picom/polybar/rofi](#picompolybarrofi)
+ - [yabai/skhd/spacebar](#yabaiskhdspacebar)
+<!--toc:end-->
+
 # dotfiles
 
 ## i3(-gaps)

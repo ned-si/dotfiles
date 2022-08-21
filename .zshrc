@@ -6,6 +6,7 @@ source <(kubectl completion zsh)
 alias k=kubectl
 complete -F __start_kubectl k
 complete -C '/usr/bin/aws_completer' aws
+source /usr/share/bash-completion/completions/az
 
 # aliases
 alias v="nvim"
@@ -44,12 +45,14 @@ plugins=(
   docker-machine 
   helm 
   kubectl 
+  kube-ps1
   python 
   rsync 
   safe-paste 
   sudo 
   systemadmin 
   systemd 
+  terraform
   tmux 
   vi-mode 
   vundle
@@ -66,7 +69,7 @@ else
   export EDITOR='nvim'
 fi
 
-complete -o nospace -C /usr/local/bin/terraform terraform
+complete -o nospace -C /usr/bin/terraform terraform
 
 
 export PATH=$HOME/.config/rofi/bin:$PATH
@@ -83,6 +86,8 @@ fi
 # keychain
 
 eval $(keychain --eval --quiet --noask nedsi)
+
+eval $(thefuck --alias)
 
 ##### shameless copy of part of Greg Hurell's config: https://www.github.com/wincent/wincent #####
 
@@ -177,7 +182,13 @@ function () {
   fi
 }
 
-export RPROMPT=$RPROMPT_BASE
+export RPROMPT='$(tf_prompt_info)''$(kube_ps1)'$RPROMPT_BASE
+
+export KUBE_PS1_SYMBOL_ENABLE=false
+export KUBE_PS1_SEPARATOR=''
+export KUBE_PS1_CTX_COLOR=yellow
+export ZSH_THEME_TF_PROMPT_PREFIX=%F{yellow}[%f
+export ZSH_THEME_TF_PROMPT_SUFFIX=%F{yellow}]%f
 
 #
 # History
@@ -220,7 +231,6 @@ setopt SHARE_HISTORY           # share history across shells
 autoload -U select-word-style
 select-word-style bash # only alphanumeric chars are considered WORDCHARS
 
-source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=59'
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 
@@ -360,8 +370,8 @@ zstyle ':chpwd:*' recent-dirs-default true
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/jsu/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jsu/google-cloud-sdk/path.zsh.inc'; fi
+# >>>> Vagrant command completion (start)
+fpath=(/opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/zsh $fpath)
+# <<<<  Vagrant command completion (end)
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/jsu/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jsu/google-cloud-sdk/completion.zsh.inc'; fi
+[[ $commands[doctl] ]] && source <(doctl completion zsh)

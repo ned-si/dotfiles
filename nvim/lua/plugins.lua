@@ -6,17 +6,43 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
 
+  -- themes
+  use 'folke/tokyonight.nvim'
+  use 'Mofiqul/dracula.nvim'
+
   -- general
-  use 'tpope/vim-surround'
-  use 'scrooloose/nerdtree'
+  use({
+    "kylechui/nvim-surround",
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+  })
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icons
+      },
+      tag = 'nightly', -- optional, updated every week. (see issue #1193)
+  }
   use 'tpope/vim-repeat'
-  use 'tpope/vim-commentary'
   use 'yggdroot/indentline'
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2', -- optional but strongly recommended
+    config = function()
+    end
+  }
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+    }
 
   -- git
-  use 'airblade/vim-gitgutter'
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
+  use 'lewis6991/gitsigns.nvim'
 
   -- telescope stuff
   use 'nvim-lua/popup.nvim'
@@ -82,4 +108,20 @@ return require('packer').startup(function()
       require("telescope").load_extension("yaml_schema")
     end,
   }
+
+  use 'barreiroleo/ltex-extra.nvim'
+
+  use 'junegunn/vim-easy-align'
+
+  use 'andymass/vim-matchup'
+
+  -- debugger
+  use 'mfussenegger/nvim-dap'
+
+  -- git worktree
+  use 'ThePrimeagen/git-worktree.nvim'
+
+  -- toggle stuff
+  use { 'nguyenvukhang/nvim-toggler' }
+
 end)
