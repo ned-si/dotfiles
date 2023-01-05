@@ -202,7 +202,9 @@ exec_always --no-startup-id autorandr --change
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # i3-layout-manager
-bindsym $mod+shift+space exec kitty; exec firefox; exec signal-desktop; exec spotify; exec whatsapp-for-linux; exec standard-notes; exec slack; exec $HOME/personal/repos/i3-layout-manager/layout_manager.sh 3w-stacks_main-mid
+bindsym $mod+shift+space exec kitty; exec firefox; exec signal-desktop;\
+  exec spotify; exec ferdium; exec obsidian;\
+  exec $HOME/personal/repos/i3-layout-manager/layout_manager.sh 3w-stacks_main-mid
 bindsym $mod+space exec $HOME/personal/repos/i3-layout-manager/layout_manager.sh
 
 # screenshots
