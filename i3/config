@@ -195,12 +195,6 @@ for_window [class=.*] border pixel 3
 default_border pixel 3
 default_floating_border pixel 3
 
-# autorandr 
-exec_always --no-startup-id autorandr --change
-
-# picom
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
-
 # i3-layout-manager
 bindsym $mod+shift+space exec kitty; exec firefox; exec signal-desktop;\
   exec spotify; exec ferdium; exec obsidian;\
@@ -217,8 +211,18 @@ bindsym $mod+ctrl+mod1+g exec maim -i $(xdotool getactivewindow) ~/screenshots/w
 bindsym $mod+ctrl+g exec maim -s ~/screenshots/zone-$(date +%s).png
 ## zone to clipboard
 bindsym $mod+g exec maim -s | xclip -selection clipboard -t image/png
-## fancy zone to file 
+## fancy zone to file
 #bindsym $mod+t exec maim -s | convert - \( +clone -background black -shadow 80x3+5+5 \) +swap -background none -layers merge +repage ~/images/screenshots/fancy-zone-$(date +%s).png
 
-# shutdown 
-bindsym $mod+ctrl+$mod1+shift+s exec --no-startup-id sudo shutdown now
+# startup commands
+
+# autorandr
+exec_always --no-startup-id autorandr --change
+
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
+
+## backgroun
+exec --no-startup-id feh --bg-scale ~/personal/images/wallpaper_jwst_cosmic_cliffs.png
+
+## status bar
+exec --no-startup-id $HOME/.config/polybar/launch.sh --forest
