@@ -1,0 +1,9 @@
+-- package({ 'template.nvim', dev = true, cmd = 'Template', config = conf.template_nvim })
+--
+-- local temp = require('template')
+--
+-- temp.temp_dir = '~/.config/nvim/template'
+-- temp.author = 'nedsi'
+-- temp.email = 'nedsi@pm.me'
+--
+-- require("telescope").load_extension('find_template')
