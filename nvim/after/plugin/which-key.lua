@@ -1,3 +1,3 @@
-require("which-key").setup() -- TODO: SET THIS UP !!! Maybe? Not sure if useful with Telescope stuff for keymaps
+require("which-key").setup() -- TODO: SET THIS UP! Complements well native descriptions
 
 vim.keymap.set('n', '<leader>td', '<cmd>TodoTelescope<CR>')
