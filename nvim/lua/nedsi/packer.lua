@@ -75,7 +75,7 @@ require('packer').startup(function(use)
 
   -- YAML
   use {
-    "someone-stole-my-name/yaml-companion.nvim", --TODO: working, but can't use diagnostics related stuff OR the diagnostics are broken, to re test
+    "someone-stole-my-name/yaml-companion.nvim", --FIX: working, but can't use diagnostics related stuff OR the diagnostics are broken, to re test
     requires = {
         { "neovim/nvim-lspconfig" },
         { "nvim-lua/plenary.nvim" },
@@ -118,7 +118,7 @@ require('packer').startup(function(use)
   -- Preview markdown
   use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 
-  -- Debugger TODO: maybe implement that one day
+  -- Debugger NOTE: maybe implement that one day
   -- use 'mfussenegger/nvim-dap'
 
   -- Git worktree
