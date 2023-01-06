@@ -42,9 +42,8 @@ require('packer').startup(function(use)
 
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline' },
   }
-
   use { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     run = function()
@@ -119,7 +118,7 @@ require('packer').startup(function(use)
   -- Preview markdown
   use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 
-  -- Debugger TODO: maybe implement that one day 
+  -- Debugger TODO: maybe implement that one day
   -- use 'mfussenegger/nvim-dap'
 
   -- Git worktree
@@ -149,7 +148,7 @@ require('packer').startup(function(use)
   use {
   "folke/todo-comments.nvim",
   requires = "nvim-lua/plenary.nvim"
-}
+  }
   use 'rcarriga/nvim-notify'
   use 'stevearc/dressing.nvim'
   -- use({ -- NOTE: not sure I want this
@@ -209,4 +208,3 @@ if is_bootstrap then
   print '=================================='
   return
 end
-
