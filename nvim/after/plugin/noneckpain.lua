@@ -127,4 +127,4 @@ NoNeckPain.bufferOptions = {
     },
 }
 
-vim.keymap.set("n", "<leader>nnp", vim.cmd.NoNeckPain, {desc = '[N]o [N]eck [P]ain'})
+vim.keymap.set("n", "<leader>nnp", vim.cmd.NoNeckPain, { desc = '[N]o [N]eck [P]ain' })

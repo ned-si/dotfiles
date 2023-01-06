@@ -17,5 +17,5 @@ vim.api.nvim_create_user_command('PeekClose', function()
   end
 end, {})
 
-vim.keymap.set("n", "<leader>pm", vim.cmd.PeekOpen, {desc = '[P]review [M]arkdown'})
-vim.keymap.set("n", "<leader>pc", vim.cmd.PeekClose, {desc = '[P]review [C]lose'})
+vim.keymap.set("n", "<leader>pm", vim.cmd.PeekOpen, { desc = 'Peek - [P]review [M]arkdown' })
+vim.keymap.set("n", "<leader>pc", vim.cmd.PeekClose, { desc = 'Peek - [P]review [C]lose' })

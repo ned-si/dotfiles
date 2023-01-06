@@ -1,10 +1,6 @@
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
@@ -15,28 +11,28 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>rn', vim.lsp.buf.rename, 'LSP - [R]e[n]ame')
+  nmap('<leader>ca', vim.lsp.buf.code_action, 'LSP - [C]ode [A]ction')
 
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('gd', vim.lsp.buf.definition, 'LSP - [G]oto [D]efinition')
+  nmap('gr', require('telescope.builtin').lsp_references, 'LSP - [G]oto [R]eferences')
+  nmap('gI', vim.lsp.buf.implementation, 'LSP - [G]oto [I]mplementation')
+  nmap('<leader>D', vim.lsp.buf.type_definition, 'LSP - Type [D]efinition')
+  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'LSP - [D]ocument [S]ymbols')
+  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'LSP - [W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('gs', vim.lsp.buf.signature_help, '[G]oto [S]ignature Documentation')
+  nmap('K', vim.lsp.buf.hover, 'LSP - Hover Documentation')
+  nmap('gs', vim.lsp.buf.signature_help, 'LSP - [G]oto [S]ignature Documentation')
 
   -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  nmap('gD', vim.lsp.buf.declaration, 'LSP - [G]oto [D]eclaration')
+  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, 'LSP - [W]orkspace [A]dd Folder')
+  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, 'LSP - [W]orkspace [R]emove Folder')
   nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
-  nmap('<leader>f', vim.lsp.buf.format, '[F]ormat')
+  end, 'LSP - [W]orkspace [L]ist Folders')
+  nmap('<leader>f', vim.lsp.buf.format, 'LSP - [F]ormat')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -65,10 +61,10 @@ local servers = {
 }
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<C-p>', vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<C-n>', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<C-p>', vim.diagnostic.goto_prev, { desc = "Diagnostic [P]revious" })
+vim.keymap.set('n', '<C-n>', vim.diagnostic.goto_next, { desc = "Diagnostic [N]ext" })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Diagnostic - Open float" })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Diagnostic - Set loc list" })
 
 -- Setup neovim lua configuration
 require('neodev').setup()
