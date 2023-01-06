@@ -1,4 +1,6 @@
+---@diagnostic disable: param-type-mismatch
 require("projections").setup({ -- FIX: make this work with manually added workspaces only
+  workspaces = {
     { "$HOME/personal/repos", {} },
     { "$HOME/work/repos", {} },
     { "$HOME/work/projects", {} },
@@ -40,8 +42,8 @@ vim.opt.sessionoptions:append("localoptions") -- Save localoptions to session fi
 
 -- Bind <leader>fp to Telescope projections
 require('telescope').load_extension('projections')
-vim.keymap.set("n", "<leader>pf", function() vim.cmd("Telescope projections") end, { desc = '[P]rojection [F]ind' } )
+vim.keymap.set("n", "<leader>pf", function() vim.cmd("Telescope projections") end, { desc = '[P]rojection - [F]ind' } )
 
-vim.keymap.set("n", "<leader>ps", vim.cmd.StoreProjectSession, { desc = '[P]rojection [S]tore session' })
-vim.keymap.set("n", "<leader>pr", vim.cmd.RestoreProjectSession, { desc = '[P]rojection [R]estore session' })
-vim.keymap.set("n", "<leader>pa", vim.cmd.AddWorkspace, { desc = '[P]rojection [A]dd workspace' })
+vim.keymap.set("n", "<leader>ps", vim.cmd.StoreProjectSession, { desc = '[P]rojection - [S]tore session' })
+vim.keymap.set("n", "<leader>pr", vim.cmd.RestoreProjectSession, { desc = '[P]rojection - [R]estore session' })
+vim.keymap.set("n", "<leader>pa", vim.cmd.AddWorkspace, { desc = '[P]rojection - [A]dd workspace' })
