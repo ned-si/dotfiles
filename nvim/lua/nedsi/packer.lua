@@ -151,6 +151,7 @@ require('packer').startup(function(use)
   requires = "nvim-lua/plenary.nvim"
 }
   use 'rcarriga/nvim-notify'
+  use 'stevearc/dressing.nvim'
   -- use({ -- NOTE: not sure I want this
   --   "folke/noice.nvim",
   --   requires = {
