@@ -13,13 +13,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- TODO: implement that in LUA!
--- fun! TrimWhitespace()
---   let l:save = winsaveview()
---   keeppatterns %s/\s\+$//e
---   call winrestview(l:save)
--- endfun
---
--- command! TrimWhitespace call TrimWhitespace()
---
--- :noremap <leader>w :call TrimWhitespace()<CR>
+-- TODO: really refactor in LUA
+vim.cmd [[
+  fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+  endfun
+
+  command! TrimWhitespace call TrimWhitespace()
+]]
+
+vim.keymap.set("n", "<leader>w", vim.cmd.TrimWhitespace, {desc = "Trim [W]hite spaces"})
