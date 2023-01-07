@@ -74,10 +74,10 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file executable" })
 
 -- Show keymaps
-vim.keymap.set("n", "<leader>tk", ":Telescope keymaps<CR>", { desc = "[T]elescope - [K]eymaps" })
+vim.keymap.set("n", "<leader>sk", ":Telescope keymaps<CR>", { desc = "Telescope - [S]earch [K]eymaps" })
 
 -- Choose YAML schema
-vim.keymap.set("n", "<leader>ty", ":Telescope yaml_schema<CR>", { desc = "[T]elescope - [Y]AML schema" })
+vim.keymap.set("n", "<leader>sy", ":Telescope yaml_schema<CR>", { desc = "Telescope - [S]earch [Y]AML schema" })
 
 -- NOTE: Might be useful at some point, keep in mind
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
