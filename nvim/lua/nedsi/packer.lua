@@ -183,7 +183,7 @@ require('packer').startup(function(use)
   use 'gnikdroy/projections.nvim'
 
   -- Pandoc integration
-  use 'aspeddro/pandoc.nvim' -- TODO: set this up properly
+  use 'aspeddro/pandoc.nvim'
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
