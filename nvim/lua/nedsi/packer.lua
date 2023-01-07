@@ -143,8 +143,12 @@ require('packer').startup(function(use)
   use "almo7aya/openingh.nvim"
 
   -- Templates everywhere!
-  -- use {'glepnir/template.nvim'} -- TODO: make it work or use another one...
-  use { 'cvigilv/esqueleto.nvim', branch = "develop" }
+  use {
+    'glepnir/template.nvim',
+    config = function()
+      require("telescope").load_extension("find_template")
+    end,
+  }
 
   -- Cute things
   use 'nvim-zh/colorful-winsep.nvim'
