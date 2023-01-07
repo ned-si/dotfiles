@@ -154,13 +154,13 @@ require('packer').startup(function(use)
   }
   use 'rcarriga/nvim-notify'
   use 'stevearc/dressing.nvim'
-  -- use({ -- NOTE: not sure I want this
-  --   "folke/noice.nvim",
-  --   requires = {
-  --     "MunifTanjim/nui.nvim",
-  --     "rcarriga/nvim-notify",
-  --   }
-  -- })
+  use({
+    "folke/noice.nvim",
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  })
 
   -- What's the keybinding?
   use "folke/which-key.nvim"
