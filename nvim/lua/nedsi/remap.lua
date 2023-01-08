@@ -27,11 +27,12 @@ vim.keymap.set('n', '<C-j>', "<C-w>j", { desc = "Move to lower Window" })
 vim.keymap.set('n', '<C-k>', "<C-w>k", { desc = "Move to upper Window" })
 vim.keymap.set('n', '<C-l>', "<C-w>l", { desc = "Move to right Window" })
 
--- Easy moves when using terms
+-- Terminal stuff
 vim.keymap.set('t', '<C-h>', "<C-\\><C-N><C-w>h")
 vim.keymap.set('t', '<C-j>', "<C-\\><C-N><C-w>j")
 vim.keymap.set('t', '<C-k>', "<C-\\><C-N><C-w>k")
 vim.keymap.set('t', '<C-l>', "<C-\\><C-N><C-w>l")
+vim.keymap.set('t', '<Esc>', "<C-\\><C-N>")
 
 -- Easy resize windows
 vim.keymap.set('n', '<C-left>', ':vertical resize -5<CR>', { desc = "Resize smaller horizontally" })
@@ -77,6 +78,9 @@ vim.keymap.set("n", "<leader>sy", ":Telescope yaml_schema<CR>", { desc = "Telesc
 
 -- Trim white spaces
 vim.keymap.set("n", "<leader>w", vim.cmd.TrimWhitespace, {desc = "Trim [W]hite spaces"})
+
+-- PackerSync
+vim.keymap.set("n", "<leader>ps", vim.cmd.PackerSync, {desc = "[P]acker[S]ync"})
 
 -- NOTE: Might be useful at some point, keep in mind
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
