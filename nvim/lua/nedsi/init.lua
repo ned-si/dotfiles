@@ -24,4 +24,3 @@ vim.cmd [[
   command! TrimWhitespace call TrimWhitespace()
 ]]
 
-vim.keymap.set("n", "<leader>w", vim.cmd.TrimWhitespace, {desc = "Trim [W]hite spaces"})
