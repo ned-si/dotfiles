@@ -75,6 +75,9 @@ vim.keymap.set("n", "<leader>sk", ":Telescope keymaps<CR>", { desc = "Telescope 
 -- Choose YAML schema
 vim.keymap.set("n", "<leader>sy", ":Telescope yaml_schema<CR>", { desc = "Telescope - [S]earch [Y]AML schema" })
 
+-- Trim white spaces
+vim.keymap.set("n", "<leader>w", vim.cmd.TrimWhitespace, {desc = "Trim [W]hite spaces"})
+
 -- NOTE: Might be useful at some point, keep in mind
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
