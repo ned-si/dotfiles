@@ -26,7 +26,7 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Telescope - Fuzzily search in current buffer]' })
 
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = 'Telescope - [S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sf', "<cmd>Telescope find_files hidden=true<CR>", { desc = 'Telescope - [S]earch [F]iles' })
 vim.keymap.set('n', '<leader>si', require('telescope.builtin').git_files, { desc = 'Telescope - [S]earch g[I]t files' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Telescope - [S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Telescope - [S]earch current [W]ord' })
