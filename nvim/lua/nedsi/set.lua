@@ -41,3 +41,6 @@ vim.opt.completeopt = 'menuone,noselect'
 -- Case insensitive searching UNLESS /C or capital in search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+-- nerdtree
+vim.g.NERDTreeShowLineNumbers=1
