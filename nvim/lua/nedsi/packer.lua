@@ -70,6 +70,7 @@ require('packer').startup(function(use)
 
   use { -- Additional text objects via treesitter
     'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-treesitter/nvim-treesitter-context',
     after = 'nvim-treesitter',
   }
 
@@ -143,9 +144,6 @@ require('packer').startup(function(use)
   -- Preview markdown
   use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 
-  -- Debugger NOTE: maybe implement that one day
-  -- use 'mfussenegger/nvim-dap'
-
   -- Git worktree
   use 'ThePrimeagen/git-worktree.nvim'
 
@@ -209,13 +207,14 @@ require('packer').startup(function(use)
   use 'aduros/ai.vim'
 
   -- Session management
-  use 'gnikdroy/projections.nvim'
+  use "natecraddock/sessions.nvim"
 
   -- Pandoc integration
   use 'aspeddro/pandoc.nvim'
 
   -- Fancy terminal
   use "akinsho/toggleterm.nvim"
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
