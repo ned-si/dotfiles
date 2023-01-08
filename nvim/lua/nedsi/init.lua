@@ -14,6 +14,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- TODO: really refactor in LUA
+-- Trim White spaces in buffer
 vim.cmd [[
   fun! TrimWhitespace()
     let l:save = winsaveview()
@@ -24,3 +25,16 @@ vim.cmd [[
   command! TrimWhitespace call TrimWhitespace()
 ]]
 
+P = function(v)
+  print(vim.inspect(v))
+  return v
+end
+
+RELOAD = function(...)
+  return require("plenary.reload").reload_module(...)
+end
+
+R = function(name)
+  RELOAD(name)
+  return require(name)
+end
