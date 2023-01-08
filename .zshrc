@@ -66,6 +66,7 @@ alias kns="kubens"
 alias kctx="kubectx"
 alias kon="kubeon"
 alias kof="kubeoff"
+alias ts="tmux-sessionizer"
 
 # autocompletion
 ## general
