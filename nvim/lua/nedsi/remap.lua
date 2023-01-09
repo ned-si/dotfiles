@@ -65,10 +65,11 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- Avoid `Q`
 vim.keymap.set('n', 'Q', '<nop>')
 
-vim.keymap.set('n', 'C-f', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { desc = "tmux-sessionizer - New Window" })
+-- Tmux-Sessionizer
+vim.keymap.set('n', '<leader>ts', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { desc = "[T]mux-[S]essionizer" })
 
 -- Make current file executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file executable" })
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file e[X]ecutable" })
 
 -- Show keymaps
 vim.keymap.set("n", "<leader>sk", ":Telescope keymaps<CR>", { desc = "Telescope - [S]earch [K]eymaps" })
