@@ -25,6 +25,7 @@ vim.cmd [[
   command! TrimWhitespace call TrimWhitespace()
 ]]
 
+-- stuff to dev plugins
 P = function(v)
   print(vim.inspect(v))
   return v
