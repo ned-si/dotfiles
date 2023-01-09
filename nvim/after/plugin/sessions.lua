@@ -1,5 +1,7 @@
 require("sessions").setup({
-    session_filepath = ".session",
+    -- session_filepath = ".session",
+    session_filepath = vim.fn.stdpath("data") .. "/sessions",
+    absolute = true,
 })
 
 vim.keymap.set("n", "<leader>es", vim.cmd.SessionsSave, { desc = "S[E]ssion [S]ave" })
