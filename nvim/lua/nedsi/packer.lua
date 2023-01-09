@@ -86,14 +86,14 @@ require('packer').startup(function(use)
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
   -- Helm
-  use 'towolf/vim-helm' -- FIX: fix this! Currently not working at all
+  use 'towolf/vim-helm' -- TODO: control if working
 
   -- Jenkins
-  use({'ckipp01/nvim-jenkinsfile-linter', requires = { "nvim-lua/plenary.nvim" } }) -- FIX: fix this! Currently not working at all
+  use({'ckipp01/nvim-jenkinsfile-linter', requires = { "nvim-lua/plenary.nvim" } }) -- TODO:control if working
 
   -- YAML
   use {
-    "someone-stole-my-name/yaml-companion.nvim", --FIX: working, but can't use diagnostics related stuff OR the diagnostics are broken, to re test
+    "someone-stole-my-name/yaml-companion.nvim",
     requires = {
         { "neovim/nvim-lspconfig" },
         { "nvim-lua/plenary.nvim" },
