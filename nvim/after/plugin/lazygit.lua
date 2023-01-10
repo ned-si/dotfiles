@@ -1,1 +1,1 @@
-vim.keymap.set("n", "<leader>lg", vim.cmd.LazyGit, { desc = '[L]azy[G]it' })
+vim.keymap.set("n", "<leader>gs", vim.cmd.LazyGit, { desc = 'LazyGit: [G]it [S]tatus' })

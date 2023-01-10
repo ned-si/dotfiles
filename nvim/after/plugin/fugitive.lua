@@ -1,1 +1,1 @@
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Fugitive - [G]it [S]tatus" })
+vim.keymap.set("n", "<leader>fg", vim.cmd.Git, { desc = "[F]ugitive - [G]it" })
