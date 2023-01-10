@@ -40,6 +40,9 @@ require('packer').startup(function(use)
 
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
+
+      -- Cool LSP information
+      'glepnir/lspsaga.nvim', branch = "main",
     },
   }
   use({
