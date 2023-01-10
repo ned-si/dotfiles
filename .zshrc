@@ -151,11 +151,18 @@ bindkey "^s" history-incremental-pattern-search-forward
 
 # Functions
 
-## change local git config
+## Change local git config
 function gcidtx() {
     git config user.name "Julien Sudan"
     git config user.email "juliensu@ext.inditex.com"
     git config user.signingkey C4C0EBDD98B457B6
+}
+
+## Start command
+function start() {
+  feh --bg-fill ~/personal/images/wallpaper_destroyers.png
+  $HOME/.config/polybar/launch.sh --forest
+  sudo systemctl restart logid.service
 }
 
 # Make CTRL-Z background things and unbackground them.
