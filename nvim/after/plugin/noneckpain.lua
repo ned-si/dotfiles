@@ -3,7 +3,7 @@ require("no-neck-pain").setup({
     debug = false,
     -- When `true`, enables the plugin when you start Neovim.
     enableOnVimEnter = false,
-    -- The width of the focused buffer when enabling NNP.
+    -- The width of the focused buffer when enabling NP.
     -- If the available window size is less than `width`, the buffer will take the whole screen.
     width = 130,
     -- Set globally to Neovim, it allows you to toggle the enable/disable state.
@@ -127,4 +127,4 @@ NoNeckPain.bufferOptions = {
     },
 }
 
-vim.keymap.set("n", "<leader>nnp", vim.cmd.NoNeckPain, { desc = '[N]o [N]eck [P]ain' })
+vim.keymap.set("n", "<leader>np", vim.cmd.NoNeckPain, { desc = '[N]o [N]eck [P]ain' })
