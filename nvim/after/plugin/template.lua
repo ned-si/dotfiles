@@ -5,3 +5,4 @@ require('template').setup({
 })
 
 vim.keymap.set("n", "<leader>st", ":Telescope find_template<CR>", { desc = "Telescope - [S]earch [T]emplates" })
+vim.keymap.set("n", "<leader>ti", ":Template ", { desc = "[T]emplate [I]nsert" })
