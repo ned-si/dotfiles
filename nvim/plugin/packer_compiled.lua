@@ -403,22 +403,36 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/yaml-companion.nvim",
     url = "https://github.com/someone-stole-my-name/yaml-companion.nvim"
+  },
+  ["yaml.nvim"] = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/opt/yaml.nvim",
+    url = "https://github.com/cuducos/yaml.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: template.nvim
-time([[Config for template.nvim]], true)
-try_loadstring("\27LJ\2\nR\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\18find_template\19load_extension\14telescope\frequire\0", "config", "template.nvim")
-time([[Config for template.nvim]], false)
 -- Config for: yaml-companion.nvim
 time([[Config for yaml-companion.nvim]], true)
 try_loadstring("\27LJ\2\nP\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\16yaml_schema\19load_extension\14telescope\frequire\0", "config", "yaml-companion.nvim")
 time([[Config for yaml-companion.nvim]], false)
+-- Config for: template.nvim
+time([[Config for template.nvim]], true)
+try_loadstring("\27LJ\2\nR\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\18find_template\19load_extension\14telescope\frequire\0", "config", "template.nvim")
+time([[Config for template.nvim]], false)
 -- Conditional loads
 time([[Conditional loading of telescope-fzf-native.nvim]], true)
   require("packer.load")({"telescope-fzf-native.nvim"}, {}, _G.packer_plugins)
 time([[Conditional loading of telescope-fzf-native.nvim]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType yaml ++once lua require("packer.load")({'yaml.nvim'}, { ft = "yaml" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

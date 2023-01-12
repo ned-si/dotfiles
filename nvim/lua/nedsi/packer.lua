@@ -98,13 +98,21 @@ require('packer').startup(function(use)
   use {
     "someone-stole-my-name/yaml-companion.nvim",
     requires = {
-        { "neovim/nvim-lspconfig" },
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-telescope/telescope.nvim" },
+      { "neovim/nvim-lspconfig" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
     },
     config = function()
       require("telescope").load_extension("yaml_schema")
     end,
+  }
+  use {
+    "cuducos/yaml.nvim",
+    ft = {"yaml"}, -- optional
+    requires = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim" -- optional
+    },
   }
 
   -- Learn to speak properly

@@ -1,0 +1,6 @@
+vim.keymap.set("n", "<leader>av", vim.cmd.YAMLView, { desc = "Y[A]ML [V]iew" })
+vim.keymap.set("n", "<leader>aya", vim.cmd.YAMLYank, { desc = "Y[A]ML [YA]nk" })
+vim.keymap.set("n", "<leader>ayk", vim.cmd.YAMLYankKey, { desc = "Y[A]ML [Y]ank [K]ey" })
+vim.keymap.set("n", "<leader>ayv", vim.cmd.YAMLYankValue, { desc = "Y[A]ML [Y]ank [V]alue" })
+vim.keymap.set("n", "<leader>aq", vim.cmd.YAMLQuickfix, { desc = "Y[A]ML [Q]uickfix" })
+vim.keymap.set("n", "<leader>at", vim.cmd.YAMLTelescope, { desc = "Y[A]ML [T]elescope" })
