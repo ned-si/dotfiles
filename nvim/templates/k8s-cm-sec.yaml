@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{_variable_}}-config
+data:
+  example.property: example-value
+  example.secret: mysecret
+  labels:
+    app: {{_variable_}}
+  annotations:
+    description: "{{_variable_}} config map"

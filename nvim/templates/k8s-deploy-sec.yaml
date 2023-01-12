@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{_variable_}}-deployment
+spec:
+  replicas: 3{{_cursor_}}
+  selector:
+    matchLabels:
+      app: {{_variable_}}
+  template:
+    metadata:
+      labels:
+        app: {{_variable_}}
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+      containers:
+      - name: example-container
+        image: example-image:latest
+        ports:
+        - containerPort: 80
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        env:
+        - name: EXAMPLE_ENV
+          value: example-value
+      imagePullSecrets:
+      - name: myregistrykey
