@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{_variable_}}-statefulset
+spec:
+  serviceName: {{_variable_}}-service
+  replicas: 3
+  selector:
+    matchLabels:
+      app: {{_variable_}}
+  template:
+    metadata:
+      labels:
+        app: {{_variable_}}
+    spec:
+      containers:
+      - name: {{_variable_}}-container
+        image: {{_variable_}}-image:latest
+        ports:
+        - containerPort: 80

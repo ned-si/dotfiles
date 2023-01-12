@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{_variable_}}-statefulset
+spec:
+  serviceName: {{_variable_}}-service
+  replicas: 3
+  selector:
+    matchLabels:
+      app: {{_variable_}}
+  template:
+    metadata:
+      labels:
+        app: {{_variable_}}
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+      containers:
+      - name: {{_variable_}}-container
+        image: {{_variable_}}-image:latest
+        ports:
+        - containerPort: 80
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        env:
+        - name: {{_variable_}}_ENV
+          value: {{_variable_}}-value
+      imagePullSecrets:
+      - name: myregistrykey
