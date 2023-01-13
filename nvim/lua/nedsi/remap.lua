@@ -38,7 +38,7 @@ vim.keymap.set('t', '<Esc>', "<C-\\><C-N>")
 vim.keymap.set('n', '<C-left>', ':vertical resize -5<CR>', { desc = "Resize smaller horizontally" })
 vim.keymap.set('n', '<C-down>', ':resize +5<CR>', { desc = "Resize bigger vertically" })
 vim.keymap.set('n', '<C-up>', ':resize -5<CR>', { desc = "Resize smaller vertically" })
-vim.keymap.set('n', '<C-right>', ':vertical resize +5<C', { desc = "Resize bigger horizontally" })
+vim.keymap.set('n', '<C-right>', ':vertical resize +5<CR>', { desc = "Resize bigger horizontally" })
 
 -- Old habits
 vim.keymap.set('i', 'jj', '<Esc>', { desc = "Escape" })
