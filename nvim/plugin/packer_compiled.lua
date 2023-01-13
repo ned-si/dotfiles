@@ -239,6 +239,11 @@ _G.packer_plugins = {
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-jdtls"] = {
+    loaded = true,
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
+    url = "https://github.com/mfussenegger/nvim-jdtls"
+  },
   ["nvim-jenkinsfile-linter"] = {
     loaded = true,
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/nvim-jenkinsfile-linter",

@@ -115,6 +115,9 @@ require('packer').startup(function(use)
     },
   }
 
+  -- Java LSP
+  use 'mfussenegger/nvim-jdtls'
+
   -- Learn to speak properly
   use 'barreiroleo/ltex-extra.nvim'
 
