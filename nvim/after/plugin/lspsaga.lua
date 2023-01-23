@@ -6,6 +6,9 @@ require('lspsaga').setup({
     tabe = '<C-c>t',
     quit = 'q',
   },
+  ui = {
+    border = 'single'
+  },
 })
 
 -- Lsp finder find the symbol definition implement reference
