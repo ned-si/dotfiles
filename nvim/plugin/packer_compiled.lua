@@ -353,6 +353,11 @@ _G.packer_plugins = {
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/template.nvim",
     url = "https://github.com/glepnir/template.nvim"
   },
+  ["term-edit.nvim"] = {
+    loaded = true,
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/term-edit.nvim",
+    url = "https://github.com/chomosuke/term-edit.nvim"
+  },
   ["todo-comments.nvim"] = {
     loaded = true,
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
@@ -424,14 +429,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: template.nvim
-time([[Config for template.nvim]], true)
-try_loadstring("\27LJ\2\nR\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\18find_template\19load_extension\14telescope\frequire\0", "config", "template.nvim")
-time([[Config for template.nvim]], false)
 -- Config for: yaml-companion.nvim
 time([[Config for yaml-companion.nvim]], true)
 try_loadstring("\27LJ\2\nP\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\16yaml_schema\19load_extension\14telescope\frequire\0", "config", "yaml-companion.nvim")
 time([[Config for yaml-companion.nvim]], false)
+-- Config for: template.nvim
+time([[Config for template.nvim]], true)
+try_loadstring("\27LJ\2\nR\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\18find_template\19load_extension\14telescope\frequire\0", "config", "template.nvim")
+time([[Config for template.nvim]], false)
 -- Conditional loads
 time([[Conditional loading of telescope-fzf-native.nvim]], true)
   require("packer.load")({"telescope-fzf-native.nvim"}, {}, _G.packer_plugins)
