@@ -155,6 +155,9 @@ require('packer').startup(function(use)
   use 'PhilRunninger/nerdtree-buffer-ops'
   use 'Xuyuanp/nerdtree-git-plugin'
 
+  -- file navigation as buffer
+  use 'stevearc/oil.nvim'
+
   -- Preview markdown
   use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 
