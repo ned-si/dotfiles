@@ -77,9 +77,6 @@ vim.keymap.set("n", "<leader>sk", ":Telescope keymaps<CR>", { desc = "Telescope 
 -- Choose YAML schema
 vim.keymap.set("n", "<leader>sy", ":Telescope yaml_schema<CR>", { desc = "Telescope - [S]earch [Y]AML schema" })
 
--- Trim white spaces
-vim.keymap.set("n", "<leader>w", vim.cmd.TrimWhitespace, {desc = "Trim [W]hite spaces"})
-
 -- PackerSync
 vim.keymap.set("n", "<leader>ps", vim.cmd.PackerSync, {desc = "[P]acker[S]ync"})
 
