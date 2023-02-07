@@ -13,18 +13,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- TODO: really refactor in LUA
--- Trim White spaces in buffer
-vim.cmd [[
-  fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-  endfun
-
-  command! TrimWhitespace call TrimWhitespace()
-]]
-
 -- stuff to dev plugins
 P = function(v)
   print(vim.inspect(v))
