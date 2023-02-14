@@ -80,6 +80,10 @@ vim.keymap.set("n", "<leader>sy", ":Telescope yaml_schema<CR>", { desc = "Telesc
 -- PackerSync
 vim.keymap.set("n", "<leader>ps", vim.cmd.PackerSync, {desc = "[P]acker[S]ync"})
 
+-- Diff current windows
+vim.keymap.set("n", "<leader>dt", ":windo diffthis<CR>", {desc = "[D]iff[T]his"})
+vim.keymap.set("n", "<leader>du", ":diffoff<CR>", {desc = "[D]iff[O]ff"})
+
 -- NOTE: Might be useful at some point, keep in mind
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
