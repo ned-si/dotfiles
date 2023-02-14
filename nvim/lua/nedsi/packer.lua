@@ -236,6 +236,8 @@ require('packer').startup(function(use)
   -- Align all the things
   use 'echasnovski/mini.nvim'
 
+  -- Fancy bufferline
+  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
