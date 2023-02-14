@@ -214,6 +214,11 @@ _G.packer_plugins = {
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/mini.nvim",
     url = "https://github.com/echasnovski/mini.nvim"
   },
+  ["nap.nvim"] = {
+    loaded = true,
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/nap.nvim",
+    url = "https://github.com/liangxianzhe/nap.nvim"
+  },
   ["neodev.nvim"] = {
     loaded = true,
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/neodev.nvim",
