@@ -146,6 +146,8 @@ require('packer').startup(function(use)
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'folke/tokyonight.nvim'
   use 'Mofiqul/dracula.nvim'
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use 'nvim-tree/nvim-web-devicons'
 
   -- Surrounds
   use 'kylechui/nvim-surround'
