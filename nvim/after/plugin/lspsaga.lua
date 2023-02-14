@@ -7,7 +7,9 @@ require('lspsaga').setup({
     quit = 'q',
   },
   ui = {
-    border = 'single'
+    border = 'single',
+    colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
+    kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
   },
 })
 
