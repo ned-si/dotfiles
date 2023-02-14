@@ -241,6 +241,10 @@ require('packer').startup(function(use)
   -- Fancy bufferline
   use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
 
+  -- navigation between things
+  use 'liangxianzhe/nap.nvim'
+
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
