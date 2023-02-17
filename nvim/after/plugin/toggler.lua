@@ -1,6 +1,7 @@
 require('nvim-toggler').setup({
-  -- your own inverses
+  -- custom inverses
   inverses = {
-    ['vim'] = 'emacs'
+    ['vim'] = 'emacs',
+    ['[ ]'] = '[x]'
   }
 })
