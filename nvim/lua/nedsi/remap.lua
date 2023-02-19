@@ -78,10 +78,14 @@ vim.keymap.set("n", "<leader>sk", ":Telescope keymaps<CR>", { desc = "Telescope 
 vim.keymap.set("n", "<leader>sy", ":Telescope yaml_schema<CR>", { desc = "Telescope - [S]earch [Y]AML schema" })
 
 -- PackerSync
-vim.keymap.set("n", "<leader>ps", vim.cmd.PackerSync, {desc = "[P]acker[S]ync"})
+vim.keymap.set("n", "<leader>ps", vim.cmd.PackerSync, { desc = "[P]acker[S]ync" })
 
 -- Diff current windows
-vim.keymap.set("n", "<leader>dt", ":windo diffthis<CR>", {desc = "[D]iff[T]his"})
-vim.keymap.set("n", "<leader>du", ":diffoff<CR>", {desc = "[D]iff[O]ff"})
+vim.keymap.set("n", "<leader>dt", ":windo diffthis<CR>", { desc = "[D]iff[T]his" })
+vim.keymap.set("n", "<leader>du", ":diffoff<CR>", { desc = "[D]iff[O]ff" })
+
+-- Nerdtree
+vim.keymap.set("n", "<leader>nt", ":NERDTreeToggle<CR>", { desc = "[N]ERD[T]ree"} )
+
 -- toggle conceallevel
 vim.keymap.set("n", "<leader>tc", ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>", { desc = "[T]oggle [C]onceallevel"} )
