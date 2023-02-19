@@ -1,6 +1,6 @@
 require("nap").setup({
-  next_prefix = "<cr>",
-  prev_prefix = "<c-cr>",
+  next_prefix = "<,>",
+  prev_prefix = "<c-,>",
   next_repeat = "<c-n>",
   prev_repeat = "<c-p>"
 })
