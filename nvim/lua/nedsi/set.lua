@@ -38,7 +38,6 @@ vim.g.markdown_fenced_languages = {
   "lua",
   "go",
   "bash",
-  "hcl",
   "yaml"
 }
 
