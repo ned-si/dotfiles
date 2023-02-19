@@ -47,7 +47,7 @@ vim.keymap.set("n", "]E", function()
 end, { silent = true })
 
 -- Outline
-vim.keymap.set("n","<leader>o", "<cmd>Lspsaga outline<CR>",{ desc = "LSP: Show [O]utline" })
+vim.keymap.set("n","<leader>ou", "<cmd>Lspsaga outline<CR>",{ desc = "LSP: Show [Ou]tline" })
 
 -- Hover Doc
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = 'Hover Documentation' })
