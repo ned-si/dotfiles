@@ -83,3 +83,5 @@ vim.keymap.set("n", "<leader>ps", vim.cmd.PackerSync, {desc = "[P]acker[S]ync"})
 -- Diff current windows
 vim.keymap.set("n", "<leader>dt", ":windo diffthis<CR>", {desc = "[D]iff[T]his"})
 vim.keymap.set("n", "<leader>du", ":diffoff<CR>", {desc = "[D]iff[O]ff"})
+-- toggle conceallevel
+vim.keymap.set("n", "<leader>tc", ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>", { desc = "[T]oggle [C]onceallevel"} )

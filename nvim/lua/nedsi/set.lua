@@ -29,6 +29,20 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+vim.opt.conceallevel = 2
+
+-- NOTE: not sure this is actually doing anything
+vim.g.markdown_fenced_languages = {
+  "json",
+  "vim",
+  "lua",
+  "go",
+  "bash",
+  "hcl",
+  "yaml"
+}
+
+
 -- Enable mouse mode
 vim.opt.mouse = "a"
 
