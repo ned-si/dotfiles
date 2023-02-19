@@ -11,11 +11,9 @@ require("obsidian").setup({
       suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
     else
       -- If title is nil, just add 4 random uppercase letters to the suffix.
-      for _ = 1, 4 do
-        suffix = suffix .. string.char(math.random(65, 90))
-      end
+      suffix = tostring(os.time())
     end
-    return tostring(os.time()) .. "-" .. suffix
+    return suffix
   end,
   notes_subdir = "notes",
   daily_notes = {
@@ -41,9 +39,9 @@ vim.keymap.set("n", "<leader>ob", ":ObsidianBacklinks<CR>", { desc = "[O]bsidian
 vim.keymap.set("n", "<leader>ot", ":ObsidianToday<CR>", { desc = "[O]bsidian [T]oday" })
 vim.keymap.set("n", "<leader>oy", ":ObsidianYesterday<CR>", { desc = "[O]bsidian [Y]esterday" })
 vim.keymap.set("n", "<leader>oo", ":ObsidianOpen<CR>", { desc = "[O]bsidian [O]pen" })
-vim.keymap.set("n", "<leader>on", ":ObsidianNew<CR>", { desc = "[O]bsidian [N]ew" })
+vim.keymap.set("n", "<leader>on", ":ObsidianNew ", { desc = "[O]bsidian [N]ew" })
 vim.keymap.set("n", "<leader>os", ":ObsidianSearch<CR>", { desc = "[O]bsidian [S]earch" })
 vim.keymap.set("n", "<leader>oq", ":ObsidianQuickSwitch<CR>", { desc = "[O]bsidian [Q]uickSwitch" })
-vim.keymap.set("n", "<leader>ol", ":ObsidianLink<CR>", { desc = "[O]bsidian [L]ink" })
-vim.keymap.set("n", "<leader>oln", ":ObsidianLinkNew<CR>", { desc = "[O]bsidian [L]ink [N]ew" })
+vim.keymap.set("n", "<leader>ol", ":ObsidianLink ", { desc = "[O]bsidian [L]ink" })
+vim.keymap.set("n", "<leader>oln", ":ObsidianLinkNew ", { desc = "[O]bsidian [L]ink [N]ew" })
 vim.keymap.set("n", "<leader>of", ":ObsidianFollowLink<CR>", { desc = "[O]bsidian [F]ollow link" })
