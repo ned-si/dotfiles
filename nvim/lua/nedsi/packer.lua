@@ -247,6 +247,8 @@ require('packer').startup(function(use)
   -- Obsidian
   use 'epwalsh/obsidian.nvim'
 
+  -- Zen mode: focus window or visual selection
+  use 'folke/zen-mode.nvim'
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')

@@ -455,6 +455,11 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/opt/yaml.nvim",
     url = "https://github.com/cuducos/yaml.nvim"
+  },
+  ["zen-mode.nvim"] = {
+    loaded = true,
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
+    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
