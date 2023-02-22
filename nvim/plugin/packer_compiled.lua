@@ -408,6 +408,11 @@ _G.packer_plugins = {
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/ts-node-action",
     url = "https://github.com/ckolkey/ts-node-action"
   },
+  ["twilight.nvim"] = {
+    loaded = true,
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/twilight.nvim",
+    url = "https://github.com/folke/twilight.nvim"
+  },
   undotree = {
     loaded = true,
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/undotree",
