@@ -1,6 +1,9 @@
 # browser
 export BROWSER="firefox"
 
+# editor
+export EDITOR=nvim
+
 # editor for kubectl edit commands
 export KUBE_EDITOR=nvim
 
