@@ -197,7 +197,7 @@ default_floating_border pixel 3
 
 # i3-layout-manager
 bindsym $mod+shift+space exec kitty; exec firefox; exec signal-desktop;\
-  exec spotify; exec ferdium; exec obsidian;\
+  exec spotify; exec ferdium; exec obsidian; exec companion;\
   exec $HOME/personal/repos/i3-layout-manager/layout_manager.sh 3w-stacks_main-mid
 bindsym $mod+space exec $HOME/personal/repos/i3-layout-manager/layout_manager.sh
 
