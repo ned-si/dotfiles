@@ -344,10 +344,10 @@ _G.packer_plugins = {
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["pandoc.nvim"] = {
+  papyrus = {
     loaded = true,
-    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/pandoc.nvim",
-    url = "https://github.com/aspeddro/pandoc.nvim"
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/papyrus",
+    url = "https://github.com/abeleinin/papyrus"
   },
   ["peek.nvim"] = {
     loaded = true,
