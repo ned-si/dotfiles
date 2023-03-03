@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/ai.vim",
     url = "https://github.com/aduros/ai.vim"
   },
+  ["blackjack.nvim"] = {
+    loaded = true,
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/blackjack.nvim",
+    url = "https://github.com/alanfortlink/blackjack.nvim"
+  },
   ["bufferline.nvim"] = {
     loaded = true,
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
