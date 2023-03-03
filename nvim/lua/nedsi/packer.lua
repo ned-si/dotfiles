@@ -229,7 +229,7 @@ require('packer').startup(function(use)
   use "natecraddock/sessions.nvim"
 
   -- Pandoc integration
-  use 'aspeddro/pandoc.nvim'
+  use 'abeleinin/papyrus'
 
   -- Fancy terminal
   use "akinsho/toggleterm.nvim"
