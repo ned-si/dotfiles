@@ -7,8 +7,12 @@ require("oil").setup({
   },
   view_options = {
     -- Show files and directories that start with "."
-    show_hidden = false,
+    show_hidden = true,
   },
+  keymap = {
+    ["<C-s>"] = "actions.select_split",
+    ["<C-v>"] = "actions.select_vsplit",
+  }
 })
 
 
