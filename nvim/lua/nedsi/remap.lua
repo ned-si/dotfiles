@@ -16,7 +16,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- Invert `:` and `;` in normal and visual modes
 vim.keymap.set({'n', 'v'}, ';', ":")
-vim.keymap.set({'n', 'v'}, ':', ";")
+-- vim.keymap.set({'n', 'v'}, ':', ";")
 
 -- Allow `'` to act like `\`` in normal mode
 vim.keymap.set('n', "'", "`")
