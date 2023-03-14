@@ -87,12 +87,23 @@ require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use({
+    "aaronhallaert/advanced-git-search.nvim",
+    config = function()
+      require("telescope").load_extension("advanced_git_search")
+    end,
+    requires = {
+      "nvim-telescope/telescope.nvim",
+      -- to show diff splits and open commits in browser
+      "tpope/vim-fugitive",
+    },
+  })
 
   -- Helm
   use 'towolf/vim-helm' -- TODO: control if working
 
   -- Jenkins
-  use({'ckipp01/nvim-jenkinsfile-linter', requires = { "nvim-lua/plenary.nvim" } }) -- TODO:control if working
+  use({ 'ckipp01/nvim-jenkinsfile-linter', requires = { "nvim-lua/plenary.nvim" } }) -- TODO:control if working
 
   -- YAML
   use {
