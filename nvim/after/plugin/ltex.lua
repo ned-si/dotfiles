@@ -1,4 +1,5 @@
 require 'lspconfig'.ltex.setup {
+  capabilities = your_capabilities,
   on_attach = function(client, bufnr)
     require("ltex_extra").setup {
       load_langs = { "fr-CH", "en-US", "en-GB" }, -- table <string> : languages for witch dictionaries will be loaded
