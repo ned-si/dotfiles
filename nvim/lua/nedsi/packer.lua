@@ -71,10 +71,17 @@ require('packer').startup(function(use)
     end,
   }
 
+  -- more textobjects
   use { -- Additional text objects via treesitter
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',
     after = 'nvim-treesitter',
+  }
+  use {
+    "chrisgrieser/nvim-various-textobjs",
+    config = function()
+      require("various-textobjs").setup({ useDefaultKeymaps = true })
+    end,
   }
 
   -- Git related plugins
