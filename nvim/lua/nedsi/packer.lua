@@ -126,7 +126,7 @@ require('packer').startup(function(use)
   }
   use {
     "cuducos/yaml.nvim",
-    ft = {"yaml"}, -- optional
+    ft = { "yaml" }, -- optional
     requires = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope.nvim" -- optional
@@ -185,7 +185,7 @@ require('packer').startup(function(use)
   use 'ThePrimeagen/git-worktree.nvim'
 
   -- Toggle stuff
-  use {'nguyenvukhang/nvim-toggler'}
+  use { 'nguyenvukhang/nvim-toggler' }
 
   -- Correct typos when opening files
   use "mong8se/actually.nvim"
@@ -210,8 +210,8 @@ require('packer').startup(function(use)
   -- Cute things
   use 'nvim-zh/colorful-winsep.nvim'
   use {
-  "folke/todo-comments.nvim",
-  requires = "nvim-lua/plenary.nvim"
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim"
   }
   use 'rcarriga/nvim-notify'
   use 'stevearc/dressing.nvim'
@@ -230,17 +230,17 @@ require('packer').startup(function(use)
   use 'xorid/swap-split.nvim'
 
   -- Center buffer
-  use {"shortcuts/no-neck-pain.nvim"}
+  use { "shortcuts/no-neck-pain.nvim" }
 
   -- ChatGPT integration
   use({
-  "jackMort/ChatGPT.nvim",
+    "jackMort/ChatGPT.nvim",
     requires = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim"
     }
-})
+  })
   use 'aduros/ai.vim'
 
   -- Session management
@@ -257,7 +257,7 @@ require('packer').startup(function(use)
   use 'echasnovski/mini.nvim'
 
   -- Fancy bufferline
-  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
+  use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
 
   -- navigation between things
   use 'liangxianzhe/nap.nvim'
@@ -272,7 +272,7 @@ require('packer').startup(function(use)
   -- Blackjack
   use {
     'alanfortlink/blackjack.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = { 'nvim-lua/plenary.nvim' },
   }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
