@@ -120,6 +120,11 @@ _G.packer_plugins = {
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/catppuccin",
     url = "https://github.com/catppuccin/nvim"
   },
+  ["circles.nvim"] = {
+    loaded = true,
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/circles.nvim",
+    url = "https://github.com/projekt0n/circles.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/cmp-buffer",
