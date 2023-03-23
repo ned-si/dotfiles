@@ -155,6 +155,11 @@ _G.packer_plugins = {
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/colorful-winsep.nvim",
     url = "https://github.com/nvim-zh/colorful-winsep.nvim"
   },
+  ["copilot.vim"] = {
+    loaded = true,
+    path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
+  },
   ["dracula.nvim"] = {
     loaded = true,
     path = "/home/nedsi/.local/share/nvim/site/pack/packer/start/dracula.nvim",

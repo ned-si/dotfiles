@@ -278,6 +278,8 @@ require('packer').startup(function(use)
     requires = { 'nvim-lua/plenary.nvim' },
   }
 
+  use 'github/copilot.vim'
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
