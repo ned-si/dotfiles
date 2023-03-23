@@ -166,7 +166,10 @@ require('packer').startup(function(use)
   use 'Mofiqul/dracula.nvim'
   use { "catppuccin/nvim", as = "catppuccin" }
   use 'nvim-tree/nvim-web-devicons'
-
+  use {
+    "projekt0n/circles.nvim",
+    requires = {"nvim-tree/nvim-web-devicons"}
+  }
   -- Surrounds
   use 'kylechui/nvim-surround'
 
