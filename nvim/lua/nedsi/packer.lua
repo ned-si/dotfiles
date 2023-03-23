@@ -272,7 +272,7 @@ require('packer').startup(function(use)
   use 'folke/zen-mode.nvim'
   use 'folke/twilight.nvim'
 
-  -- Blackjack
+  -- Useless, hence indispensable
   use {
     'alanfortlink/blackjack.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
