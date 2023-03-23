@@ -11,7 +11,7 @@ export KUBE_EDITOR=nvim
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # paths
-export PATH=$HOME/.config/rofi/bin:${KREW_ROOT:-$HOME/.krew}/bin:$LEGO_HOME/bin:$PATH:$HOME/.local/bin
+export PATH=$HOME/.config/rofi/bin:${KREW_ROOT:-$HOME/.krew}/bin:$LEGO_HOME/bin:$PATH:$HOME/.local/bin:$HOME/.pulumi/bin
 
 # openai
 source $HOME/.openai-api
