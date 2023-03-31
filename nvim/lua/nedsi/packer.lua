@@ -83,8 +83,6 @@ require('packer').startup(function(use)
       require("various-textobjs").setup({ useDefaultKeymaps = true })
     end,
   }
-  -- better movements
-  use { "chrisgrieser/nvim-spider" }
 
   -- Git related plugins
   use 'tpope/vim-fugitive'
