@@ -5,5 +5,14 @@ require("nap").setup({
   prev_repeat = "<c-p>"
 })
 
-require("nap").nap('h', "Gitsigns next_hunk", "Gitsigns prev_hunk", "Next diff [H]unk", "Previous diff [H]unk")
-require("nap").nap('d', "Lspsaga diagnostic_jump_next", "Lspsaga diagnostic_jump_prev", "Next [D]iagnostic", "Previous [D]iagnostic")
+require("nap").map("d", {
+  next = { rhs = "<cmd>Lspsaga diagnostic_jump_next<cr>", opts = { desc = "Next [D]iagnostic" } },
+  prev = { rhs = "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts = { desc = "Previous [D]iagnostic" } },
+  mode = { "n", "v", "o" },
+})
+
+require("nap").map("h", {
+  next = { rhs = "<cmd>Gitsigns next_hunk<cr>", opts = { desc = "Next diff [H]unk" } },
+  prev = { rhs = "<cmd>Gitsigns prev_hunk<cr>", opts = { desc = "Previous diff [H]unk" } },
+  mode = { "n", "v", "o" },
+})
