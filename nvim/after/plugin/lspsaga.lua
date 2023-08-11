@@ -17,7 +17,7 @@ require('lspsaga').setup({
 -- if there is no implement it will hide
 -- when you use action in finder like open vsplit then you can
 -- use <C-t> to jump backlspsaga
-vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { desc = 'LSP: [G]et [H]elp' })
+vim.keymap.set("n", "gh", "<cmd>Lspsaga finder<CR>", { desc = 'LSP: [G]et [H]elp' })
 
 -- Code action
 vim.keymap.set({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = 'LSP: [C]ode [A]ction' })
@@ -30,6 +30,7 @@ vim.keymap.set({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc =
 -- also support open/vsplit/etc operation check definition_action_keys
 -- support tagstack C-t jump back
 vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", { desc = 'LSP: [G]oto [D]efinition' })
+vim.keymap.set("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>", { desc = 'LSP: [G]oto [T]ype definition' })
 
 -- Show cursor diagnostics
 vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { desc = 'LSP: show [C]urrent [D]iagnostic' })
@@ -40,11 +41,8 @@ vim.keymap.set("n", "<C-n>", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "
 
 -- Only jump to error
 vim.keymap.set("n", "[E", function()
-  require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
-end, { silent = true })
-vim.keymap.set("n", "]E", function()
-  require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
-end, { silent = true })
+  require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end)
 
 -- Outline
 vim.keymap.set("n","<leader>ou", "<cmd>Lspsaga outline<CR>",{ desc = "LSP: Show [Ou]tline" })
