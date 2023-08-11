@@ -18,8 +18,10 @@ require("obsidian").setup({
   notes_subdir = "notes",
   daily_notes = {
     folder = "notes/dailies",
-  }
+  },
+  mappings = {}
 })
+
 
 vim.keymap.set(
   "n",
