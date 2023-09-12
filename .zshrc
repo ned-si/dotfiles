@@ -98,8 +98,8 @@ compdef kubecolor=kubectl
 ## aws
 complete -C '/usr/bin/aws_completer' aws
 
-## azure
-source /usr/share/bash-completion/completions/az
+## azure TODO: add it again later
+# source /usr/share/bash-completion/completions/az
 
 ## terraform
 complete -o nospace -C /usr/bin/terraform terraform

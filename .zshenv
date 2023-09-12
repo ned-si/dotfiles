@@ -14,7 +14,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export PATH=$HOME/.config/rofi/bin:${KREW_ROOT:-$HOME/.krew}/bin:$LEGO_HOME/bin:$PATH:$HOME/.local/bin:$HOME/.pulumi/bin
 
 # openai
-source $HOME/.openai-api
+# source $HOME/.openai-api
 
 # lego
 export LEGO_HOME="$HOME/work/projects/idtx/lego/"
