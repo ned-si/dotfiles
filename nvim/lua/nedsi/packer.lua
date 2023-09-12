@@ -235,16 +235,16 @@ require('packer').startup(function(use)
   -- Center buffer
   use { "shortcuts/no-neck-pain.nvim" }
 
-  -- ChatGPT integration
-  use({
-    "jackMort/ChatGPT.nvim",
-    requires = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
-  })
-  use 'aduros/ai.vim'
+  -- -- ChatGPT integration TODO: add something that works
+  -- use({
+  --   "jackMort/ChatGPT.nvim",
+  --   requires = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim"
+  --   }
+  -- })
+  -- use 'aduros/ai.vim'
 
   -- Session management
   use "natecraddock/sessions.nvim"
