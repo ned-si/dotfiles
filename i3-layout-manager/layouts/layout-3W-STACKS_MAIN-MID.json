@@ -1,0 +1,153 @@
+[
+{
+	"border": "pixel",
+		"floating": "auto_off",
+		"fullscreen_mode": 0,
+		"layout": "splith",
+		"marks": [],
+		"percent": 1,
+		"type": "con",
+		"nodes": [
+		{
+			"border": "pixel",
+			"floating": "auto_off",
+			"layout": "stacked",
+			"marks": [],
+			"percent": 0.258333333333333,
+			"type": "con",
+			"nodes": [
+			{
+				"border": "pixel",
+				"current_border_width": 3,
+				"floating": "auto_off",
+				"geometry": {
+					"height": 1348,
+					"width": 1300,
+					"x": 14,
+					"y": 51
+				},
+				"marks": [],
+				"name": "Signal",
+				"percent": 0.5,
+				"swallows": [
+				{
+					"instance": "^signal$"
+				}
+				],
+				"type": "con"
+			},
+			{
+				"border": "pixel",
+				"current_border_width": 3,
+				"floating": "auto_off",
+				"geometry": {
+					"height": 1348,
+					"width": 1300,
+					"x": 14,
+					"y": 51
+				},
+				"marks": [],
+				"name": "Ferdium - Slack - Nathan - Nathan - Container Solutions - Slack",
+				"percent": 0.5,
+				"swallows": [
+				{
+					"instance": "^ferdium$"
+				}
+				],
+				"type": "con"
+			}
+			]
+		},
+		{
+			"border": "pixel",
+			"floating": "auto_off",
+			"layout": "stacked",
+			"marks": [],
+			"percent": 0.483333333333333,
+			"type": "con",
+			"nodes": [
+			{
+				"border": "pixel",
+				"floating": "auto_off",
+				"layout": "stacked",
+				"marks": [],
+				"percent": 1,
+				"type": "con",
+				"nodes": [
+				{
+					"border": "pixel",
+					"current_border_width": 3,
+					"floating": "auto_off",
+					"geometry": {
+						"height": 1385,
+						"width": 2459,
+						"x": 0,
+						"y": 0
+					},
+					"marks": [],
+					"name": "zsh",
+					"percent": null,
+					"swallows": [
+					{
+						"instance": "^kitty$"
+					}
+					],
+					"type": "con"
+				}
+				]
+			}
+			]
+		},
+		{
+			"border": "pixel",
+			"floating": "auto_off",
+			"layout": "stacked",
+			"marks": [],
+			"percent": 0.258333333333333,
+			"type": "con",
+			"nodes": [
+			{
+				"border": "pixel",
+				"current_border_width": 3,
+				"floating": "auto_off",
+				"geometry": {
+					"height": 1348,
+					"width": 1301,
+					"x": 3805,
+					"y": 51
+				},
+				"marks": [],
+				"name": "Spotify",
+				"percent": 0.5,
+				"swallows": [
+				{
+					"instance": "^spotify$"
+				}
+				],
+				"type": "con"
+			},
+			{
+				"border": "pixel",
+				"current_border_width": 3,
+				"floating": "auto_off",
+				"geometry": {
+					"height": 1348,
+					"width": 2459,
+					"x": 0,
+					"y": 0
+				},
+				"marks": [],
+				"name": "klaxalk/i3-layout-manager: Saving, loading and managing layouts for i3wm. — Mozilla Firefox",
+				"percent": 0.5,
+				"swallows": [
+				{
+					"instance": "^Navigator$"
+				}
+				],
+				"type": "con"
+			}
+			]
+		}
+		]
+}
+]
