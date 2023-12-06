@@ -158,6 +158,12 @@ function gcidtx() {
     git config user.signingkey C4C0EBDD98B457B6
 }
 
+function gcdtn() {
+    git config user.name "Julien Sudan"
+    git config user.email "julien.sudan@datenna.com"
+    git config user.signingkey F2E011CB02DFC70A
+}
+
 ## Start command
 function start() {
   feh --bg-fill ~/personal/images/wallpaper_destroyers.png
