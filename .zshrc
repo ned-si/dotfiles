@@ -104,9 +104,6 @@ source /usr/share/bash-completion/completions/az
 ## terraform
 complete -o nospace -C /usr/bin/terraform terraform
 
-## thefuck
-eval $(thefuck --alias)
-
 ## fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
