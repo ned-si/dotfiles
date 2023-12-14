@@ -57,14 +57,17 @@ opt.completeopt = "menuone,noselect,preview"
 opt.ignorecase = true
 opt.smartcase = true
 
+-- nerdtree
+vim.g.NERDTreeShowLineNumbers = 1
+
 -- Fixing Lazyvim
 opt.autowrite = false
 opt.cursorline = false
 opt.clipboard = ""
 opt.wrap = true
+opt.list = false
+opt.spell = false
+opt.spelllang = ""
 
 vim.g.autoformat = false
 vim.b.autoformat = false
-
--- nerdtree
-vim.g.NERDTreeShowLineNumbers = 1
