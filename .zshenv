@@ -12,6 +12,3 @@ export PATH=$HOME/.config/rofi/bin:${KREW_ROOT:-$HOME/.krew}/bin:$LEGO_HOME/bin:
 
 # openai
 # source $HOME/.openai-api
-
-# lego
-export LEGO_HOME="$HOME/work/projects/idtx/lego/"
