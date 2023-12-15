@@ -68,6 +68,7 @@ opt.wrap = true
 opt.list = false
 opt.spell = false
 opt.spelllang = ""
+opt.formatexpr=""
 
 vim.g.autoformat = false
 vim.b.autoformat = false
