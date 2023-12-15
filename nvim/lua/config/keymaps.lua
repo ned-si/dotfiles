@@ -86,13 +86,13 @@ vim.keymap.set(
   { desc = "[T]mux-[S]essionizer" }
 )
 
--- Choose YAML schema
-vim.keymap.set(
-  "n",
-  "<leader>sy",
-  "<cmd>Telescope yaml_schema<CR>",
-  { desc = "Telescope - [S]earch [Y]AML schema" }
-)
+-- Choose YAML schema FIXME: not working
+-- vim.keymap.set(
+--   "n",
+--   "<leader>sy",
+--   "<cmd>Telescope yaml_schema<CR>",
+--   { desc = "Telescope - [S]earch [Y]AML schema" }
+-- )
 
 -- toggle conceallevel
 vim.keymap.set(

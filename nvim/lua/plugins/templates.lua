@@ -1,34 +1,3 @@
--- return {
---   {
---     "glepnir/template.nvim",
---     config = function()
---     end,
---     opts = {
---       config = {
---         temp_dir = "~/.config/nvim/templates",
---         author = "nedsi",
---         email = "nedsi@pm.me",
---       },
---       keys = {
---         {
---           "<leader>ft",
---           function()
---             require("telescope").extensions.find_template.templates()
---           end,
---           desc = "[F]ind [T]emplate",
---         },
---         {
---           "<leader>ti",
---           function()
---             require("telescope").extensions.find_template.insert()
---           end,
---           desc = "[T]emplate [I]nsert",
---         },
---       },
---     },
---   },
--- }
---
 return {
   "glepnir/template.nvim",
   cmd = { "Template", "TemProject" },
