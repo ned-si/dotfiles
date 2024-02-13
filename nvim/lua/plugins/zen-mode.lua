@@ -5,6 +5,14 @@ return {
       plugins = {
         gitsigns = { enabled = true },
         tmux = { enabled = true },
+        diagnostics = { enabled = true },
+      },
+    },
+    keys = {
+      {
+        "<leader>zm",
+        "<cmd>ZenMode<cr>",
+        desc = "[Z]en [M]ode",
       },
     },
   },
@@ -15,11 +23,11 @@ return {
         alpha = 0.4,
         inactive = true,
       },
-      keys = {
+    },
+    keys = {
+      {
         "<leader>tt",
-        function()
-          require("twilight").toggle()
-        end,
+        "<cmd>Twilight<cr>",
         desc = "[T]oggle [T]wilight",
       },
     },
