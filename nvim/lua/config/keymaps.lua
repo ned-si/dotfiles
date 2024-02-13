@@ -104,3 +104,20 @@ vim.keymap.set(
 
 -- lazy
 vim.keymap.set("n", "<leader>a", "<cmd>Lazy<cr>", { desc = "L[a]zy" })
+
+-- Diff current windows
+vim.keymap.set(
+  "n",
+  "<leader>dt",
+  "<cmd>windo diffthis<CR>",
+  { desc = "[D]iff[T]his" }
+)
+vim.keymap.set("n", "<leader>du", "<cmd>diffoff<CR>", { desc = "[D]iff[O]ff" })
+
+-- Make current file executable
+vim.keymap.set(
+  "n",
+  "<leader>x",
+  "<cmd>!chmod +x %<CR>",
+  { silent = true, desc = "Make current file e[X]ecutable" }
+)
