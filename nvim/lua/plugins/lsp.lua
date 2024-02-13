@@ -14,7 +14,6 @@ return {
 
   {
     "nvimdev/lspsaga.nvim",
-    lazy = true,
     opts = {
       definition = {
         keys = {
@@ -37,32 +36,32 @@ return {
         "<leader>ca",
         mode = { "n", "v" },
         "<cmd>Lspsaga code_action<CR>",
-        { desc = "LSP: [C]ode [A]ction" },
+        desc = "LSP: [C]ode [A]ction",
       },
       {
-        "gd",
+        "<leader>pd",
         "<cmd>Lspsaga peek_definition<CR>",
-        { desc = "LSP: [G]oto [D]efinition" },
+        desc = "LSP: [P]eak [D]efinition",
       },
       {
-        "gt",
+        "<leader>pt",
         "<cmd>Lspsaga peek_type_definition<CR>",
-        { desc = "LSP: [G]oto [T]ype definition" },
+        desc = "LSP: [P]eak [T]ype definition",
       },
       {
         "<leader>cd",
         "<cmd>Lspsaga show_cursor_diagnostics<CR>",
-        { desc = "LSP: show [C]urrent [D]iagnostic" },
+        desc = "LSP: show [C]urrent [D]iagnostic",
       },
       {
         "<C-p>",
         "<cmd>Lspsaga diagnostic_jump_prev<CR>",
-        { desc = "LSP: Diagnostic [P]revious" },
+        desc = "LSP: Diagnostic [P]revious",
       },
       {
         "<C-n>",
         "<cmd>Lspsaga diagnostic_jump_next<CR>",
-        { desc = "LSP: Diagnostic [N]ext" },
+        desc = "LSP: Diagnostic [N]ext",
       },
       {
         "[E",
@@ -75,12 +74,12 @@ return {
       {
         "<leader>ou",
         "<cmd>Lspsaga outline<CR>",
-        { desc = "LSP: Show [Ou]tline" },
+        desc = "LSP: Show [Ou]tline",
       },
       {
         "K",
         "<cmd>Lspsaga hover_doc<CR>",
-        { desc = "Hover Documentation" },
+        desc = "Hover Documentation",
       },
     },
   },
