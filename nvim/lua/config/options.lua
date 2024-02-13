@@ -57,6 +57,9 @@ opt.completeopt = "menuone,noselect,preview"
 opt.ignorecase = true
 opt.smartcase = true
 
+-- Proper textwidth
+opt.textwidth = 80
+
 -- nerdtree
 vim.g.NERDTreeShowLineNumbers = 1
 
@@ -69,6 +72,7 @@ opt.list = false
 opt.spell = false
 opt.spelllang = ""
 opt.formatexpr=""
+opt.laststatus = 2
 
 vim.g.autoformat = false
 vim.b.autoformat = false
