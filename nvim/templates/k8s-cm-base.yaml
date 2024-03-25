@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{_variable_}}-config
-data:
-  {{_variable_}}.property: example-value
