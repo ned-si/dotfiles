@@ -11,8 +11,9 @@ vim.keymap.set(
 )
 
 -- Invert `:` and `;` in normal and visual modes
-vim.keymap.set({ "n", "v" }, ";", ":")
-vim.keymap.set({ "n", "v" }, ":", ";")
+-- vim.keymap.set({ "n", "v" }, ";", ":")
+-- vim.keymap.set({ "n", "v" }, ":", ";")
+-- no need anymore, done at the keyboard level
 
 -- Remap for dealing with word wrap
 vim.keymap.set(
