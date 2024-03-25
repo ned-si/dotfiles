@@ -161,7 +161,7 @@ function gcpma() {
 
 ## Start command
 function start() {
-  feh --bg-fill ~/personal/images/wallpaper_destroyers.png
+  feh --bg-fill ~/personal/images/wallpaper-dune-2-09.jpg
   $HOME/.config/polybar/launch.sh --forest
   sudo systemctl restart logid.service
 }
