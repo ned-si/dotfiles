@@ -8,4 +8,4 @@ export EDITOR=nvim
 export KUBE_EDITOR=nvim
 
 # paths
-export PATH=$HOME/.config/rofi/bin:${KREW_ROOT:-$HOME/.krew}/bin::$PATH:$HOME/.local/bin:$HOME/.pulumi/bin
+export PATH=$HOME/.config/rofi/bin:${KREW_ROOT:-$HOME/.krew}/bin::$PATH:$HOME/.local/bin:$HOME/.pulumi/bin:$(go env GOPATH)/bin
