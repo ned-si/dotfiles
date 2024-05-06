@@ -141,22 +141,10 @@ bindkey "^s" history-incremental-pattern-search-forward
 # Functions
 
 ## Change local git config
-function gcidtx() {
+function gcexo() {
     git config user.name "Julien Sudan"
-    git config user.email "juliensu@ext.inditex.com"
-    git config user.signingkey C4C0EBDD98B457B6
-}
-
-function gcdtn() {
-    git config user.name "Julien Sudan"
-    git config user.email "julien.sudan@datenna.com"
-    git config user.signingkey F2E011CB02DFC70A
-}
-
-function gcpma() {
-    git config user.name "Julien Sudan"
-    git config user.email "Julien.Sudan@madnesspartners.com"
-    git config user.signingkey F96C11C4EADD77DC
+    git config user.email "julien.sudan@exoscale.ch"
+    git config user.signingkey 9BEDF41A8472C335
 }
 
 ## Start command
