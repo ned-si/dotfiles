@@ -8,10 +8,4 @@ return {
       indent = { char = "┊" },
     },
   },
-  {
-    "mini.indentscope",
-    opts = {
-      symbol = "┊",
-    },
-  },
 }
