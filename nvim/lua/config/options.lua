@@ -38,7 +38,6 @@ opt.conceallevel = 2
 vim.g.markdown_fenced_languages = {
   "json",
   "vim",
-  "lua",
   "go",
   "bash",
   "yaml",

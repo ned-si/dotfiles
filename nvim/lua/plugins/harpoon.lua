@@ -1,6 +1,7 @@
 return {
   "ThePrimeagen/harpoon",
   lazy = false,
+  branch = "harpoon2",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
@@ -42,7 +43,7 @@ return {
       desc = "[H]arpoon - File [3]",
     },
     {
-      "<leader>;",
+      "<leader>:",
       "<cmd>lua require('harpoon.ui').nav_file(4)<cr>",
       desc = "[H]arpoon - File [4]",
     },

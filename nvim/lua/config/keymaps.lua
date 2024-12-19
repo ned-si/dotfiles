@@ -122,3 +122,91 @@ vim.keymap.set(
   "<cmd>!chmod +x %<CR>",
   { silent = true, desc = "Make current file e[X]ecutable" }
 )
+
+-- Copy current file name (relative/absolute) to system clipboard
+
+if
+  vim.fn.has("mac") == 1
+  or vim.fn.has("gui_macvim") == 1
+  or vim.fn.has("gui_mac") == 1
+then
+  -- relative path  (src/foo.txt)
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>yr",
+    ':let @*=expand("%")<CR>',
+    { noremap = true, silent = true, desc = "[Y]ank [R]elative path" }
+  )
+
+  -- absolute path  (/something/src/foo.txt)
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>ya",
+    ':let @*=expand("%:p")<CR>',
+    { noremap = true, silent = true, desc = "[Y]ank [A]bsolute path" }
+  )
+
+  -- filename       (foo.txt)
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>yf",
+    ':let @*=expand("%:t")<CR>',
+    { noremap = true, silent = true, desc = "[Y]ank [F]ilename" }
+  )
+
+  -- directory name (/something/src)
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>yd",
+    ':let @*=expand("%:p:h")<CR>',
+    { noremap = true, silent = true, desc = "[Y]ank [D]irectory" }
+  )
+end
+
+-- Copy current file name (relative/absolute) to system clipboard (Linux version)
+if
+  vim.fn.has("gui_gtk") == 1
+  or vim.fn.has("gui_gtk2") == 1
+  or vim.fn.has("gui_gnome") == 1
+  or vim.fn.has("unix") == 1
+then
+  -- relative path (src/foo.txt)
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>yr",
+    ':let @+=expand("%")<CR>',
+    { noremap = true, silent = true, desc = "[Y]ank [R]elative path" }
+  )
+
+  -- absolute path (/something/src/foo.txt)
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>ya",
+    ':let @+=expand("%:p")<CR>',
+    { noremap = true, silent = true, desc = "[Y]ank [A]bsolute path" }
+  )
+
+  -- filename (foo.txt)
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>yf",
+    ':let @+=expand("%:t")<CR>',
+    { noremap = true, silent = true, desc = "[Y]ank [F]ilename" }
+  )
+
+  -- directory name (/something/src)
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>yd",
+    ':let @+=expand("%:p:h")<CR>',
+    { noremap = true, silent = true, desc = "[Y]ank [D]irectory" }
+  )
+end
+
+-- Recommended is to have the same open mapping as your close (```<leader>k```) the plugin for a toggle effect.
+vim.keymap.set(
+  "n",
+  "<leader>kc",
+  '<cmd>lua require("kubectl").open()<cr>',
+  { noremap = true, silent = true }
+)
