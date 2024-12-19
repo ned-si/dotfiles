@@ -1,18 +1,5 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      opts.mapping =
-        cmp.mapping.preset.insert(vim.tbl_deep_extend("force", opts.mapping, {
-          ["<CR>"] = cmp.config.disable,
-          ["C-y"] = cmp.mapping.confirm({ select = true }),
-        }))
-      return opts
-    end,
-  },
-
-  {
     "neovim/nvim-lspconfig",
     opts = {
       -- make sure mason installs the server

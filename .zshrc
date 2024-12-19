@@ -32,7 +32,6 @@ plugins=(
   common-aliases
   docker
   docker-compose
-  docker-machine
   helm
   kubectl
   kube-ps1
@@ -67,6 +66,20 @@ alias kctx="kubectx"
 alias kon="kubeon"
 alias kof="kubeoff"
 alias ts="tmux-sessionizer"
+alias ghd="gh dash"
+alias restish="noglob restish"
+alias findhost='ssh exoadmin@infra-dns003 findhost \$1\'
+#alias findhost='ssh exoadmin@infra-dns003.gv2.p.exoscale.net findhost'
+alias exo-irc="ssh irc -t 'tmux attach; bash -l'"
+alias exo-api-pp="export EXOSCALE_API_KEY=$EXOSCALE_API_KEY_PP; export EXOSCALE_API_SECRET=$EXOSCALE_API_SECRET_PP; export EXOSCALE_API_ENDPOINT=$EXOSCALE_API_ENDPOINT_PP; export EXOSCALE_API_ENVIRONMENT=$EXOSCALE_API_ENVIRONMENT_PP"
+alias exo-api-prod="export EXOSCALE_API_KEY=$EXOSCALE_API_KEY_PROD; export EXOSCALE_API_SECRET=$EXOSCALE_API_SECRET_PROD; unset EXOSCALE_API_ENDPOINT; unset EXOSCALE_API_ENVIRONMENT"
+alias exo-api-test="export EXOSCALE_API_KEY=$EXOSCALE_API_KEY_TEST; export EXOSCALE_API_SECRET=$EXOSCALE_API_SECRET_TEST; unset EXOSCALE_API_ENDPOINT; unset EXOSCALE_API_ENVIRONMENT"
+alias exo-api-pp-julien="export EXOSCALE_API_KEY=$EXOSCALE_API_KEY_PP_PERSONAL; export EXOSCALE_API_SECRET=$EXOSCALE_API_SECRET_PP_PERSONAL; export EXOSCALE_API_ENDPOINT=$EXOSCALE_API_ENDPOINT_PP; export EXOSCALE_API_ENVIRONMENT=$EXOSCALE_API_ENVIRONMENT_PP"
+alias exo-api-prod-julien="export EXOSCALE_API_KEY=$EXOSCALE_API_KEY_PROD_PERSONAL; export EXOSCALE_API_SECRET=$EXOSCALE_API_SECRET_PROD_PERSONAL; unset EXOSCALE_API_ENDPOINT; unset EXOSCALE_API_ENVIRONMENT"
+alias exo-ts="tailscale status -json | jq '.BackendState, .TailscaleIPs, .CurrentTailnet'"
+alias exo-tu="sudo tailscale logout && sudo tailscale up --accept-routes --hostname=laptop-julien-sudan --shields-up --stateful-filtering"
+alias exo-tlo="sudo tailscale logout"
+alias exo-cl='ssh exoadmin@infra-cfg001.gv2.p.exoscale.net sudo puppet cert list'
 
 # autocompletion
 ## general
@@ -111,6 +124,9 @@ if [ $commands[oc] ]; then
   compdef _oc oc
 fi
 
+## talhelper
+source <(talhelper completion zsh)
+
 
 # options
 export HISTSIZE=100000
@@ -147,6 +163,12 @@ function gcexo() {
     git config user.signingkey 9BEDF41A8472C335
 }
 
+function gcmain() {
+    git config user.name "Julien Sudan"
+    git config user.email "nedsi@pm.me"
+    git config user.signingkey 0B69285D11496F81
+}
+
 ## Start command
 function start() {
   feh --bg-fill ~/personal/images/wallpaper-dune-2-09.jpg
@@ -165,8 +187,22 @@ function fg-bg() {
 zle -N fg-bg
 bindkey '^Z' fg-bg
 
+# yazi gooodness
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+complete -o nospace -C /usr/bin/tofu tofu
+
+## zoxide
+eval "$(zoxide init zsh)"

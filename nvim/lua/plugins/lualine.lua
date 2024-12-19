@@ -28,6 +28,7 @@ end
 
 return {
   "nvim-lualine/lualine.nvim",
+  enabled = true,
   opts = function()
     return {
       options = {
