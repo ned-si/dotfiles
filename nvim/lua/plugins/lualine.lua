@@ -39,6 +39,7 @@ return {
       },
       sections = {
         lualine_a = { getWords },
+        lualine_b = { require("yaml_nvim").get_yaml_key_and_value },
         -- lualine_x = { "fileformat", "filetype", get_schema },
       },
     }
