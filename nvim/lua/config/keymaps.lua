@@ -88,12 +88,12 @@ vim.keymap.set(
 )
 
 -- Choose YAML schema FIXME: not working
--- vim.keymap.set(
---   "n",
---   "<leader>sy",
---   "<cmd>Telescope yaml_schema<CR>",
---   { desc = "Telescope - [S]earch [Y]AML schema" }
--- )
+vim.keymap.set(
+  "n",
+  "<leader>sy",
+  "<cmd>Telescope yaml_schema<CR>",
+  { desc = "Telescope - [S]earch [Y]AML schema" }
+)
 
 -- toggle conceallevel
 vim.keymap.set(
@@ -141,9 +141,9 @@ then
   -- absolute path  (/something/src/foo.txt)
   vim.api.nvim_set_keymap(
     "n",
-    "<leader>ya",
+    "<leader>yp",
     ':let @*=expand("%:p")<CR>',
-    { noremap = true, silent = true, desc = "[Y]ank [A]bsolute path" }
+    { noremap = true, silent = true, desc = "[Y]ank Absolute [P]ath" }
   )
 
   -- filename       (foo.txt)
@@ -181,9 +181,9 @@ then
   -- absolute path (/something/src/foo.txt)
   vim.api.nvim_set_keymap(
     "n",
-    "<leader>ya",
+    "<leader>yp",
     ':let @+=expand("%:p")<CR>',
-    { noremap = true, silent = true, desc = "[Y]ank [A]bsolute path" }
+    { noremap = true, silent = true, desc = "[Y]ank Absolute [P]ath" }
   )
 
   -- filename (foo.txt)
@@ -202,11 +202,3 @@ then
     { noremap = true, silent = true, desc = "[Y]ank [D]irectory" }
   )
 end
-
--- Recommended is to have the same open mapping as your close (```<leader>k```) the plugin for a toggle effect.
-vim.keymap.set(
-  "n",
-  "<leader>kc",
-  '<cmd>lua require("kubectl").open()<cr>',
-  { noremap = true, silent = true }
-)
