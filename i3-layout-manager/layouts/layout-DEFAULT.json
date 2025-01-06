@@ -116,8 +116,8 @@
     "percent": 0.266666666666667,
     "swallows": [
        {
-       // "class": "^kitty$",
-       // "instance": "^kitty$",
+       // "class": "^ghostty$",
+       // "instance": "^ghostty$",
        // "machine": "^nedsi-home$",
        // "title": "^zsh$"
        }
