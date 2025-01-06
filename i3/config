@@ -50,7 +50,7 @@ bindsym XF86MonBrightnessUp exec brightnessctl s +5%
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec ghostty
 
 # kill focused window
 bindsym $mod+w kill
@@ -199,7 +199,7 @@ default_border pixel 3
 default_floating_border pixel 3
 
 # i3-layout-manager
-bindsym $mod+shift+space exec kitty; exec firefox; exec signal-desktop;\
+bindsym $mod+shift+space exec ghostty; exec firefox; exec signal-desktop;\
   exec spotify; exec ferdium; exec obsidian; exec companion;\
   exec $HOME/personal/repos/i3-layout-manager/layout_manager.sh 3w-stacks_main-mid
 bindsym $mod+space exec $HOME/personal/repos/i3-layout-manager/layout_manager.sh
