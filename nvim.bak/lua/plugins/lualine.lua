@@ -33,13 +33,13 @@ return {
     return {
       options = {
         icons_enabled = true,
-        -- theme = "catppuccin",
+        theme = "catppuccin",
         component_separators = { "|" },
         section_separators = { "" },
       },
       sections = {
         lualine_a = { getWords },
-        -- lualine_b = { require("yaml_nvim").get_yaml_key_and_value },
+        lualine_b = { require("yaml_nvim").get_yaml_key_and_value },
         -- lualine_x = { "fileformat", "filetype", get_schema },
       },
     }
