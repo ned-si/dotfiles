@@ -5,7 +5,6 @@ return {
     opts = {
         load_langs = { "fr-CH", "en-US", "en-GB" },
         init_check = true,
-        path = "$HOME/.local/share/nvim/.ltex",
         server_opts = {
             capabilities = your_capabilities,
             on_attach = function(client, bufnr)

@@ -69,7 +69,6 @@ alias ts="tmux-sessionizer"
 alias ghd="gh dash"
 alias restish="noglob restish"
 alias findhost='ssh exoadmin@infra-dns003 findhost \$1\'
-#alias findhost='ssh exoadmin@infra-dns003.gv2.p.exoscale.net findhost'
 alias exo-irc="ssh irc -t 'tmux attach; bash -l'"
 alias exo-api-pp="export EXOSCALE_API_KEY=$EXOSCALE_API_KEY_PP; export EXOSCALE_API_SECRET=$EXOSCALE_API_SECRET_PP; export EXOSCALE_API_ENDPOINT=$EXOSCALE_API_ENDPOINT_PP; export EXOSCALE_API_ENVIRONMENT=$EXOSCALE_API_ENVIRONMENT_PP"
 alias exo-api-prod="export EXOSCALE_API_KEY=$EXOSCALE_API_KEY_PROD; export EXOSCALE_API_SECRET=$EXOSCALE_API_SECRET_PROD; unset EXOSCALE_API_ENDPOINT; unset EXOSCALE_API_ENVIRONMENT"
@@ -206,3 +205,10 @@ complete -o nospace -C /usr/bin/tofu tofu
 
 ## zoxide
 eval "$(zoxide init zsh)"
+
+## exo stuff
+vm_connect() {
+  ssh -o StrictHostKeyChecking=accept-new \
+    $(restish root-api instance-get "$1" | jq -r '.["exoscale.entity.instance/host"]["exoscale.entity.host/name"] | split(".")[0]') \
+    virsh console --force $(restish root-api instance-get "$1" | jq -r '.["exoscale.entity.instance/internal-name"]')
+}
