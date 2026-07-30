@@ -11,7 +11,7 @@ version: '3'
 
 vars:
   # Stowed on every machine.
-  COMMON: zsh tmux nvim lazygit gh-dash ghostty bin
+  COMMON: zsh tmux nvim git ssh lazygit gh-dash ghostty bin
   # Stowed only on the Arch/X11 desktop.
   LINUX: linux-x11 i3 i3-layout-manager polybar picom rofi autorandr
   # Never stowed automatically. See the note in the Brewfile.

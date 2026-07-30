@@ -1,4 +1,7 @@
 gui:
+  nerdFontsVersion: "3"
+  showFileTree: true
+  # Catppuccin Mocha, to match tmux, ghostty and nvim.
   theme:
     activeBorderColor:
       - '#b4befe'
@@ -19,17 +22,28 @@ gui:
       - '#cdd6f4'
     searchingActiveBorderColor:
       - '#f9e2af'
-
   authorColors:
     '*': '#b4befe'
 
+git:
+  # Reuse the delta setup from ~/.gitconfig. --paging=never is required or delta
+  # tries to launch its own pager inside lazygit's.
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  # Only relevant on repos that use it, harmless elsewhere.
+  autoFetch: true
+
+os:
+  edit: 'nvim {{filename}}'
+  editAtLine: 'nvim +{{line}} {{filename}}'
+
 customCommands:
-  - key: "o"
-    command: "nvim -c ':Octo pr create'"
-    context: "localBranches"
-    loadingText: "Loading Octo"
-    description: "Open pull request with Octo"
+  # GitHub only, so this is for personal repos. Genesys is on Bitbucket, where
+  # PRs go through atlas.nvim or the browser instead.
+  - key: 'O'
+    command: 'nvim -c ":Octo pr create"'
+    context: 'localBranches'
+    loadingText: 'opening Octo'
+    description: 'Create pull request with Octo (GitHub only)'
     subprocess: true
-keybinding:
-  branches:
-    createPullRequest: "O"

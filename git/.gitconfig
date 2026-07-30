@@ -1,0 +1,80 @@
+# Work is the default identity here, because everything under ~/repos is
+# Genesys. Personal repos are matched by their remote below rather than by
+# their path on disk, so a personal checkout can live anywhere.
+[user]
+	name = Julien Sudan
+	email = julien.sudan@genesys.com
+
+# Requires git >= 2.36. Matches any repo with a ned-si remote, which is more
+# robust than gitdir: since this dotfiles repo sits in ~/repos next to work.
+[includeIf "hasconfig:remote.*.url:git@github.com:ned-si/**"]
+	path = ~/.config/git/config-personal
+[includeIf "hasconfig:remote.*.url:https://github.com/ned-si/**"]
+	path = ~/.config/git/config-personal
+
+[init]
+	defaultBranch = main
+
+[core]
+	excludesfile = ~/.config/git/ignore
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
+	hyperlinks = true
+	syntax-theme = Catppuccin-mocha
+
+[merge]
+	# zdiff3 shows the common ancestor, which makes conflicts far easier to read.
+	conflictstyle = zdiff3
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[push]
+	# Stop `git push` failing on a new branch just to tell you to set upstream.
+	autoSetupRemote = true
+
+[pull]
+	rebase = true
+
+[fetch]
+	prune = true
+	pruneTags = true
+
+[rebase]
+	autoStash = true
+	autoSquash = true
+
+[rerere]
+	# Remember conflict resolutions and replay them.
+	enabled = true
+
+[branch]
+	sort = -committerdate
+
+[column]
+	ui = auto
+
+[commit]
+	# Put the diff in the editor when writing a commit message.
+	verbose = true
+
+[help]
+	autocorrect = prompt
+
+[alias]
+	s = status --short --branch
+	lg = log --oneline --graph --decorate -20
+	last = log -1 --stat
+	unstage = restore --staged
+	amend = commit --amend --no-edit
+
+[include]
+	# Untracked. Anything machine-specific or that should not be published.
+	path = ~/.config/git/config.local

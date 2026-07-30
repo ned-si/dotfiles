@@ -65,8 +65,7 @@ keybindings:
           nvim -c ":silent Octo pr edit {{.PrNumber}}"
         '
 repoPaths:
-  exoscale/*: $HOME/work/repos/
-  ned-si/*: $HOME/personal/repos
+  ned-si/*: $HOME/repos
 theme:
   ui:
     table:

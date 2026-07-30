@@ -1,0 +1,9 @@
+# Applied automatically to repos with a ned-si remote. See the includeIf rules
+# in ~/.gitconfig.
+#
+# The matching key, ssh-nedsi-main, is served by the Bitwarden ssh-agent rather
+# than living on disk. Nothing to configure here for it: ssh offers the agent's
+# keys and GitHub picks the one it recognises.
+[user]
+	name = nedsi
+	email = nedsi@pm.me
