@@ -1,0 +1,92 @@
+version: '3'
+
+# Config is managed with GNU stow. Every top-level directory here is a stow
+# "package" whose interior mirrors $HOME, so `stow zsh` turns zsh/.zshrc into
+# ~/.zshrc as a symlink back into this repo.
+#
+# Which packages get stowed depends on the machine, which is why this used to
+# live on separate git branches. Branches were the wrong tool: they had to be
+# rebased forever and shared changes landed twice. Package selection is a
+# deployment concern, so it belongs here.
+
+vars:
+  # Stowed on every machine.
+  COMMON: zsh tmux nvim lazygit gh-dash ghostty bin
+  # Stowed only on the Arch/X11 desktop.
+  LINUX: linux-x11 i3 i3-layout-manager polybar picom rofi autorandr
+  # Never stowed automatically. See the note in the Brewfile.
+  MACOS_WM: macos-wm
+
+tasks:
+  default:
+    desc: List the available tasks
+    cmds:
+      - task --list
+    silent: true
+
+  brew:
+    desc: Install the Homebrew toolchain
+    cmds:
+      - brew bundle install --file=Brewfile
+
+  brew:tex:
+    desc: "Install the TeX and PDF casks (asks for your sudo password)"
+    cmds:
+      - brew install --cask skim basictex
+      # BasicTeX ships a minimal tree, so pull in what vimtex actually needs.
+      - sudo tlmgr update --self
+      - sudo tlmgr install latexmk latexindent biber biblatex
+
+  link:
+    desc: Symlink this platform's config into $HOME
+    cmds:
+      - task: _stow
+        vars: { STOW_ARGS: --restow }
+
+  unlink:
+    desc: Remove the symlinks this platform's config created
+    cmds:
+      - task: _stow
+        vars: { STOW_ARGS: --delete }
+
+  check:
+    desc: Dry-run the linking and show what would change
+    cmds:
+      - task: _stow
+        vars: { STOW_ARGS: "--simulate --verbose=2" }
+
+  adopt:
+    desc: >-
+      Take over config files that already exist in $HOME. This OVERWRITES the
+      repo's copies with whatever is in $HOME, so run it on a clean tree and
+      inspect `git diff` afterwards.
+    cmds:
+      - task: _stow
+        vars: { STOW_ARGS: --adopt }
+      - git diff --stat
+
+  link:macos-wm:
+    desc: "Opt in to the yabai/skhd/spacebar config (needs SIP changes)"
+    cmds:
+      - task: _stow
+        vars: { STOW_ARGS: --restow, PKGS: '{{.MACOS_WM}}' }
+
+  # Resolves the package list for the current OS unless PKGS is passed in,
+  # then shells out to stow once.
+  _stow:
+    internal: true
+    requires:
+      vars: [STOW_ARGS]
+    cmds:
+      - |
+        set -eu
+        pkgs="{{.PKGS}}"
+        if [ -z "$pkgs" ]; then
+          case "$(uname -s)" in
+            Darwin) pkgs="{{.COMMON}}" ;;
+            Linux)  pkgs="{{.COMMON}} {{.LINUX}}" ;;
+            *) echo "unsupported OS: $(uname -s)" >&2; exit 1 ;;
+          esac
+        fi
+        echo "stow {{.STOW_ARGS}} -> $pkgs"
+        stow --dir="$PWD" --target="$HOME" {{.STOW_ARGS}} $pkgs
