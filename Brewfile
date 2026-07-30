@@ -12,6 +12,8 @@ brew "powerlevel10k"
 brew "tmux"
 brew "zoxide"
 brew "fzf"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
 
 # --- core cli -------------------------------------------------------------
 brew "stow"
