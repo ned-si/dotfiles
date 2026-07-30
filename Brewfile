@@ -72,10 +72,15 @@ brew "maven"
 brew "node"
 
 # --- music engraving ------------------------------------------------------
-# LilyPond for drum sheets; fluid-synth/timidity to audition the MIDI output.
+# LilyPond for drum sheets. nvim-lilypond-suite's player renders the emitted
+# MIDI with timidity, converts with ffmpeg, then plays it through mpv, so all
+# three are required for playback to work.
 brew "lilypond"
-brew "fluid-synth"
 brew "timidity"
+brew "mpv"
+# Alternative synth to timidity. Needs a SoundFont supplied separately, which is
+# why timidity is the configured default.
+brew "fluid-synth"
 
 # --- casks ----------------------------------------------------------------
 cask "ghostty"
