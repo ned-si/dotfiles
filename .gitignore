@@ -1,1 +1,9 @@
-rofi/launchers/colorful/colors.rasi
+# rofi theme generator writes this
+rofi/.config/rofi/launchers/colorful/colors.rasi
+
+# stale vim session files
+.session
+Session.vim
+
+# macOS
+.DS_Store
