@@ -5,5 +5,10 @@ rofi/.config/rofi/launchers/colorful/colors.rasi
 .session
 Session.vim
 
+# agent tooling scratch state, including git worktrees
+.claude/
+.kiro/
+.cursor/
+
 # macOS
 .DS_Store
