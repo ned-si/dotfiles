@@ -1,25 +1,57 @@
 #!/usr/bin/env bash
+# Jump to a tmux session for a project directory, creating it if needed.
+#
+#   tmux-sessionizer            pick a directory with fzf
+#   tmux-sessionizer <dir>      go straight to that directory
+set -uo pipefail
+
+# Roots to offer. Missing ones are skipped so this stays usable on a machine
+# that has not checked everything out yet.
+ROOTS=(
+  "$HOME/repos"
+  "$HOME/braindump"
+)
 
 if [[ $# -eq 1 ]]; then
-    selected=$1
+  selected="$1"
 else
-    selected=$(find ~/work/projects ~/work/repos ~/personal/repos ~/braindump -mindepth 1 -maxdepth 1 -type d | fzf)
+  existing=()
+  for root in "${ROOTS[@]}"; do
+    [[ -d "$root" ]] && existing+=("$root")
+  done
+
+  if [[ ${#existing[@]} -eq 0 ]]; then
+    echo "tmux-sessionizer: none of the configured roots exist" >&2
+    exit 1
+  fi
+
+  selected=$(find "${existing[@]}" -mindepth 1 -maxdepth 1 -type d \
+    -not -name '.*' 2>/dev/null | sort | fzf --no-multi)
 fi
 
-if [[ -z $selected ]]; then
-    exit 0
+[[ -z "$selected" ]] && exit 0
+
+if [[ ! -d "$selected" ]]; then
+  echo "tmux-sessionizer: not a directory: $selected" >&2
+  exit 1
 fi
 
+# tmux treats dots as host separators in session names.
 selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
-    exit 0
+# No server running at all: create the session and attach to it.
+if [[ -z "${TMUX:-}" ]] && ! tmux info &>/dev/null; then
+  tmux new-session -s "$selected_name" -c "$selected"
+  exit 0
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+  tmux new-session -ds "$selected_name" -c "$selected"
 fi
 
-tmux switch-client -t $selected_name
+# switch-client only works from inside tmux; attach otherwise.
+if [[ -z "${TMUX:-}" ]]; then
+  tmux attach-session -t "$selected_name"
+else
+  tmux switch-client -t "$selected_name"
+fi

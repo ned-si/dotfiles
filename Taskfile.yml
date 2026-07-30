@@ -65,6 +65,27 @@ tasks:
         vars: { STOW_ARGS: --adopt }
       - git diff --stat
 
+  tmux:plugins:
+    desc: "Install tpm and the tmux plugins (run after `task link`)"
+    cmds:
+      - |
+        set -eu
+        tpm="$HOME/.tmux/plugins/tpm"
+        if [ ! -d "$tpm" ]; then
+          git clone --depth 1 https://github.com/tmux-plugins/tpm "$tpm"
+        else
+          git -C "$tpm" pull --ff-only
+        fi
+        if [ ! -e "$HOME/.tmux.conf" ]; then
+          echo "~/.tmux.conf is not linked yet; run 'task link' first." >&2
+          exit 1
+        fi
+        # tpm reads TMUX_PLUGIN_MANAGER_PATH out of a running server, so bring
+        # one up with the real config before installing.
+        tmux start-server
+        tmux source-file "$HOME/.tmux.conf"
+        "$tpm/bin/install_plugins"
+
   link:macos-wm:
     desc: "Opt in to the yabai/skhd/spacebar config (needs SIP changes)"
     cmds:
