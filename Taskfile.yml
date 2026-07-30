@@ -80,11 +80,12 @@ tasks:
           echo "~/.tmux.conf is not linked yet; run 'task link' first." >&2
           exit 1
         fi
-        # tpm reads TMUX_PLUGIN_MANAGER_PATH out of a running server, so bring
-        # one up with the real config before installing.
-        tmux start-server
+        # tpm reads TMUX_PLUGIN_MANAGER_PATH out of a running server, and a
+        # server only stays up once it owns a session, so make a throwaway one.
+        tmux new-session -d -s tpm-install
         tmux source-file "$HOME/.tmux.conf"
         "$tpm/bin/install_plugins"
+        tmux kill-session -t tpm-install
 
   link:macos-wm:
     desc: "Opt in to the yabai/skhd/spacebar config (needs SIP changes)"
