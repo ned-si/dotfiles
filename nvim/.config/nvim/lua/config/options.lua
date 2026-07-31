@@ -1,6 +1,12 @@
 -- Loaded before lazy.nvim starts. LazyVim's own defaults are applied first:
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 
+-- Must be set here, before the lang.python extra is evaluated. That extra
+-- defaults to pyright and then explicitly sets enabled = false on every other
+-- python server, so configuring basedpyright without flipping this leaves you
+-- with ruff and nothing else attached.
+vim.g.lazyvim_python_lsp = "basedpyright"
+
 local opt = vim.opt
 
 opt.number = true
