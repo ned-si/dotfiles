@@ -65,6 +65,54 @@ tasks:
         rm -f "$tmp"
         "$HOME/.local/bin/latexmk" --version
 
+  update:
+    desc: Update everything, then show what changed
+    # Nothing in this repo carries a hand-maintained version. The Brewfile has no
+    # version constraints, tpm tracks branches, and the two `version = "*"` nvim
+    # specs resolve to the latest tag. Each tool owns its own state, so this just
+    # drives all four rather than trying to be a package manager.
+    #
+    # Renovate would have nothing to do here: its homebrew manager reads tap
+    # Formula/*.rb files, not Brewfiles.
+    #
+    # lazy-lock.json is the one file that records versions, so `git diff` after
+    # this is the closest thing to a dependency changelog. Review it before
+    # committing.
+    cmds:
+      - brew update
+      - brew upgrade
+      # Installs anything added to the Brewfile since last time.
+      - brew bundle install --file=Brewfile
+      # Updates plugins and rewrites lazy-lock.json.
+      - nvim --headless "+Lazy! sync" +qa
+      # Refreshes the mason registry. Upgrading individual tools is the `:Mason`
+      # UI, since mason has no headless upgrade-all.
+      - nvim --headless -c 'Lazy! load mason.nvim' -c 'MasonUpdate' -c 'qa' || true
+      - task: tmux:update
+      # latexmk is fetched from CTAN rather than managed by tlmgr, so refresh it.
+      - task: tex:latexmk
+      - cmd: git --no-pager diff --stat
+        ignore_error: true
+
+  tmux:update:
+    desc: Update the tmux plugins
+    cmds:
+      - |
+        set -eu
+        tpm="$HOME/.tmux/plugins/tpm"
+        if [ ! -d "$tpm" ]; then
+          echo "tpm is not installed; run 'task tmux:plugins' first" >&2
+          exit 1
+        fi
+        git -C "$tpm" pull --ff-only
+        # Same as install: tpm needs a live server to read
+        # TMUX_PLUGIN_MANAGER_PATH, and a server only stays up once it owns a
+        # session.
+        tmux new-session -d -s tpm-update
+        tmux source-file "$HOME/.tmux.conf"
+        "$tpm/bin/update_plugins" all
+        tmux kill-session -t tpm-update
+
   link:
     desc: Symlink this platform's config into $HOME
     cmds:

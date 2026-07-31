@@ -41,7 +41,11 @@ return {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
       opts.options = vim.tbl_extend("force", opts.options or {}, {
-        theme = "catppuccin",
+        -- Not "catppuccin": there is no such theme file. catppuccin ships one
+        -- per flavour (catppuccin-mocha, -latte, ...) plus catppuccin-nvim,
+        -- which follows whichever flavour is configured above. Using the wrong
+        -- name makes lualine warn and silently fall back to "auto".
+        theme = "catppuccin-nvim",
         component_separators = { left = "|", right = "|" },
         section_separators = { left = "", right = "" },
       })
