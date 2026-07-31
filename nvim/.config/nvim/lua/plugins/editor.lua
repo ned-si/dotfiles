@@ -121,7 +121,9 @@ return {
     },
   },
 
-  -- yazi replaces ranger: same modal feel, but previews images inline.
+  -- yazi replaces ranger: same modal feel, plus inline image previews. It is the
+  -- only file browser here. No tree docked to the left, no picker sidebar; see
+  -- plugins/disabled.lua for what was turned off to get there.
   {
     "mikavilpas/yazi.nvim",
     event = "VeryLazy",
@@ -130,8 +132,13 @@ return {
       { "<leader>cw", "<cmd>Yazi cwd<cr>", desc = "yazi at cwd" },
     },
     opts = {
-      -- mini.files stays bound to <leader>fm for quick in-tree edits.
-      open_for_directories = false,
+      -- Take over directory buffers, so `:e .` and `nvim <dir>` open yazi. This
+      -- replaces a hand-rolled netrw autocmd: going through the plugin's own
+      -- option avoids racing snacks and netrw over the FileExplorer augroup.
+      --
+      -- Note this also captures :Explore, so netrw is effectively out of the
+      -- picture rather than sitting behind it as a fallback.
+      open_for_directories = true,
       keymaps = { show_help = "<f1>" },
     },
   },

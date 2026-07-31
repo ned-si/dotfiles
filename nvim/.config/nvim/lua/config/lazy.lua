@@ -45,7 +45,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.tex" },
 
-    { import = "lazyvim.plugins.extras.editor.mini-files" },
+    -- No file-tree extra on purpose. File navigation is yazi (<leader>-) or
+    -- netrw via :e. and nothing else. See plugins/disabled.lua.
     { import = "lazyvim.plugins.extras.util.dot" },
 
     { import = "plugins" },

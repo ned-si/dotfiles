@@ -30,6 +30,10 @@ vim.filetype.add({
   },
 })
 
+-- Directory buffers are handled by yazi, configured in plugins/editor.lua.
+-- There was a hand-rolled netrw hijack here; yazi.nvim does the same job with a
+-- supported option, so the custom autocmd is gone.
+
 -- Prose wraps at the text width and gets spell checking; code does not. This is
 -- the one place spelling is enabled, since opt.spell is off globally.
 vim.api.nvim_create_autocmd("FileType", {

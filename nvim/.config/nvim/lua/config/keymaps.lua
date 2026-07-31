@@ -50,6 +50,22 @@ map("t", "<C-k>", "<C-\\><C-N><C-w>k")
 map("t", "<C-l>", "<C-\\><C-N><C-w>l")
 map("t", "<Esc>", "<C-\\><C-N>")
 
+-- Discovery ----------------------------------------------------------------
+-- Three ways to find a mapping you have forgotten, none of them added here
+-- because they already exist:
+--   <leader> then pause   which-key lists what is available under that prefix
+--   <leader>sk            fuzzy-search EVERY mapping, then enter to run it
+--   <leader>?             which-key popup of this buffer's local mappings
+-- <leader>sk is the one to reach for. Deliberately not rebound to <leader>?,
+-- since which-key already owns that and overriding it would come down to
+-- plugin load order.
+
+-- File navigation ----------------------------------------------------------
+-- yazi is the only file browser: no tree docked to the left, no picker sidebar.
+-- It also takes over directory buffers, so `:e .` and `nvim <dir>` land here
+-- too, as does :Explore. Kept on <leader>pv out of old habit.
+map("n", "<leader>pv", "<cmd>Yazi<CR>", { desc = "Browse files (yazi)" })
+
 -- Tools --------------------------------------------------------------------
 map("n", "<leader>ts", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Tmux sessionizer" })
 map("n", "<leader>a", "<cmd>Lazy<cr>", { desc = "Lazy" })

@@ -60,6 +60,12 @@ opt.cursorline = false
 opt.list = false
 opt.laststatus = 2
 
+-- LazyVim turns this on, which makes :q on a modified buffer pop a
+-- "Save changes to ...?" dialog instead of failing with E37. That is not vim
+-- behaviour and it reads as ":q stopped working". Back to the standard: :q
+-- refuses, :q! discards, :wq writes.
+opt.confirm = false
+
 -- Spell checking is handled per-filetype by ltex-ls-plus for prose, rather than
 -- vim's dictionary flagging every identifier in source files.
 opt.spell = false

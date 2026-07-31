@@ -48,7 +48,12 @@ powerlevel10k, autosuggestions and syntax highlighting.
 
 Shell aliases worth knowing: `v` nvim, `lg` lazygit, `ts` tmux-sessionizer, `k`
 kubectl, `kctx`/`kns` context and namespace, `tf` terraform, `ghd` gh dash,
-`ls`/`ll`/`la`/`lt` eza, `catp` bat.
+`catp` bat.
+
+Listings are eza: `ls` and `l` are short (`l` includes dotfiles), `ll` and `la`
+are the long form with permissions and a git column, `lt` is a tree. `lr`, `lS`,
+`ldot`, `lart` and `lrt` are there too. The long ones stat every entry, which is
+slow in `$HOME` because of the OneDrive placeholders — use `l` there.
 
 `y` (shell function) opens yazi and leaves the shell in whatever directory you
 quit from. `C-x C-x` edits the current command line in nvim. `C-r` is a
@@ -67,7 +72,7 @@ and Ghostty speaks the Kitty graphics protocol.
 | `<leader>,` | switch buffer |
 | `<leader>-` | yazi at the current file, with image previews |
 | `<leader>cw` | yazi at the working directory |
-| `<leader>fm` | mini.files, for quick in-tree renames and moves |
+| `<leader>pv` | same, out of old habit |
 | `<leader>ha` / `<leader>hA` | harpoon: add / prepend current file |
 | `<leader>hg` | harpoon menu |
 | `<leader>j` `<leader>k` `<leader>l` `<leader>;` | jump to harpoon slot 1-4 |
@@ -79,6 +84,21 @@ and Ghostty speaks the Kitty graphics protocol.
 
 Harpoon is the main tool for a task: pin the three or four files you are actually
 working on and jump by position rather than by name.
+
+There is no file tree. Nothing docks to the left, and `<leader>e` is deliberately
+unmapped. yazi is the only browser, and it also takes over directory buffers, so
+`:e .`, `nvim <dir>` and `:Explore` all open it.
+
+### Finding a mapping you have forgotten
+
+| Key | Does |
+|---|---|
+| `<leader>` then pause | which-key lists everything under that prefix |
+| `<leader>sk` | fuzzy-search **every** mapping, enter to run it |
+| `<leader>?` | which-key popup of this buffer's local mappings |
+
+`<leader>sk` is the one to reach for when you know what you want to do but not
+which key does it.
 
 ## Editing
 
@@ -102,6 +122,10 @@ working on and jump by position rather than by name.
 
 Autoformat is **off** by default. `<leader>cf` formats deliberately. Reformatting
 a file you only opened to read produces noisy diffs.
+
+`:q` behaves the way vim always has: it refuses on a modified buffer with `E37`,
+`:q!` discards, `:wq` writes. LazyVim ships `confirm = true`, which replaces that
+with a "Save changes?" dialog; that is turned off here.
 
 ## Clipboard
 

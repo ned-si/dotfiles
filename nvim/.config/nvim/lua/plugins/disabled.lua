@@ -1,9 +1,31 @@
 -- Things LazyVim enables that are not wanted here.
 
 return {
-  -- mini.files (via the editor.mini-files extra) and yazi cover browsing; a
-  -- third tree is one more set of keymaps to remember.
+  -- No sidebar file tree, in any form. Navigation is yazi (<leader>-) for
+  -- browsing with previews, or netrw via `:e .` for a plain listing in the
+  -- current window. Nothing docked to the left.
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
+  { "nvim-mini/mini.files", enabled = false },
+
+  {
+    "folke/snacks.nvim",
+    opts = {
+      explorer = {
+        -- Without this snacks takes over netrw, so `:e .` opens its picker in a
+        -- left split instead of a normal netrw buffer. That is the sidebar.
+        enabled = false,
+        replace_netrw = false,
+      },
+    },
+    -- LazyVim's picker extra binds these to the explorer. Freed rather than
+    -- left pointing at something disabled.
+    keys = {
+      { "<leader>e", false },
+      { "<leader>E", false },
+      { "<leader>fe", false },
+      { "<leader>fE", false },
+    },
+  },
 
   -- Auto-inserted closing pairs fight with surround-based editing.
   { "nvim-mini/mini.pairs", enabled = false },

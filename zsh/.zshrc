@@ -72,13 +72,16 @@ alias ts="tmux-sessionizer"
 # ls flags, and those are not eza flags: eza's -F/--classify takes an optional
 # WHEN value, so `ls -lFh` becomes `eza -lFh` and eza reads the `h` as the value
 # for --classify and errors out. Overriding only `ls` leaves the rest broken.
+# common-aliases makes `l` a long listing. Keeping it short instead: the long
+# form is what ll and la are for, and --git is only on those, since it stats
+# every entry and that is slow in $HOME where the OneDrive placeholders live.
 if command -v eza >/dev/null 2>&1; then
   alias ls="eza --group-directories-first"
-  alias l="eza -lh --git --group-directories-first"
+  alias l="eza -a --group-directories-first"
   alias ll="eza -lh --git --group-directories-first"
   alias la="eza -lha --git --group-directories-first"
   alias lt="eza --tree --level=2"
-  alias lr="eza -lh --git --sort=modified --recurse --level=2"
+  alias lr="eza -lh --sort=modified --recurse --level=2"
   alias lS="eza -1 --sort=size --reverse"
   alias ldot="eza -lhd .*"
   alias lart="eza -1a --sort=changed --reverse"
