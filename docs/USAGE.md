@@ -30,6 +30,15 @@ Leader is `<Space>`. Local leader is `\`. In tmux the prefix is `C-f`.
 Ghostty is the terminal, tmux owns sessions and windows. Shell is zsh with
 powerlevel10k, autosuggestions and syntax highlighting.
 
+Opening a terminal drops you straight into tmux, into a session called `main`,
+attaching to it if it already exists rather than piling up numbered sessions.
+`tmux-sessionizer` then switches that client to per-project sessions.
+
+This is guarded so it only applies to real terminal windows. Anything that starts
+an interactive shell to run a single command — git opening an editor, nvim's `:!`,
+build tools, editor-integrated terminals — is left alone. If you ever need a
+shell outside tmux, `zsh -i -c` or `TMUX=1 zsh` both bypass it.
+
 | Key | Does |
 |---|---|
 | `C-f` | tmux prefix |

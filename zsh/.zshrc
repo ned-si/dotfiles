@@ -17,6 +17,46 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# --- launch tmux ----------------------------------------------------------
+# Drop straight into tmux, so a terminal window is never outside it. exec, not
+# plain tmux, so there is no stray parent shell to fall back into on detach.
+#
+# The guards matter more than the exec does. A bare `exec tmux` here hijacks
+# anything that starts an interactive shell for a single command, which is a lot:
+#
+#   -o interactive            skip scripts and non-interactive shells
+#   ZSH_EXECUTION_STRING      set by `zsh -ic 'cmd'`, which git, nvim's :!,
+#                             build tools and agents all use. Without this,
+#                             every one of them ends up inside a new tmux
+#                             session and hangs waiting for a terminal.
+#   -t 1                      stdout must be a real tty, not a pipe
+#   TMUX                      already inside tmux: nesting is not wanted
+#   TERM_PROGRAM              editor-integrated terminals manage their own
+#                             shell and their integration breaks if replaced
+#   NVIM / VIM                :terminal inside an editor
+#   command -v tmux           on a machine without tmux this must be a no-op,
+#                             not a broken login
+#
+# Placed after the instant prompt to match the original ordering, and after the
+# Kiro CLI pre block, which does its own exec into a pty.
+if [[ -o interactive ]] \
+  && [[ -z "$ZSH_EXECUTION_STRING" ]] \
+  && [[ -t 1 ]] \
+  && [[ -z "$TMUX" ]] \
+  && [[ -z "$NVIM" ]] \
+  && [[ -z "$VIM" ]] \
+  && [[ "$TERM_PROGRAM" != "kiro" ]] \
+  && [[ "$TERM_PROGRAM" != "vscode" ]] \
+  && [[ -z "$INSIDE_EMACS" ]] \
+  && command -v tmux >/dev/null 2>&1
+then
+  # `new-session -A -s <name>` attaches if that session exists and creates it
+  # otherwise, so reopening a terminal returns to the same place instead of
+  # leaving a pile of numbered sessions behind. tmux-sessionizer still switches
+  # this client to per-project sessions.
+  exec tmux new-session -A -s main
+fi
+
 # --- oh-my-zsh ------------------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""  # powerlevel10k is sourced below instead
