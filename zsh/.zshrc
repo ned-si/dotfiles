@@ -50,11 +50,9 @@ if [[ -o interactive ]] \
   && [[ -z "$INSIDE_EMACS" ]] \
   && command -v tmux >/dev/null 2>&1
 then
-  # `new-session -A -s <name>` attaches if that session exists and creates it
-  # otherwise, so reopening a terminal returns to the same place instead of
-  # leaving a pile of numbered sessions behind. tmux-sessionizer still switches
-  # this client to per-project sessions.
-  exec tmux new-session -A -s main
+  # A fresh session per window, deliberately. Attaching to an existing one is a
+  # conscious act: `tmux a`, or <prefix>f for the sessionizer picker.
+  exec tmux
 fi
 
 # --- oh-my-zsh ------------------------------------------------------------
