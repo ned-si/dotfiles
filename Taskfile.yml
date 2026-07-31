@@ -30,18 +30,40 @@ tasks:
       - brew bundle install --file=Brewfile
 
   brew:tex:
-    desc: "Install the TeX and PDF casks (asks for your sudo password)"
+    desc: "Install TeX and the PDF viewer for vimtex"
     cmds:
+      # The basictex cask runs a pkg installer, so this one step may ask for a
+      # password on a machine that has not installed it yet.
       - brew install --cask skim basictex
-      # BasicTeX ships a minimal tree, so pull in what vimtex actually needs.
+      - task: tex:latexmk
+
+  tex:latexmk:
+    desc: "Install latexmk without needing root"
+    cmds:
+      # BasicTeX ships a minimal tree and does not include latexmk, which vimtex
+      # needs to drive compilation.
       #
-      # Absolute path on purpose. BasicTeX installs into /Library/TeX/texbin,
-      # which is not on PATH in a fresh shell, and sudo resets PATH from
-      # secure_path regardless, so plain `sudo tlmgr` fails with
-      # "tlmgr: command not found" even once the shell can see it.
-      - sudo /Library/TeX/texbin/tlmgr update --self
-      - sudo /Library/TeX/texbin/tlmgr install latexmk latexindent biber biblatex
-      - /Library/TeX/texbin/latexmk --version
+      # The obvious route, `tlmgr install latexmk`, needs root: the tree under
+      # /usr/local/texlive is root-owned. That is not available on a machine
+      # where policy has removed %admin from /etc/sudoers, which is the case on
+      # the work laptop, so being in the admin group does not help. tlmgr's user
+      # mode is not an option either, because latexmk is marked non-relocatable
+      # and tlmgr refuses to install it into TEXMFHOME.
+      #
+      # latexmk is a self-contained perl script, so fetching it straight from
+      # CTAN into ~/.local/bin sidesteps all of that. macOS ships perl.
+      #
+      # On a machine where sudo does work, this is equivalent:
+      #   sudo /Library/TeX/texbin/tlmgr install latexmk
+      - |
+        set -eu
+        mkdir -p "$HOME/.local/bin"
+        tmp=$(mktemp)
+        curl -fsSL --max-time 120 -o "$tmp" \
+          https://mirrors.ctan.org/support/latexmk/latexmk.pl
+        install -m 0755 "$tmp" "$HOME/.local/bin/latexmk"
+        rm -f "$tmp"
+        "$HOME/.local/bin/latexmk" --version
 
   link:
     desc: Symlink this platform's config into $HOME
