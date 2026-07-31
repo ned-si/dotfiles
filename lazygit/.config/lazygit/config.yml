@@ -39,7 +39,7 @@ os:
   editAtLine: 'nvim +{{line}} {{filename}}'
 
 customCommands:
-  # GitHub only, so this is for personal repos. work is on Bitbucket, where
+  # GitHub only, so this is for personal repos. Work is on Bitbucket, where
   # PRs go through atlas.nvim or the browser instead.
   - key: 'O'
     command: 'nvim -c ":Octo pr create"'

@@ -1,12 +1,26 @@
-# Work is the default identity here, because everything under ~/repos is
-# work. Personal repos are matched by their remote below rather than by
-# their path on disk, so a personal checkout can live anywhere.
-[user]
-	name = Julien Sudan
-	email = work@example.invalid
+# No default identity here on purpose. This repo is published, so it lives in an
+# untracked file instead:
+#
+#   ~/.gitconfig.local             the default identity
+#   ~/.config/git/config-personal  applied to repos with a personal remote
+#
+# ~/.gitconfig.local sits outside ~/.config/git deliberately: that directory is a
+# stow symlink into this repo, so a local file there would land in the working
+# tree and be one `git add -A` away from being published.
+#
+# Order matters. git applies each include where it appears and the last value
+# wins, so the unconditional default has to come FIRST and the conditional
+# override second. Reversed, config.local's identity would win everywhere and
+# personal repos would quietly get committed under the work identity.
+[include]
+	# Untracked. Holds the default identity and anything not for publishing.
+	path = ~/.gitconfig.local
 
-# Requires git >= 2.36. Matches any repo with a ned-si remote, which is more
-# robust than gitdir: since this dotfiles repo sits in ~/repos next to work.
+# The includeIf below matches on the repo's REMOTE URL rather than its path,
+# which matters because personal and work checkouts sit side by side in ~/repos
+# and a gitdir: rule would need a special case for each one.
+#
+# Requires git >= 2.36.
 [includeIf "hasconfig:remote.*.url:git@github.com:ned-si/**"]
 	path = ~/.config/git/config-personal
 [includeIf "hasconfig:remote.*.url:https://github.com/ned-si/**"]
@@ -74,7 +88,3 @@
 	last = log -1 --stat
 	unstage = restore --staged
 	amend = commit --amend --no-edit
-
-[include]
-	# Untracked. Anything machine-specific or that should not be published.
-	path = ~/.config/git/config.local

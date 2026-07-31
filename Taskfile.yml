@@ -34,8 +34,14 @@ tasks:
     cmds:
       - brew install --cask skim basictex
       # BasicTeX ships a minimal tree, so pull in what vimtex actually needs.
-      - sudo tlmgr update --self
-      - sudo tlmgr install latexmk latexindent biber biblatex
+      #
+      # Absolute path on purpose. BasicTeX installs into /Library/TeX/texbin,
+      # which is not on PATH in a fresh shell, and sudo resets PATH from
+      # secure_path regardless, so plain `sudo tlmgr` fails with
+      # "tlmgr: command not found" even once the shell can see it.
+      - sudo /Library/TeX/texbin/tlmgr update --self
+      - sudo /Library/TeX/texbin/tlmgr install latexmk latexindent biber biblatex
+      - /Library/TeX/texbin/latexmk --version
 
   link:
     desc: Symlink this platform's config into $HOME

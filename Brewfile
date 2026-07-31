@@ -47,7 +47,7 @@ brew "sevenzip"
 brew "imagemagick"
 
 # --- python ---------------------------------------------------------------
-# uv is what work-cli uses; pyenv is here for pinning interpreter versions.
+# uv for tool installs, pyenv for pinning interpreter versions.
 brew "uv"
 brew "pyenv"
 brew "ruff"

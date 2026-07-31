@@ -37,7 +37,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.docker" },
     { import = "lazyvim.plugins.extras.lang.toml" },
 
-    -- Reading work platform code more than writing it. jdtls only attaches
+    -- Mostly for reading java rather than writing it. jdtls only attaches
     -- on java/gradle buffers, so this is inert the rest of the time.
     { import = "lazyvim.plugins.extras.lang.java" },
 

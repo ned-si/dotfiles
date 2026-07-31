@@ -1,5 +1,5 @@
 -- Python is the day job. LazyVim's lang.python extra already brings basedpyright
--- and ruff; this only adjusts what work tooling expects.
+-- and ruff; this only adjusts the defaults.
 
 return {
   {
@@ -34,9 +34,9 @@ return {
     },
   },
 
-  -- Resolve the interpreter from the project's own virtualenv. work-cli pins
-  -- UV_TOOL_DIR to its own uv environment, which is not the venv a given repo
-  -- wants, so leaving this to autodetection picks the wrong Python.
+  -- Resolve the interpreter from the project's own virtualenv. Other tooling may
+  -- pin UV_TOOL_DIR to a shared environment, which is not the venv a given repo
+  -- wants, so autodetection can pick the wrong Python.
   {
     "linux-cultist/venv-selector.nvim",
     ft = "python",

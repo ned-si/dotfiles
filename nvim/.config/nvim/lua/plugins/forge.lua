@@ -1,19 +1,19 @@
 -- Pull requests and issues.
 --
--- Two forges, because personal work is on GitHub and work is on
--- bitbucket.org/WORKSPACE. octo.nvim covers GitHub and is mature. Bitbucket and
--- Jira come from atlas.nvim, which is the only plugin that does both.
+-- Two forges, because personal work is on GitHub and work is on Bitbucket.
+-- octo.nvim covers GitHub and is mature. Bitbucket and Jira come from
+-- atlas.nvim, which is the only plugin that does both.
 --
 -- Caveat worth knowing before relying on it: atlas.nvim's own README says it is
 -- in early development and will have breaking changes. It is isolated in this
 -- file for that reason, so deleting it costs nothing. The fallback is the
--- browser, or asking Kiro through the Bitbucket MCP that work-cli configures,
--- which needs no plugin at all.
+-- browser.
 --
--- Credentials come from the environment, never from this repo. Put them in
--- ~/.zshenv.local:
---   export ATLAS_BITBUCKET_USER=...      Atlassian account email
---   export ATLAS_BITBUCKET_TOKEN=...     Atlassian API token
+-- Everything environment-specific comes from the environment, never from this
+-- repo, which is published. Put these in ~/.zshenv.local:
+--   export ATLAS_BITBUCKET_WORKSPACE=...  Bitbucket workspace slug
+--   export ATLAS_BITBUCKET_USER=...       Atlassian account email
+--   export ATLAS_BITBUCKET_TOKEN=...      Atlassian API token
 --   export ATLAS_JIRA_URL=https://<site>.atlassian.net
 --   export ATLAS_JIRA_USER=...
 --   export ATLAS_JIRA_TOKEN=...
@@ -71,7 +71,7 @@ return {
         pulls = {
           providers = {
             bitbucket = {
-              workspace = "WORKSPACE",
+              workspace = env("ATLAS_BITBUCKET_WORKSPACE"),
               username = env("ATLAS_BITBUCKET_USER"),
               token = env("ATLAS_BITBUCKET_TOKEN"),
             },

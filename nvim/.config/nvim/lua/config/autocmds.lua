@@ -22,7 +22,7 @@ vim.filetype.add({
   },
 })
 
--- work terraform lives in .tf; also treat .tfvars.json as json rather than
+-- Terraform lives in .tf; also treat .tfvars.json as json rather than
 -- leaving it unhighlighted.
 vim.filetype.add({
   extension = {
@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Python at work is 4-space, unlike the 2-space default set in options.lua.
+-- Python is 4-space here, unlike the 2-space default set in options.lua.
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("python_indent"),
   pattern = "python",
