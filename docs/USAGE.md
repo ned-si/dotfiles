@@ -286,14 +286,26 @@ Errors land in the quickfix list and as diagnostics.
 
 ## AI agent in the editor
 
-**Disabled by default.** `lua/plugins/agentic.lua` has the reasoning: it is
-third-party code brokering an agent with read and write access to the working
-tree, and some environments only sanction specific editors for AI assistance.
-Settle both before enabling rather than after.
+agentic.nvim speaks the Agent Client Protocol to an agent CLI, so it reuses that
+CLI's existing auth, tool servers, skills and sub-agents rather than configuring
+anything separately.
 
-Once enabled, `C-\` toggles the chat, `<leader>ka` adds the current file or
-selection to context, `<leader>kn` starts a new session and `<leader>kr` restores
-one. Sessions are shared with the agent's own CLI in both directions.
+| Key | Does |
+|---|---|
+| `C-\` | toggle the chat |
+| `<leader>ka` | add the current file or selection to context |
+| `<leader>kn` | new session |
+| `<leader>kr` | restore a previous session |
+| `<localleader>m` / `<localleader>s` | switch model / provider mid-conversation |
+| `Shift-Tab` | switch agent mode |
+| `@` / `/` in the prompt | file picker / slash commands |
+
+Sessions are shared in both directions, so a conversation started here can be
+picked up in the terminal with `--resume` and vice versa.
+
+Tool calls go through the plugin's permission prompt; `trust_all_tools` is
+deliberately not set, since the agent can read and write the working tree.
+`ACP_PROVIDER` in `~/.zshenv.local` selects which agent CLI to talk to.
 
 ## Things that need a token or a one-off step
 

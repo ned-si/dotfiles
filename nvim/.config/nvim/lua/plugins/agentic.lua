@@ -1,35 +1,26 @@
 -- AI agent chat in the editor, over the Agent Client Protocol.
 --
 -- ACP lets an editor talk to any compatible agent CLI, so this reuses whatever
--- the CLI already has configured: its auth, its tool servers, its own skills.
--- Sessions are shared in both directions, so a conversation started here can be
--- resumed from the terminal and vice versa.
+-- the CLI already has configured: its auth, its tool servers, its own skills and
+-- sub-agents. Nothing is duplicated here and no additional service is involved,
+-- so the model and data path are the same as using that CLI in a terminal.
 --
--- DISABLED BY DEFAULT.
+-- Sessions are shared in both directions: a conversation started here can be
+-- resumed from the terminal with `--resume`, and the other way round.
 --
--- Two reasons, both worth re-checking before enabling:
+-- Set ACP_PROVIDER in ~/.zshenv.local to point at whichever agent CLI is
+-- installed; the default below matches the one on this machine.
 --
---  1. Editor choice. Some environments only sanction specific editors for AI
---     assistance, and neovim is often not on that list. Check before using this
---     for anything other than personal work.
---  2. It is third-party code with filesystem access, brokering an agent that can
---     read and write the working tree. That warrants a dependency and static
---     analysis pass, and ideally a review of the plugin itself, rather than
---     being taken on trust.
---
--- The model and data path are the less interesting part of the risk: it proxies
--- to a CLI already installed and configured locally, so no additional service
--- receives anything. The composition is what deserves scrutiny.
---
--- Set the provider to match whichever agent CLI is installed. Flip enabled to
--- true once the above is settled. trust_all_tools is deliberately not set, so
--- tool calls stay behind the plugin's own permission prompt.
+-- trust_all_tools is deliberately not set. Tool calls stay behind the plugin's
+-- own permission prompt, which is worth keeping given the agent can read and
+-- write the working tree.
 
 return {
   {
     "carlos-algms/agentic.nvim",
-    enabled = false,
-    cmd = { "Agentic" },
+    -- No cmd trigger: the plugin exposes no user commands, only a lua API, so
+    -- the keymaps below are what load it. Each requires the module inside its
+    -- own function, so nothing is pulled in at startup.
     opts = {
       provider = vim.env.ACP_PROVIDER or "kiro-acp",
     },
