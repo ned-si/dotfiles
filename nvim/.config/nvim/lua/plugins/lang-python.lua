@@ -39,7 +39,6 @@ return {
   -- wants, so leaving this to autodetection picks the wrong Python.
   {
     "linux-cultist/venv-selector.nvim",
-    branch = "regexp",
     ft = "python",
     opts = {
       search = {

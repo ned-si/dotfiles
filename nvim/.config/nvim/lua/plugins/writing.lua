@@ -42,6 +42,10 @@ return {
 
   -- Grammar and style for prose. ltex-ls itself is abandoned; ltex-ls-plus is
   -- the maintained fork and is what mason installs under this name.
+  --
+  -- It is a ~300MB LanguageTool bundle on the JVM, so expect 30 to 45 seconds
+  -- before it attaches to the first prose buffer of a session. That is the cost
+  -- of multilingual checking; harper-ls starts instantly but is English-only.
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -98,11 +102,8 @@ return {
       daily_notes = {
         folder = "notes/dailies",
       },
-      completion = {
-        -- blink.cmp is LazyVim's completion engine now, not nvim-cmp.
-        blink = true,
-        min_chars = 2,
-      },
+      -- No completion block: obsidian.nvim ships its own obsidian-ls server now
+      -- and warns that configuring completion here will be removed in 4.0.
       -- Titles become the filename, rather than a zettelkasten timestamp.
       note_id_func = function(title)
         if title ~= nil and title ~= "" then
