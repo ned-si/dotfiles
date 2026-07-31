@@ -1,6 +1,14 @@
 theme = catppuccin-mocha
 window-decoration = false
 
+# Send Option as Alt/Meta rather than letting macOS turn it into a special
+# character. Without this, none of tmux's M- bindings can ever fire: Option+c
+# gets swallowed by the input layer and tmux receives nothing.
+#
+# Scoped to Ghostty, so Option keeps its normal behaviour everywhere else. Use
+# `left` instead of `true` to keep the right Option key for character input.
+macos-option-as-alt = true
+
 font-family = "JetBrainsMono Nerd Font Mono"
 font-family-italic = "VictorMono Nerd Font Mono"
 font-family-bold-italic = "VictorMono Nerd Font Mono"

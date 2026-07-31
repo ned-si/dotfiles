@@ -39,12 +39,17 @@ an interactive shell to run a single command — git opening an editor, nvim's `
 build tools, editor-integrated terminals — is left alone. If you ever need a
 shell outside tmux, `zsh -i -c` or `TMUX=1 zsh` both bypass it.
 
+The `M-` bindings depend on `macos-option-as-alt` in the Ghostty config. Without
+it macOS consumes Option before tmux sees it and none of them fire. Switch it to
+`left` if you want the right Option key back for character input.
+
 | Key | Does |
 |---|---|
 | `C-f` | tmux prefix |
-| `M-v` / `M-h` | split vertical / horizontal, in the current pane's directory |
 | `M-h/j/k/l` | move between panes |
-| `M-S-h/j/k/l` | resize pane by 5 |
+| `M-H/J/K/L` | resize pane by 5 |
+| `M-v` / `M-b` | split vertical / horizontal, in the current pane's directory |
+| `prefix` `\|` / `prefix` `-` | the same splits, if that is easier to remember |
 | `M-n` / `M-p` / `M-c` | next / previous / new window |
 | `M-s` | toggle synchronised panes, types into all of them at once |
 | `prefix` `r` | reload tmux.conf |
