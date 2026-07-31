@@ -65,14 +65,28 @@ alias tf="terraform"
 
 alias ts="tmux-sessionizer"
 
-# eza for listings. `cat` is deliberately left alone so scripts and pipes keep
-# working; use `catp` when you want the pretty version.
+# eza for listings.
+#
+# The whole ls family has to be redefined, not just `ls`. oh-my-zsh's
+# common-aliases plugin defines l, lr, lt, lS, ldot, lart and lrt in terms of BSD
+# ls flags, and those are not eza flags: eza's -F/--classify takes an optional
+# WHEN value, so `ls -lFh` becomes `eza -lFh` and eza reads the `h` as the value
+# for --classify and errors out. Overriding only `ls` leaves the rest broken.
 if command -v eza >/dev/null 2>&1; then
   alias ls="eza --group-directories-first"
-  alias ll="eza -l --git --group-directories-first"
-  alias la="eza -la --git --group-directories-first"
+  alias l="eza -lh --git --group-directories-first"
+  alias ll="eza -lh --git --group-directories-first"
+  alias la="eza -lha --git --group-directories-first"
   alias lt="eza --tree --level=2"
+  alias lr="eza -lh --git --sort=modified --recurse --level=2"
+  alias lS="eza -1 --sort=size --reverse"
+  alias ldot="eza -lhd .*"
+  alias lart="eza -1a --sort=changed --reverse"
+  alias lrt="eza -1 --sort=changed --reverse"
 fi
+
+# `cat` is deliberately left alone so scripts and pipes keep working; use `catp`
+# when you want the pretty version.
 command -v bat >/dev/null 2>&1 && alias catp="bat -p"
 
 # --- history --------------------------------------------------------------
