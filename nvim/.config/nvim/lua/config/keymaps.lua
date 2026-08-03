@@ -25,10 +25,30 @@ map("n", "<leader>d", '"_d', { desc = "Delete without clobbering register" })
 
 -- Yank the current file's path in various shapes. macOS only; the Linux branch
 -- of this used the + register, but * and + are the same thing here.
-map("n", "<leader>yr", ':let @+=expand("%")<CR>', { silent = true, desc = "Yank relative path" })
-map("n", "<leader>yp", ':let @+=expand("%:p")<CR>', { silent = true, desc = "Yank absolute path" })
-map("n", "<leader>yf", ':let @+=expand("%:t")<CR>', { silent = true, desc = "Yank filename" })
-map("n", "<leader>yd", ':let @+=expand("%:p:h")<CR>', { silent = true, desc = "Yank directory" })
+map(
+  "n",
+  "<leader>yr",
+  ':let @+=expand("%")<CR>',
+  { silent = true, desc = "Yank relative path" }
+)
+map(
+  "n",
+  "<leader>yp",
+  ':let @+=expand("%:p")<CR>',
+  { silent = true, desc = "Yank absolute path" }
+)
+map(
+  "n",
+  "<leader>yf",
+  ':let @+=expand("%:t")<CR>',
+  { silent = true, desc = "Yank filename" }
+)
+map(
+  "n",
+  "<leader>yd",
+  ':let @+=expand("%:p:h")<CR>',
+  { silent = true, desc = "Yank directory" }
+)
 
 -- Motion -------------------------------------------------------------------
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
@@ -67,12 +87,27 @@ map("t", "<Esc>", "<C-\\><C-N>")
 map("n", "<leader>pv", "<cmd>Yazi<CR>", { desc = "Browse files (yazi)" })
 
 -- Tools --------------------------------------------------------------------
-map("n", "<leader>ts", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Tmux sessionizer" })
+map(
+  "n",
+  "<leader>ts",
+  "<cmd>silent !tmux neww tmux-sessionizer<CR>",
+  { desc = "Tmux sessionizer" }
+)
 map("n", "<leader>a", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
-map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make file executable" })
+map(
+  "n",
+  "<leader>x",
+  "<cmd>!chmod +x %<CR>",
+  { silent = true, desc = "Make file executable" }
+)
 
-map("n", "<leader>dt", "<cmd>windo diffthis<CR>", { desc = "Diff open windows" })
+map(
+  "n",
+  "<leader>dt",
+  "<cmd>windo diffthis<CR>",
+  { desc = "Diff open windows" }
+)
 map("n", "<leader>du", "<cmd>diffoff!<CR>", { desc = "Diff off" })
 
 -- conceallevel hides markdown and LaTeX markup; toggle it to edit the raw text.

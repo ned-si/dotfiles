@@ -1,0 +1,109 @@
+name: ci
+
+# No CD: nothing here is deployed. `task link` is the install step and it runs on
+# the machine being set up.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# A second push supersedes the first; there is no value in finishing the old run.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # Everything that does not need macOS. Fast, and covers most of the surface.
+  lint:
+    name: lint (linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            zsh tmux stow shellcheck
+          # eza is not in the Ubuntu repos; the alias check skips without it,
+          # but it is the check that would have caught `l` breaking, so install it.
+          ARCH=$(dpkg --print-architecture)
+          EZA_VER=$(curl -fsSL https://api.github.com/repos/eza-community/eza/releases/latest | jq -r .tag_name)
+          curl -fsSL "https://github.com/eza-community/eza/releases/download/${EZA_VER}/eza_x86_64-unknown-linux-gnu.tar.gz" \
+            | sudo tar -xz -C /usr/local/bin eza || echo "eza install failed; alias check will skip"
+
+      - uses: arduino/setup-task@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check nvim/.config/nvim
+
+      # oh-my-zsh is sourced by .zshrc. Without it the syntax check still works,
+      # but the alias check needs the plugin that defines l/lr/lS to be present,
+      # since the whole point is verifying the eza overrides win.
+      - name: Install oh-my-zsh
+        run: |
+          RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+      - run: task check:shell
+      - run: task check:tmux
+      - run: task check:stow
+
+  # nvim needs its plugins, so this gets a cache. mason is disabled via CI=1,
+  # see lua/plugins/ci.lua, or this would download hundreds of megabytes of
+  # language servers on every run for no extra coverage.
+  nvim:
+    name: nvim
+    runs-on: ubuntu-latest
+    env:
+      CI: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+
+      - uses: arduino/setup-task@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache lazy.nvim plugins
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/nvim/lazy
+          key: lazy-${{ runner.os }}-${{ hashFiles('nvim/.config/nvim/lazy-lock.json') }}
+          restore-keys: lazy-${{ runner.os }}-
+
+      - name: Link the nvim config into place
+        run: |
+          mkdir -p ~/.config
+          ln -sfn "$PWD/nvim/.config/nvim" ~/.config/nvim
+
+      - run: task check:nvim
+
+  # Only the checks that genuinely need macOS.
+  macos:
+    name: macos-only checks
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: arduino/setup-task@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Ghostty
+        run: brew install --cask ghostty
+
+      - run: task check:ghostty

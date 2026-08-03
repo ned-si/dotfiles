@@ -58,12 +58,15 @@ return {
               -- gets written here.
               language = "en-GB",
               dictionary = (function()
-                local path = vim.env.HOME .. "/.ltex/dictionaries/dictionary.json"
+                local path = vim.env.HOME
+                  .. "/.ltex/dictionaries/dictionary.json"
                 local f = io.open(path, "r")
                 if f then
                   local ok, data = pcall(vim.json.decode, f:read("*a"))
                   f:close()
-                  if ok then return data end
+                  if ok then
+                    return data
+                  end
                 end
                 return {}
               end)(),
@@ -74,7 +77,10 @@ return {
               -- LaTeX commands that take a non-prose argument, so the checker
               -- stops reporting them as sentence fragments.
               latex = {
-                commands = { ["\\includegraphics[]{}"] = "ignore", ["\\lstinputlisting{}"] = "ignore" },
+                commands = {
+                  ["\\includegraphics[]{}"] = "ignore",
+                  ["\\lstinputlisting{}"] = "ignore",
+                },
               },
               disabledRules = {
                 ["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S" },
@@ -155,13 +161,38 @@ return {
       { "<leader>on", "<cmd>Obsidian new<cr>", desc = "Obsidian new" },
       { "<leader>oo", "<cmd>Obsidian open<cr>", desc = "Obsidian open in app" },
       { "<leader>os", "<cmd>Obsidian search<cr>", desc = "Obsidian search" },
-      { "<leader>oq", "<cmd>Obsidian quick_switch<cr>", desc = "Obsidian quick switch" },
+      {
+        "<leader>oq",
+        "<cmd>Obsidian quick_switch<cr>",
+        desc = "Obsidian quick switch",
+      },
       { "<leader>ot", "<cmd>Obsidian today<cr>", desc = "Obsidian today" },
-      { "<leader>oy", "<cmd>Obsidian yesterday<cr>", desc = "Obsidian yesterday" },
-      { "<leader>ob", "<cmd>Obsidian backlinks<cr>", desc = "Obsidian backlinks" },
-      { "<leader>of", "<cmd>Obsidian follow_link<cr>", desc = "Obsidian follow link" },
-      { "<leader>ol", "<cmd>Obsidian link<cr>", mode = "v", desc = "Obsidian link selection" },
-      { "<leader>oi", "<cmd>Obsidian paste_img<cr>", desc = "Obsidian paste image" },
+      {
+        "<leader>oy",
+        "<cmd>Obsidian yesterday<cr>",
+        desc = "Obsidian yesterday",
+      },
+      {
+        "<leader>ob",
+        "<cmd>Obsidian backlinks<cr>",
+        desc = "Obsidian backlinks",
+      },
+      {
+        "<leader>of",
+        "<cmd>Obsidian follow_link<cr>",
+        desc = "Obsidian follow link",
+      },
+      {
+        "<leader>ol",
+        "<cmd>Obsidian link<cr>",
+        mode = "v",
+        desc = "Obsidian link selection",
+      },
+      {
+        "<leader>oi",
+        "<cmd>Obsidian paste_img<cr>",
+        desc = "Obsidian paste image",
+      },
     },
   },
 }

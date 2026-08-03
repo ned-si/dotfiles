@@ -24,6 +24,56 @@ tasks:
       - task --list
     silent: true
 
+  check:all:
+    desc: Run every check, the same ones CI runs
+    cmds:
+      - task: check:shell
+      - task: check:lua
+      - task: check:tmux
+      - task: check:nvim
+      - task: check:stow
+      - task: check:ghostty
+
+  check:shell:
+    desc: zsh/bash syntax, shellcheck, and exercise the listing aliases
+    cmds:
+      - bash ci/check-shell.sh
+
+  check:lua:
+    desc: stylua formatting check
+    cmds:
+      - |
+        if command -v stylua >/dev/null 2>&1; then
+          stylua --check nvim/.config/nvim
+        else
+          echo "  SKIP     stylua not installed"
+        fi
+
+  check:tmux:
+    desc: tmux config loads, and the bindings are the intended ones
+    cmds:
+      - bash ci/check-tmux.sh
+
+  check:nvim:
+    desc: nvim starts clean, with the expected options, mappings and filetypes
+    cmds:
+      - bash ci/check-nvim.sh
+
+  check:stow:
+    desc: every package links cleanly into an empty target
+    cmds:
+      - bash ci/check-stow.sh
+
+  check:ghostty:
+    desc: "ghostty config validates (macOS only, skips elsewhere)"
+    cmds:
+      - bash ci/check-ghostty.sh
+
+  fmt:
+    desc: Format the lua config in place
+    cmds:
+      - stylua nvim/.config/nvim
+
   brew:
     desc: Install the Homebrew toolchain
     cmds:
@@ -125,7 +175,7 @@ tasks:
       - task: _stow
         vars: { STOW_ARGS: --delete }
 
-  check:
+  link:check:
     desc: Dry-run the linking and show what would change
     cmds:
       - task: _stow

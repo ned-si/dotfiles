@@ -37,10 +37,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, "Previous diagnostic")
 
     map("[E", function()
-      vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
+      vim.diagnostic.jump({
+        count = -1,
+        severity = vim.diagnostic.severity.ERROR,
+      })
     end, "Previous error")
     map("]E", function()
-      vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+      vim.diagnostic.jump({
+        count = 1,
+        severity = vim.diagnostic.severity.ERROR,
+      })
     end, "Next error")
   end,
 })
@@ -65,10 +71,22 @@ return {
       folds = { folded = true },
     },
     keys = {
-      { "<leader>pd", "<cmd>Glance definitions<cr>", desc = "Peek definitions" },
-      { "<leader>pt", "<cmd>Glance type_definitions<cr>", desc = "Peek type definitions" },
+      {
+        "<leader>pd",
+        "<cmd>Glance definitions<cr>",
+        desc = "Peek definitions",
+      },
+      {
+        "<leader>pt",
+        "<cmd>Glance type_definitions<cr>",
+        desc = "Peek type definitions",
+      },
       { "<leader>pr", "<cmd>Glance references<cr>", desc = "Peek references" },
-      { "<leader>pi", "<cmd>Glance implementations<cr>", desc = "Peek implementations" },
+      {
+        "<leader>pi",
+        "<cmd>Glance implementations<cr>",
+        desc = "Peek implementations",
+      },
       { "gh", "<cmd>Glance references<cr>", desc = "Peek references" },
     },
   },

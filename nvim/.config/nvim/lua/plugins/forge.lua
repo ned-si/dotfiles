@@ -41,7 +41,10 @@ return {
       mappings = {
         review_diff = {
           select_next_entry = { lhs = "<Tab>", desc = "next changed file" },
-          select_prev_entry = { lhs = "<S-Tab>", desc = "previous changed file" },
+          select_prev_entry = {
+            lhs = "<S-Tab>",
+            desc = "previous changed file",
+          },
         },
       },
     },
@@ -90,7 +93,11 @@ return {
       }
     end,
     keys = {
-      { "<leader>Pb", "<cmd>Atlas pulls bitbucket<cr>", desc = "Bitbucket PRs" },
+      {
+        "<leader>Pb",
+        "<cmd>Atlas pulls bitbucket<cr>",
+        desc = "Bitbucket PRs",
+      },
       { "<leader>Pj", "<cmd>Atlas issues jira<cr>", desc = "Jira issues" },
     },
   },

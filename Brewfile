@@ -18,6 +18,8 @@ brew "zsh-syntax-highlighting"
 # --- core cli -------------------------------------------------------------
 brew "stow"
 brew "ripgrep"
+# Used by `task check:shell`; CI installs it too.
+brew "shellcheck"
 brew "fd"
 brew "bat"
 brew "eza"

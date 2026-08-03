@@ -117,7 +117,10 @@ return {
             return diagnostics
           end
           for _, resource in ipairs(decoded.resources) do
-            if resource.status == "statusInvalid" or resource.status == "statusError" then
+            if
+              resource.status == "statusInvalid"
+              or resource.status == "statusError"
+            then
               table.insert(diagnostics, {
                 lnum = 0,
                 col = 0,
@@ -147,7 +150,11 @@ return {
       { "<leader>cyv", "<cmd>YAMLView<cr>", desc = "YAML: view key path" },
       { "<leader>cyy", "<cmd>YAMLYank<cr>", desc = "YAML: yank value" },
       { "<leader>cyk", "<cmd>YAMLYankKey<cr>", desc = "YAML: yank key path" },
-      { "<leader>cyq", "<cmd>YAMLQuickfix<cr>", desc = "YAML: keys to quickfix" },
+      {
+        "<leader>cyq",
+        "<cmd>YAMLQuickfix<cr>",
+        desc = "YAML: keys to quickfix",
+      },
     },
   },
 
@@ -167,7 +174,10 @@ return {
           else
             vim.api.nvim_buf_set_lines(0, 0, 0, false, { modeline })
           end
-          vim.notify("Pinned buffer to the Kubernetes schema", vim.log.levels.INFO)
+          vim.notify(
+            "Pinned buffer to the Kubernetes schema",
+            vim.log.levels.INFO
+          )
         end,
         ft = { "yaml" },
         desc = "YAML: pin Kubernetes schema",

@@ -65,7 +65,8 @@ return {
                 -- npm-groovy-lint is 1-indexed; nvim diagnostics are 0-indexed.
                 lnum = math.max((issue.line or 1) - 1, 0),
                 col = 0,
-                severity = severity_map[issue.severity] or vim.diagnostic.severity.WARN,
+                severity = severity_map[issue.severity]
+                  or vim.diagnostic.severity.WARN,
                 source = "npm-groovy-lint",
                 message = issue.msg or "groovy lint",
               })

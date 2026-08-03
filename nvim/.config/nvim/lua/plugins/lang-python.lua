@@ -43,12 +43,19 @@ return {
     opts = {
       search = {
         -- uv and standard venv layouts, plus pyenv's shared directory.
-        cwd = { command = "fd '/bin/python$' . --full-path --color never -E /proc -HI -a -L" },
+        cwd = {
+          command = "fd '/bin/python$' . --full-path --color never -E /proc -HI -a -L",
+        },
       },
       options = { notify_user_on_venv_activation = true },
     },
     keys = {
-      { "<leader>cv", "<cmd>VenvSelect<cr>", ft = "python", desc = "Select venv" },
+      {
+        "<leader>cv",
+        "<cmd>VenvSelect<cr>",
+        ft = "python",
+        desc = "Select venv",
+      },
     },
   },
 }

@@ -21,7 +21,7 @@ task tmux:plugins  # tpm + tmux plugins
 ```
 
 `task link` picks the package set from `uname`, so the same command is correct on
-both machines. `task check` dry-runs it and shows what would change; `task
+both machines. `task link:check` dry-runs it and shows what would change; `task
 unlink` reverses it.
 
 Stow refuses to overwrite a real file, so if `task link` reports conflicts, move
@@ -63,6 +63,33 @@ ever changes.
 Platform differences used to live on git branches. That meant every shared change
 landed twice and the platform branches needed perpetual rebasing, so it is now a
 package-selection problem solved in `Taskfile.yml`.
+
+## Checks
+
+`task check:all` runs everything CI runs. Individually:
+
+| task | checks |
+|---|---|
+| `check:shell` | zsh/bash syntax, shellcheck, and runs every listing alias |
+| `check:lua` | stylua formatting |
+| `check:tmux` | config loads, bindings are unique and reachable |
+| `check:nvim` | starts clean, options/mappings/filetypes as configured |
+| `check:stow` | every package links cleanly into an empty target |
+| `check:ghostty` | config validates and the theme name resolves (macOS) |
+
+CI runs the same tasks, so there is no separate CI logic to drift. Three jobs:
+Linux for shell/tmux/stow, a cached Linux job for nvim, and macOS for ghostty.
+
+These are not hypothetical. Every check here exists because something silently
+broke: a Ghostty theme name that never resolved for over a year, tmux bindings
+spelled in a way no terminal can produce, a lualine theme that fell back without
+anyone noticing, plugins renamed upstream, and `l` breaking because eza rejects
+BSD `ls` flags. All of them were invisible until something was actually run.
+
+They deliberately stop short of anything needing a language server or a real
+terminal. `<leader>ca` on a grammar warning, Option-as-Alt reaching tmux, and
+YAML schema resolution all need a live environment, and testing them in CI buys
+flakiness rather than confidence.
 
 ## Machine-local overrides
 

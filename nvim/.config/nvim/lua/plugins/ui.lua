@@ -58,7 +58,10 @@ return {
           return n .. (n == 1 and " word" or " words")
         end,
         cond = function()
-          return vim.tbl_contains({ "markdown", "text", "tex", "plaintex" }, vim.bo.filetype)
+          return vim.tbl_contains(
+            { "markdown", "text", "tex", "plaintex" },
+            vim.bo.filetype
+          )
         end,
       })
 

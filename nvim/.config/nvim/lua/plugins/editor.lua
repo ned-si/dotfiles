@@ -25,9 +25,27 @@ return {
       end
 
       return {
-        { "<leader>ha", h(function(hp) hp:list():add() end), desc = "Harpoon add" },
-        { "<leader>hA", h(function(hp) hp:list():prepend() end), desc = "Harpoon prepend" },
-        { "<leader>hg", h(function(hp) hp.ui:toggle_quick_menu(hp:list()) end), desc = "Harpoon menu" },
+        {
+          "<leader>ha",
+          h(function(hp)
+            hp:list():add()
+          end),
+          desc = "Harpoon add",
+        },
+        {
+          "<leader>hA",
+          h(function(hp)
+            hp:list():prepend()
+          end),
+          desc = "Harpoon prepend",
+        },
+        {
+          "<leader>hg",
+          h(function(hp)
+            hp.ui:toggle_quick_menu(hp:list())
+          end),
+          desc = "Harpoon menu",
+        },
 
         { "<leader>j", select(1), desc = "Harpoon 1" },
         { "<leader>k", select(2), desc = "Harpoon 2" },
@@ -76,15 +94,29 @@ return {
     version = false,
     opts = {},
     keys = {
-      { "<leader>tw", "<cmd>lua MiniTrailspace.trim()<cr>", desc = "Trim trailing whitespace" },
-      { "<leader>tl", "<cmd>lua MiniTrailspace.trim_last_lines()<cr>", desc = "Trim trailing lines" },
+      {
+        "<leader>tw",
+        "<cmd>lua MiniTrailspace.trim()<cr>",
+        desc = "Trim trailing whitespace",
+      },
+      {
+        "<leader>tl",
+        "<cmd>lua MiniTrailspace.trim_last_lines()<cr>",
+        desc = "Trim trailing lines",
+      },
     },
   },
 
   {
     "xorid/swap-split.nvim",
     keys = {
-      { "<leader>ss", function() require("swap-split").swap() end, desc = "Swap split" },
+      {
+        "<leader>ss",
+        function()
+          require("swap-split").swap()
+        end,
+        desc = "Swap split",
+      },
     },
   },
 
@@ -93,8 +125,18 @@ return {
     "almo7aya/openingh.nvim",
     keys = {
       { "<leader>ogr", "<cmd>OpenInGHRepo<cr>", desc = "Open repo in browser" },
-      { "<leader>ogf", "<cmd>OpenInGHFile<cr>", mode = "n", desc = "Open file in browser" },
-      { "<leader>ogf", "<cmd>OpenInGHFileLines<cr>", mode = "v", desc = "Open lines in browser" },
+      {
+        "<leader>ogf",
+        "<cmd>OpenInGHFile<cr>",
+        mode = "n",
+        desc = "Open file in browser",
+      },
+      {
+        "<leader>ogf",
+        "<cmd>OpenInGHFileLines<cr>",
+        mode = "v",
+        desc = "Open lines in browser",
+      },
     },
   },
 
@@ -117,7 +159,13 @@ return {
     dependencies = { "nvim-treesitter" },
     opts = {},
     keys = {
-      { "<leader>na", function() require("ts-node-action").node_action() end, desc = "Node action" },
+      {
+        "<leader>na",
+        function()
+          require("ts-node-action").node_action()
+        end,
+        desc = "Node action",
+      },
     },
   },
 
