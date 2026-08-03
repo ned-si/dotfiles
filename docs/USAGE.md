@@ -279,6 +279,18 @@ upstream describes as early and prone to breaking changes, so it lives alone in
 Prose filetypes get spell checking, wrapping at the text width, and grammar
 checking from ltex-ls-plus in English and French. Source files do not.
 
+Grammar suggestions come with code actions on `<leader>ca`: add a word to the
+dictionary, disable a rule, or hide a false positive. These are not part of LSP —
+the server offers them but the editor has to do the work — so `ltex-client.nvim`
+implements them. Without it they fail with "does not support command
+`_ltex.addToDictionary`".
+
+The dictionary lives in `~/.ltex/dictionaries`, **outside this repo and not
+tracked**, because it accumulates project names, people and internal terms. It is
+one location shared across every project, keyed by language, so a word added once
+is known everywhere. `:LTeXSetLanguage` switches the language for the current
+document and `:LTeXStatus` shows what the server is doing.
+
 **LaTeX** is vimtex driving latexmk, with Skim as the viewer for bidirectional
 SyncTeX: `C-S-click` in the PDF jumps to the source line.
 

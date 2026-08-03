@@ -57,6 +57,16 @@ return {
               -- Swiss French plus both English variants, matching what actually
               -- gets written here.
               language = "en-GB",
+              dictionary = (function()
+                local path = vim.env.HOME .. "/.ltex/dictionaries/dictionary.json"
+                local f = io.open(path, "r")
+                if f then
+                  local ok, data = pcall(vim.json.decode, f:read("*a"))
+                  f:close()
+                  if ok then return data end
+                end
+                return {}
+              end)(),
               additionalRules = {
                 enablePickyRules = true,
                 motherTongue = "fr",
@@ -84,6 +94,30 @@ return {
       vim.list_extend(opts.ensure_installed, { "ltex-ls-plus" })
       return opts
     end,
+  },
+
+  -- "Add to dictionary" and friends are not part of LSP. The server offers them
+  -- as code actions but leaves the actual work to the client, which is why they
+  -- failed with "does not support command `_ltex.addToDictionary`": nothing was
+  -- implementing them. This plugin does.
+  --
+  -- Chosen over barreiroleo/ltex_extra.nvim, which is what the old config used.
+  -- That one still targets the archived ltex-ls, calls lspconfig["ltex"].setup
+  -- itself, and is flagged a work in progress pending a rewrite. This one is
+  -- written for ltex-ls-plus specifically.
+  {
+    "icewind/ltex-client.nvim",
+    ft = { "markdown", "tex", "plaintex", "bib", "gitcommit" },
+    opts = {
+      -- Outside the repo on purpose, and deliberately not a stow package.
+      -- Dictionaries accumulate project names, people and internal terms over
+      -- time, none of which belongs in a public repo. Also matched by the global
+      -- gitignore, in case it ever ends up somewhere tracked.
+      --
+      -- Writes dictionary.json, disabled_rules.json and false_positives.json,
+      -- keyed by language, so one location serves every language.
+      user_dictionaries_path = vim.env.HOME .. "/.ltex/dictionaries",
+    },
   },
 
   -- epwalsh/obsidian.nvim is archived; this is the community fork that took over,

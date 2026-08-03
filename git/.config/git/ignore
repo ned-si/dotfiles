@@ -35,3 +35,10 @@ __pycache__/
 
 # AI tooling scratch state
 .aider*
+
+# ltex dictionaries: accumulate project names, people and internal terms, so
+# they should never be committed anywhere. Normally live in ~/.ltex.
+.ltex/
+ltex.dictionary.*.txt
+ltex.disabledRules.*.txt
+ltex.hiddenFalsePositives.*.txt
