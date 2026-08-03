@@ -1,5 +1,12 @@
-theme = catppuccin-mocha
-window-decoration = false
+# Exact name of the bundled theme, which is capitalised and space-separated.
+# "catppuccin-mocha" silently fails to resolve and Ghostty falls back to its
+# default palette. Check available names with `ghostty +list-themes`.
+theme = Catppuccin Mocha
+
+# auto rather than none, so there is a titlebar to grab and move the window by.
+# macos-titlebar-style defaults to transparent, so this costs very little screen
+# space. Set to none to go back to a fully borderless window.
+window-decoration = auto
 
 # Send Option as Alt/Meta rather than letting macOS turn it into a special
 # character. Without this, none of tmux's M- bindings can ever fire: Option+c
