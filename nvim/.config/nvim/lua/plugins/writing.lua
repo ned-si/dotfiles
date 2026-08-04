@@ -72,6 +72,10 @@ return {
               end)(),
               additionalRules = {
                 enablePickyRules = true,
+                -- motherTongue is what enables LanguageTool's false-friend
+                -- notes. Dropping it disables that whole class at once, which is
+                -- the lever to reach for if the disabledRules list below starts
+                -- growing.
                 motherTongue = "fr",
               },
               -- LaTeX commands that take a non-prose argument, so the checker
@@ -82,8 +86,17 @@ return {
                   ["\\lstinputlisting{}"] = "ignore",
                 },
               },
+              -- Applied per language, so a rule has to be listed under each one
+              -- that is actually written in here.
+              --
+              -- REGARD is a false-friend note: with motherTongue set to French it
+              -- claims "regard" means "considérer". It is wrong every time in
+              -- normal English usage. The rule ID comes from the diagnostic's
+              -- `code` field, which is how to find any others worth disabling.
               disabledRules = {
-                ["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S" },
+                ["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S", "REGARD" },
+                ["en-US"] = { "REGARD" },
+                ["fr"] = { "REGARD" },
               },
             },
           },
@@ -98,6 +111,32 @@ return {
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, { "ltex-ls-plus" })
+      return opts
+    end,
+  },
+
+  -- markdownlint-cli2 only looks for config in the linted file's directory and
+  -- its ancestors: there is no XDG location, so a file opened outside a project
+  -- gets stock defaults. Passing --config supplies a global baseline.
+  --
+  -- Scope worth knowing: despite --config being documented as the "base"
+  -- configuration, a project-local .markdownlint.yaml does NOT merge with it, it
+  -- replaces the rule settings. Verified: with a local config present the rules
+  -- disabled globally start firing again. So this covers loose files and any
+  -- project without its own config, and a project that has one wins outright,
+  -- which is the reasonable outcome anyway.
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = function(_, opts)
+      opts.linters = opts.linters or {}
+      local cfg = vim.fn.expand("~/.config/markdownlint/config.yaml")
+      if vim.uv.fs_stat(cfg) then
+        opts.linters["markdownlint-cli2"] =
+          vim.tbl_deep_extend("force", opts.linters["markdownlint-cli2"] or {}, {
+            args = { "--config", cfg, "--" },
+          })
+      end
       return opts
     end,
   },
