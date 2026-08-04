@@ -50,10 +50,14 @@ fi
 echo
 echo "== startup produces no warnings or errors =="
 # Warnings here are the point: "theme not found, falling back" is a warning.
+#
+# On failure the whole output is printed, not just the matching lines. nvim writes
+# "Error in command line:" and puts the actual message on the following line, so
+# grepping for matches alone throws away the only useful part.
 start_out=$(nvim --headless -c 'doautocmd User VeryLazy' -c 'lua vim.wait(3000)' -c 'qa!' 2>&1)
 if printf '%s' "$start_out" | grep -qiE '^E[0-9]+:|error|warn|not found|deprecat'; then
-  note FAIL "startup output:"
-  printf '%s' "$start_out" | grep -iE '^E[0-9]+:|error|warn|not found|deprecat' | head -10 | sed 's/^/           /'
+  note FAIL "startup was not clean, full output follows:"
+  printf '%s\n' "$start_out" | sed 's/^/           | /'
   fail=1
 else
   note OK "clean"

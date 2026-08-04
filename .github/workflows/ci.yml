@@ -22,68 +22,68 @@ jobs:
     name: lint (linux)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install tools
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
             zsh tmux stow shellcheck
-          # eza is not in the Ubuntu repos; the alias check skips without it,
-          # but it is the check that would have caught `l` breaking, so install it.
-          ARCH=$(dpkg --print-architecture)
+          # eza is not in the Ubuntu repos, and the alias check is the one that
+          # would have caught `l` breaking, so it is worth fetching.
           EZA_VER=$(curl -fsSL https://api.github.com/repos/eza-community/eza/releases/latest | jq -r .tag_name)
           curl -fsSL "https://github.com/eza-community/eza/releases/download/${EZA_VER}/eza_x86_64-unknown-linux-gnu.tar.gz" \
-            | sudo tar -xz -C /usr/local/bin eza || echo "eza install failed; alias check will skip"
+            | sudo tar -xz -C /usr/local/bin eza \
+            || echo "eza install failed; the alias check will skip itself"
 
-      - uses: arduino/setup-task@v2
+      - name: Install markdownlint-cli2
+        run: npm install -g markdownlint-cli2
+
+      - uses: arduino/setup-task@v3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: JohnnyMorganz/stylua-action@v4
+      - uses: JohnnyMorganz/stylua-action@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
           args: --check nvim/.config/nvim
 
-      # oh-my-zsh is sourced by .zshrc. Without it the syntax check still works,
-      # but the alias check needs the plugin that defines l/lr/lS to be present,
-      # since the whole point is verifying the eza overrides win.
+      # oh-my-zsh is sourced by .zshrc. The syntax check works without it, but the
+      # alias check needs the plugin that defines l/lr/lS to be present, since the
+      # point is verifying the eza overrides win.
       - name: Install oh-my-zsh
         run: |
           RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-      - name: Install markdownlint-cli2
-        run: npm install -g markdownlint-cli2
 
       - run: task check:shell
       - run: task check:markdown
       - run: task check:tmux
       - run: task check:stow
 
-  # nvim needs its plugins, so this gets a cache. mason is disabled via CI=1,
-  # see lua/plugins/ci.lua, or this would download hundreds of megabytes of
-  # language servers on every run for no extra coverage.
+  # nvim needs its plugins, so this gets a cache. CI=1 disables mason and
+  # treesitter parser installs, see lua/plugins/ci.lua: neither adds coverage here
+  # and both make the run slow and network-dependent.
   nvim:
     name: nvim
     runs-on: ubuntu-latest
     env:
       CI: "1"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: stable
 
-      - uses: arduino/setup-task@v2
+      - uses: arduino/setup-task@v3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cache lazy.nvim plugins
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.local/share/nvim/lazy
           key: lazy-${{ runner.os }}-${{ hashFiles('nvim/.config/nvim/lazy-lock.json') }}
@@ -101,13 +101,18 @@ jobs:
     name: macos-only checks
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: arduino/setup-task@v2
+      - uses: arduino/setup-task@v3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Ghostty
-        run: brew install --cask ghostty
+        run: |
+          # The runner image ships aws/tap pre-tapped, and Homebrew now warns
+          # loudly about untrusted taps on every invocation. Nothing here needs
+          # it, so drop it rather than silencing the check globally.
+          brew untap aws/tap 2>/dev/null || true
+          brew install --cask ghostty
 
       - run: task check:ghostty
