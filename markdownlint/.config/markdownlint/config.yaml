@@ -15,6 +15,16 @@ MD034: false
 # Reasonable for published docs, tedious for personal notes.
 MD059: false
 
-# Line length. Prose here wraps at 80 by the editor's textwidth, but tables,
-# code blocks and long URLs cannot, and there is no value in being told so.
-MD013: false
+# Line length. Kept on deliberately: 80 matches the editor's textwidth, and being
+# told when a line runs over is the point. A table too wide to fit is a signal to
+# rewrite it as a list.
+#
+# Code blocks are exempt. A shell command or a long URL cannot be wrapped without
+# changing what it means, so flagging those is noise rather than a prompt to fix
+# anything. Set code_blocks to true to be told anyway.
+MD013:
+  line_length: 80
+  heading_line_length: 80
+  code_blocks: false
+  tables: true
+  headings: true

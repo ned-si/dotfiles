@@ -54,7 +54,11 @@ jobs:
           RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+      - name: Install markdownlint-cli2
+        run: npm install -g markdownlint-cli2
+
       - run: task check:shell
+      - run: task check:markdown
       - run: task check:tmux
       - run: task check:stow
 

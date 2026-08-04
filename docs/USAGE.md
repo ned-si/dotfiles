@@ -44,12 +44,12 @@ it macOS consumes Option before tmux sees it and none of them fire. Switch it to
 `left` if you want the right Option key back for character input.
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `C-f` | tmux prefix |
 | `M-h/j/k/l` | move between panes |
 | `M-H/J/K/L` | resize pane by 5 |
 | `M-v` / `M-b` | split vertical / horizontal, in the current pane's directory |
-| `prefix` `\|` / `prefix` `-` | the same splits, if that is easier to remember |
+| `prefix` `\|` / `prefix` `-` | the same splits, easier to remember |
 | `M-n` / `M-p` / `M-c` | next / previous / new window |
 | `M-s` | toggle synchronised panes, types into all of them at once |
 | `prefix` `r` | reload tmux.conf |
@@ -58,7 +58,7 @@ it macOS consumes Option before tmux sees it and none of them fire. Switch it to
 | `prefix` `n` | jump to a session for the notes vault |
 | `prefix` `f` | pick any project with fzf and jump to its session |
 | `prefix` `t` | open this project's TODO.md, or the vault's |
-| `prefix` `[` | copy mode, then `v` to select and `y` to yank to the system clipboard |
+| `prefix` `[` | copy mode: `v` to select, `y` to yank to the clipboard |
 
 Shell aliases worth knowing: `v` nvim, `lg` lazygit, `ts` tmux-sessionizer, `k`
 kubectl, `kctx`/`kns` context and namespace, `tf` terraform, `ghd` gh dash,
@@ -80,7 +80,7 @@ and Ghostty speaks the Kitty graphics protocol.
 ## Files and navigation
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `<leader><space>` | find files in the project |
 | `<leader>/` | live grep the project |
 | `<leader>,` | switch buffer |
@@ -106,7 +106,7 @@ unmapped. yazi is the only browser, and it also takes over directory buffers, so
 ### Finding a mapping you have forgotten
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `<leader>` then pause | which-key lists everything under that prefix |
 | `<leader>sk` | fuzzy-search **every** mapping, enter to run it |
 | `<leader>?` | which-key popup of this buffer's local mappings |
@@ -117,7 +117,7 @@ which key does it.
 ## Editing
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `jj` | escape from insert |
 | `'` | acts like a backtick, jump to exact mark |
 | `J` / `K` in visual | move the selection down / up |
@@ -125,7 +125,7 @@ which key does it.
 | `C-d` / `C-u` / `n` / `N` | scroll and search, keeping the cursor centred |
 | `ys` / `ds` / `cs` | add / delete / change surround |
 | `ga` | mini.align, line up columns |
-| `<leader>tw` / `<leader>tl` | trim trailing whitespace / trailing blank lines |
+| `<leader>tw` / `<leader>tl` | trim trailing whitespace / blank lines |
 | `<leader>na` | ts-node-action, e.g. collapse or expand a multiline table |
 | `<leader>U` | undo tree |
 | `<leader>x` | chmod +x the current file |
@@ -147,10 +147,10 @@ with a "Save changes?" dialog; that is turned off here.
 are separate and crossing between them is always explicit.
 
 | Key | Does |
-|---|---|
-| `<leader>y` | yank to the system clipboard (operator, so `<leader>yy` for a line) |
+| --- | --- |
+| `<leader>y` | yank to system clipboard (`<leader>yy` for a line) |
 | `<leader>Y` | yank the whole buffer to the system clipboard |
-| `<leader>p` | in visual: paste over the selection without clobbering the register |
+| `<leader>p` | in visual: paste over selection, keeping the register |
 | `<leader>d` | delete without clobbering the register |
 | `<leader>yr` / `<leader>yp` | yank the file's relative / absolute path |
 | `<leader>yf` / `<leader>yd` | yank the filename / its directory |
@@ -164,9 +164,9 @@ lspsaga is gone; this is native `vim.lsp` plus glance.nvim for peeking. Hover,
 signature and diagnostic floats all have rounded borders.
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `K` | hover documentation |
-| `gd` / `gr` / `gI` / `gy` | definition / references / implementation / type definition |
+| `gd` / `gr` / `gI` / `gy` | definition / refs / impl / type definition |
 | `gh` | peek references in a split pane |
 | `<leader>pd` / `<leader>pt` | peek definition / type definition |
 | `<leader>pr` / `<leader>pi` | peek references / implementations |
@@ -185,7 +185,7 @@ Servers install on demand through mason. Everything language-specific is
 lazy-loaded by filetype, so listing a language costs nothing until you open one.
 
 | Language | Server | Linter / formatter |
-|---|---|---|
+| --- | --- | --- |
 | Python | basedpyright + ruff | ruff |
 | Terraform | terraform-ls | tflint |
 | YAML | yaml-language-server | kubeconform for manifests |
@@ -204,7 +204,8 @@ which matters when other tooling pins a shared uv environment and autodetection
 would otherwise choose the wrong interpreter.
 
 Jenkinsfiles are detected as groovy by filename, including `Jenkinsfile.release`
-and `deploy.jenkinsfile`. There is no language server on purpose: groovyls needs a
+and `deploy.jenkinsfile`. There is no language server on purpose: groovyls
+needs a
 classpath a Jenkinsfile does not have, and reports the whole pipeline DSL as
 undefined. npm-groovy-lint knows the DSL and gives real feedback.
 
@@ -227,11 +228,11 @@ Real validation, including CRDs from the datree catalogue, comes from
 `kubeconform` on write. A JSON schema alone cannot check a custom resource.
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `<leader>cyv` | show the key path at the cursor |
 | `<leader>cyy` / `<leader>cyk` | yank the value / the key path |
 | `<leader>cyq` | send all keys to the quickfix list |
-| `<leader>cyK` | pin this buffer to the Kubernetes schema, when path matching guesses wrong |
+| `<leader>cyK` | pin this buffer to the Kubernetes schema |
 
 `<leader>cyK` inserts a `# yaml-language-server: $schema=kubernetes` modeline,
 which survives being committed alongside the manifest.
@@ -242,16 +243,17 @@ lazygit is the main interface: `lg` in the shell, or `<leader>gg` in nvim. delta
 renders every diff, in git, lazygit and nvim.
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `<leader>gg` | lazygit |
 | `<leader>gb` | blame the current line |
 | `<leader>gf` | file history |
 | `]h` / `[h` | next / previous hunk |
 | `<leader>ghs` / `<leader>ghr` | stage / reset hunk |
-| `<leader>ogr` / `<leader>ogf` | open the repo / file in a browser, `ogf` works on a visual selection too |
+| `<leader>ogr` / `<leader>ogf` | open repo / file in a browser |
 
 Identity is picked automatically. The default comes from the untracked
-`~/.gitconfig.local`; repos with a personal remote get `nedsi` instead, matched on
+`~/.gitconfig.local`; repos with a personal remote get `nedsi` instead,
+matched on
 the remote URL rather than the path. Both SSH keys are served by the Bitwarden
 agent, so there is no key material on disk.
 
@@ -263,7 +265,7 @@ are aliased.
 ## Pull requests and issues
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `<leader>Po` | Octo, GitHub |
 | `<leader>Pp` / `<leader>Pi` | GitHub PRs / issues |
 | `<leader>Pb` | Bitbucket PRs |
@@ -280,7 +282,8 @@ Prose filetypes get spell checking, wrapping at the text width, and grammar
 checking from ltex-ls-plus in English and French. Source files do not.
 
 Grammar suggestions come with code actions on `<leader>ca`: add a word to the
-dictionary, disable a rule, or hide a false positive. These are not part of LSP —
+dictionary, disable a rule, or hide a false positive. These are not part of
+LSP —
 the server offers them but the editor has to do the work — so `ltex-client.nvim`
 implements them. Without it they fail with "does not support command
 `_ltex.addToDictionary`".
@@ -295,7 +298,7 @@ document and `:LTeXStatus` shows what the server is doing.
 SyncTeX: `C-S-click` in the PDF jumps to the source line.
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `\ll` | start or stop the compile watcher |
 | `\lv` | open the PDF at the cursor position |
 | `\lk` | stop compilation |
@@ -308,7 +311,7 @@ Auxiliary files go to `build/`, so the source directory stays clean.
 **Notes** live in `~/braindump` as an Obsidian vault.
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `<leader>on` / `<leader>oo` | new note / open in the Obsidian app |
 | `<leader>os` / `<leader>oq` | search / quick switch |
 | `<leader>ot` / `<leader>oy` | today's / yesterday's daily note |
@@ -321,7 +324,7 @@ Auxiliary files go to `build/`, so the source directory stays clean.
 ## LilyPond
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `\c` | compile |
 | `\v` | open the PDF |
 | `\p` | play the MIDI in a floating player |
@@ -341,12 +344,12 @@ CLI's existing auth, tool servers, skills and sub-agents rather than configuring
 anything separately.
 
 | Key | Does |
-|---|---|
+| --- | --- |
 | `C-\` | toggle the chat |
 | `<leader>ka` | add the current file or selection to context |
 | `<leader>kn` | new session |
 | `<leader>kr` | restore a previous session |
-| `<localleader>m` / `<localleader>s` | switch model / provider mid-conversation |
+| `<localleader>m` / `<localleader>s` | switch model / provider |
 | `Shift-Tab` | switch agent mode |
 | `@` / `/` in the prompt | file picker / slash commands |
 
@@ -360,7 +363,7 @@ deliberately not set, since the agent can read and write the working tree.
 ## Things that need a token or a one-off step
 
 | What | Why | Where |
-|---|---|---|
+| --- | --- | --- |
 | `gh auth login` | Octo and gh-dash | once |
 | Atlassian API token | Bitbucket PRs and Jira in nvim | `~/.zshenv.local` |
 | Default git identity | kept out of a public repo | `~/.gitconfig.local` |

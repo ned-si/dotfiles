@@ -1,5 +1,7 @@
 # dotfiles
 
+[![ci](https://github.com/ned-si/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/ned-si/dotfiles/actions/workflows/ci.yml)
+
 macOS (work) and Arch/i3 (personal desktop), managed with GNU stow and
 driven by [Taskfile](https://taskfile.dev).
 
@@ -45,7 +47,7 @@ LanguageTool bundle. Let it finish before expecting grammar checking to work.
 Every top-level directory is a stow package whose interior mirrors `$HOME`:
 
 | package | lands at | notes |
-|---|---|---|
+| --- | --- | --- |
 | `zsh` | `~/.zshrc`, `~/.zshenv`, `~/.zprofile`, `~/.p10k.zsh` | |
 | `tmux` | `~/.tmux.conf` | |
 | `nvim` | `~/.config/nvim` | LazyVim |
@@ -53,7 +55,8 @@ Every top-level directory is a stow package whose interior mirrors `$HOME`:
 | `ssh` | `~/.ssh/config` | no internal hosts, see below |
 | `lazygit`, `gh-dash`, `ghostty` | `~/.config/<name>` | |
 | `bin` | `~/.local/bin` | `tmux-sessionizer` |
-| `linux-x11`, `i3`, `polybar`, `picom`, `rofi`, `autorandr`, `i3-layout-manager` | | Arch only |
+| `linux-x11`, `i3`, `polybar`, `picom` | | Arch only |
+| `rofi`, `autorandr`, `i3-layout-manager` | | Arch only |
 | `macos-wm` | | yabai/skhd/spacebar, **never stowed automatically** |
 
 `macos-wm` is kept because the config is worth not losing, but it needs SIP
@@ -69,9 +72,10 @@ package-selection problem solved in `Taskfile.yml`.
 `task check:all` runs everything CI runs. Individually:
 
 | task | checks |
-|---|---|
+| --- | --- |
 | `check:shell` | zsh/bash syntax, shellcheck, and runs every listing alias |
 | `check:lua` | stylua formatting |
+| `check:markdown` | markdownlint on this repo's docs, MD013 at 80 columns |
 | `check:tmux` | config loads, bindings are unique and reachable |
 | `check:nvim` | starts clean, options/mappings/filetypes as configured |
 | `check:stow` | every package links cleanly into an empty target |
@@ -97,7 +101,7 @@ Anything secret, generated, or specific to one host goes in an untracked file.
 All of these are optional and sourced only if they exist:
 
 | file | for |
-|---|---|
+| --- | --- |
 | `~/.zshenv.local` | environment and secrets, loaded early |
 | `~/.zshrc.local` | interactive-only: aliases, functions |
 | `~/.zprofile.local` | login-shell only |
@@ -117,7 +121,7 @@ The default identity lives in the untracked `~/.config/git/config.local`, since
 this repo is published. Personal repos are matched on their **remote URL** rather
 than their path, because they sit in `~/repos` alongside work checkouts:
 
-```
+```text
 ~/repos/dotfiles     -> nedsi <nedsi@pm.me>          (personal remote)
 ~/repos/<work repo>  -> whatever config.local sets   (default)
 ```
@@ -130,14 +134,14 @@ and nothing to configure per host.
 Bindings that differ from LazyVim or from the old config:
 
 | key | does | why |
-|---|---|---|
+| --- | --- | --- |
 | `<leader>j/k/l/;` | harpoon slots 1-4 | |
 | `<leader>U` | undo tree | `<leader>u` is LazyVim's toggles group |
-| `<leader>y` | yank to system clipboard | `clipboard=""`, so this is always explicit |
-| `<leader>cy*` | YAML key-path tools | `<leader>y` is an operator, `<leader>yy` is taken |
-| `<leader>cyK` | pin the buffer to the Kubernetes schema | when path matching guesses wrong |
-| `<leader>pd` / `<leader>pt` / `gh` | peek definition / type / references | replaces lspsaga |
-| `<leader>P*` | pull requests and issues | `Po` GitHub, `Pb` Bitbucket, `Pj` Jira |
+| `<leader>y` | yank to system clipboard | `clipboard=""`, always explicit |
+| `<leader>cy*` | YAML key-path tools | `<leader>yy` is already taken |
+| `<leader>cyK` | pin buffer to the K8s schema | when path matching is wrong |
+| `<leader>pd` / `<leader>pt` | peek definition / type | replaces lspsaga |
+| `<leader>P*` | pull requests and issues | `Po` GH, `Pb` BB, `Pj` Jira |
 | `<C-\>` | Kiro chat | |
 | `<leader>-` | yazi | replaces ranger |
 
@@ -162,8 +166,8 @@ flags every `{{ }}` as a syntax error.
 ### Forge integration
 
 `octo.nvim` handles personal GitHub. Bitbucket and Jira come from `atlas.nvim`,
-which upstream describes as early and prone to breaking changes; it is isolated in
-`lua/plugins/forge.lua` so it can be deleted without touching anything else.
+which upstream describes as early and prone to breaking changes; it is isolated
+in `lua/plugins/forge.lua` so it can be deleted without touching anything else.
 Credentials come from `~/.zshenv.local`:
 
 ```sh

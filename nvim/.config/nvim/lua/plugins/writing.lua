@@ -132,10 +132,13 @@ return {
       opts.linters = opts.linters or {}
       local cfg = vim.fn.expand("~/.config/markdownlint/config.yaml")
       if vim.uv.fs_stat(cfg) then
-        opts.linters["markdownlint-cli2"] =
-          vim.tbl_deep_extend("force", opts.linters["markdownlint-cli2"] or {}, {
+        opts.linters["markdownlint-cli2"] = vim.tbl_deep_extend(
+          "force",
+          opts.linters["markdownlint-cli2"] or {},
+          {
             args = { "--config", cfg, "--" },
-          })
+          }
+        )
       end
       return opts
     end,
