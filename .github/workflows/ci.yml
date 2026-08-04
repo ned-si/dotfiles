@@ -78,6 +78,13 @@ jobs:
           neovim: true
           version: stable
 
+      # nvim-treesitter's main branch requires the tree-sitter CLI and checks for
+      # it at startup, warning if it is absent. Normally mason supplies it, but
+      # mason is disabled here, so provide it directly. Cheaper than re-enabling
+      # mason, which would also pull every language server.
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+
       - uses: arduino/setup-task@v3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
