@@ -77,6 +77,50 @@ io.write(table.concat(bad, "; "))' -c 'qa!' 2>/dev/null)
 if [ -n "$opts" ]; then note FAIL "$opts"; fail=1; else note OK "all as configured"; fi
 
 echo
+echo "== completion stays quiet until asked =="
+# Guards the whole point of lua/plugins/completion.lua. LazyVim's own blink
+# defaults are the opposite of every assertion below, so an upstream change or a
+# stray opts table that stops overriding them would silently bring the popup and
+# the <CR>-accepts-an-entry behaviour back.
+#
+# blink loads on InsertEnter, which never fires here, so ask lazy for it by name
+# rather than relying on the require to trigger the load.
+cmpcfg=$(nvim --headless -c 'lua
+require("lazy").load({ plugins = { "blink.cmp" } })
+local ok, cfg = pcall(require, "blink.cmp.config")
+if not ok then io.write("blink.cmp.config did not load") return end
+local bad = {}
+-- These three are typed "boolean | fun(ctx): boolean" and blink does not store
+-- them as given: a plain false in the spec comes back out as a function that
+-- returns false. So resolve before comparing, or a correct config fails here.
+local function resolve(v)
+  if type(v) ~= "function" then return v end
+  local called, res = pcall(v, { mode = "default", bounds = {}, get_keyword = function() return "" end })
+  if not called then return "<function that errored, cannot verify>" end
+  return res
+end
+local function want(path, got, expected)
+  got = resolve(got)
+  if got ~= expected then
+    table.insert(bad, string.format("%s=%s want %s", path, tostring(got), tostring(expected)))
+  end
+end
+want("completion.menu.auto_show", cfg.completion.menu.auto_show, false)
+want("completion.list.selection.preselect", cfg.completion.list.selection.preselect, false)
+want("completion.ghost_text.enabled", cfg.completion.ghost_text.enabled, false)
+want("keymap.preset", cfg.keymap.preset, "default")
+-- <CR> must reach the buffer as a newline, so blink must not claim it at all.
+if cfg.keymap["<CR>"] ~= nil then
+  table.insert(bad, "keymap[<CR>] is set, must stay unmapped")
+end
+-- and the manual trigger has to exist, or the menu becomes unreachable
+if cfg.keymap["<C-l>"] == nil then
+  table.insert(bad, "keymap[<C-l>] missing, no way to summon the menu")
+end
+io.write(table.concat(bad, "; "))' -c 'qa!' 2>/dev/null)
+if [ -n "$cmpcfg" ]; then note FAIL "$cmpcfg"; fail=1; else note OK "manual only, <CR> untouched"; fi
+
+echo
 echo "== mappings that matter are present =="
 maps=$(nvim --headless -c 'doautocmd User VeryLazy' -c 'lua
 vim.wait(2000)

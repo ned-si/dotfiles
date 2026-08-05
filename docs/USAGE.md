@@ -141,6 +141,28 @@ a file you only opened to read produces noisy diffs.
 `:q!` discards, `:wq` writes. LazyVim ships `confirm = true`, which replaces that
 with a "Save changes?" dialog; that is turned off here.
 
+### Completion
+
+The menu never appears on its own. Nothing pops up as you type, nothing is
+preselected, and no inline ghost text previews an entry. `<CR>` is therefore
+always a newline rather than an accept of whatever happened to be highlighted.
+
+| Key | Does |
+| --- | --- |
+| `C-l` in insert | summon the menu |
+| `C-n` / `C-p` | move through it |
+| `C-y` | accept; takes the first item if you have not moved |
+| `C-e` | dismiss |
+| `Tab` | jump to the next snippet placeholder |
+
+`C-Space` is blink's own trigger and stays mapped, but macOS claims
+`ctrl+space` for "select previous input source", so it never reaches the
+terminal. Turn that off under System Settings, Keyboard, Keyboard Shortcuts,
+Input Sources if you would rather use it.
+
+LazyVim's defaults are the opposite on every count, so `ci/check-nvim.sh`
+asserts this stays as it is.
+
 ## Clipboard
 
 `clipboard` is deliberately empty, so nvim's registers and the system clipboard
