@@ -123,3 +123,6 @@ jobs:
           brew install --cask ghostty
 
       - run: task check:ghostty
+
+      # Needs the real macOS path_helper, so it cannot run on the Linux job.
+      - run: task check:path
