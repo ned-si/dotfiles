@@ -89,14 +89,15 @@ return {
               -- Applied per language, so a rule has to be listed under each one
               -- that is actually written in here.
               --
-              -- REGARD is a false-friend note: with motherTongue set to French it
-              -- claims "regard" means "considérer". It is wrong every time in
-              -- normal English usage. The rule ID comes from the diagnostic's
-              -- `code` field, which is how to find any others worth disabling.
+              -- REGARD and CHANGE are false-friend notes: with motherTongue set to
+              -- French they claim "regard" means "considérer" and "change" means
+              -- "monnaie". Both are wrong every time in normal English usage. The
+              -- rule ID comes from the diagnostic's `code` field, which is how to
+              -- find any others worth disabling.
               disabledRules = {
-                ["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S", "REGARD" },
-                ["en-US"] = { "REGARD" },
-                ["fr"] = { "REGARD" },
+                ["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S", "REGARD", "CHANGE" },
+                ["en-US"] = { "REGARD", "CHANGE" },
+                ["fr"] = { "REGARD", "CHANGE" },
               },
             },
           },
