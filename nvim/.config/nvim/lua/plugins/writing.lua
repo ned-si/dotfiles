@@ -72,11 +72,11 @@ return {
               end)(),
               additionalRules = {
                 enablePickyRules = true,
-                -- motherTongue is what enables LanguageTool's false-friend
-                -- notes. Dropping it disables that whole class at once, which is
-                -- the lever to reach for if the disabledRules list below starts
-                -- growing.
-                motherTongue = "fr",
+                -- No motherTongue: it is what enables LanguageTool's
+                -- false-friend notes (REGARD, CHANGE, CHECK, ACTUALLY, ...),
+                -- and every one seen so far has been wrong for normal English
+                -- usage. Dropping it disables the whole class at once rather
+                -- than chasing rule IDs one at a time.
               },
               -- LaTeX commands that take a non-prose argument, so the checker
               -- stops reporting them as sentence fragments.
@@ -87,17 +87,10 @@ return {
                 },
               },
               -- Applied per language, so a rule has to be listed under each one
-              -- that is actually written in here.
-              --
-              -- REGARD and CHANGE are false-friend notes: with motherTongue set to
-              -- French they claim "regard" means "considérer" and "change" means
-              -- "monnaie". Both are wrong every time in normal English usage. The
-              -- rule ID comes from the diagnostic's `code` field, which is how to
-              -- find any others worth disabling.
+              -- that is actually written in here. The rule ID comes from the
+              -- diagnostic's `code` field.
               disabledRules = {
-                ["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S", "REGARD", "CHANGE" },
-                ["en-US"] = { "REGARD", "CHANGE" },
-                ["fr"] = { "REGARD", "CHANGE" },
+                ["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S" },
               },
             },
           },
