@@ -13,18 +13,26 @@ cd "$(dirname "$0")/.." || exit 1
 fail=0
 note() { printf '  %-8s %s\n' "$1" "$2"; }
 
-# Run against a copy of the config, never the working tree.
+# Run against a copy of the config. Never the working tree, and never whatever
+# XDG_CONFIG_HOME happens to be set to.
 #
 # `Lazy! sync` below performs an update, which ignores lazy-lock.json, moves each
 # plugin to the latest commit on its branch and then writes the lock back out
 # to $XDG_CONFIG_HOME/nvim. Point that at the repo and simply running the check
 # rewrites tracked plugin pins, so an unrelated commit can carry a plugin bump
-# nobody asked for. CI throws its checkout away and never noticed; locally it
-# shows up as a dirty `git status`.
+# nobody asked for.
 #
-# An explicit XDG_CONFIG_HOME still wins, which is how you point the check at an
-# already-installed config.
-if [ -z "${XDG_CONFIG_HOME:-}" ]; then
+# Honouring a preset XDG_CONFIG_HOME, as this did at first, was worse than
+# useless: GitHub's runners export XDG_CONFIG_HOME=/home/runner/.config, so the
+# copy was never built in CI and the check read whatever happened to be in that
+# directory, which only worked because the workflow linked the config into it.
+# An ambient variable with nothing to do with this repo decided what got tested.
+#
+# So build it unconditionally. CHECK_NVIM_CONFIG is the way to aim the check at
+# an already-installed config instead, e.g. the stowed one.
+if [ -n "${CHECK_NVIM_CONFIG:-}" ]; then
+  export XDG_CONFIG_HOME="$CHECK_NVIM_CONFIG"
+else
   cfgcopy=$(mktemp -d)
   trap 'rm -rf "$cfgcopy"' EXIT
   mkdir -p "$cfgcopy/nvim"
@@ -41,6 +49,44 @@ while IFS= read -r f; do
   fi
 done < <(find nvim/.config/nvim -name '*.lua' | sort)
 rm -f /tmp/ci-lua-err
+
+echo
+echo "== the config under test is the one that loads =="
+# A precondition, because every section below reports OK when nvim produces no
+# output at all: they test for the *absence* of complaints, and a `-c lua` that
+# aborts early prints nothing to stdout. Point the check at an empty config and
+# it passes almost everything, which is how a CI run with no config at all
+# reported OK for options and completion while only the two sections that assert
+# something is present failed. Assert the basics up front so a later OK means
+# something was actually examined.
+probe=$(nvim --headless -c 'lua
+local lazy_ok = pcall(require, "lazy.core.config")
+io.write(table.concat({
+  vim.fn.stdpath("config"),
+  tostring(lazy_ok),
+  tostring(vim.g.mapleader),
+  tostring(pcall(require, "config.keymaps")),
+}, "|"))' -c 'qa!' 2>/dev/null)
+if [ -z "$probe" ]; then
+  note FAIL "nvim printed nothing at all, so nothing below would be tested"
+  exit 1
+fi
+IFS='|' read -r p_cfg p_lazy p_leader p_keymaps <<EOF
+$probe
+EOF
+if [ "$p_cfg" != "$XDG_CONFIG_HOME/nvim" ]; then
+  note FAIL "nvim reads $p_cfg, not the copy at $XDG_CONFIG_HOME/nvim"; exit 1
+fi
+if [ "$p_lazy" != "true" ]; then
+  note FAIL "lazy.nvim did not load, the config was not read"; exit 1
+fi
+if [ "$p_leader" != " " ]; then
+  note FAIL "mapleader is [$p_leader], not a space, so the mapping check cannot work"; exit 1
+fi
+if [ "$p_keymaps" != "true" ]; then
+  note FAIL "config.keymaps is not requireable from $p_cfg"; exit 1
+fi
+note OK "$p_cfg, lazy loaded, leader is a space"
 
 echo
 echo "== plugins install and resolve =="

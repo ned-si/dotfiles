@@ -96,11 +96,7 @@ jobs:
           key: lazy-${{ runner.os }}-${{ hashFiles('nvim/.config/nvim/lazy-lock.json') }}
           restore-keys: lazy-${{ runner.os }}-
 
-      - name: Link the nvim config into place
-        run: |
-          mkdir -p ~/.config
-          ln -sfn "$PWD/nvim/.config/nvim" ~/.config/nvim
-
+      # check-nvim.sh builds its own config dir, so there is nothing to link.
       - run: task check:nvim
 
   # Only the checks that genuinely need macOS.
