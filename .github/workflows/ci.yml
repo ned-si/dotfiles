@@ -96,9 +96,7 @@ jobs:
           key: lazy-${{ runner.os }}-${{ hashFiles('nvim/.config/nvim/lazy-lock.json') }}
           restore-keys: lazy-${{ runner.os }}-
 
-      # No need to link the config into ~/.config: check-nvim.sh copies it to a
-      # temp dir and points XDG_CONFIG_HOME there, so that it cannot rewrite
-      # lazy-lock.json in the checkout.
+      # check-nvim.sh builds its own config dir, so there is nothing to link.
       - run: task check:nvim
 
   # Only the checks that genuinely need macOS.
