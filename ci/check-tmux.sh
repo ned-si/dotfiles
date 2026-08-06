@@ -61,6 +61,77 @@ for pair in "M-h:-L" "M-j:-D" "M-k:-U" "M-l:-R"; do
 done
 
 echo
+echo "== every window shows its own name, and no filled blocks =="
+# Asserts on the rendered status line, not on the config text, because the bug
+# this catches was valid config: catppuccin renamed the option for unfocused
+# windows between v1 and v2, the old name was accepted and ignored, and every
+# window except the focused one displayed the pane title instead of its name.
+# Nothing errored, so only looking at the output catches it.
+#
+# Three named windows, focus on the middle one, so a format that only works for
+# the current window cannot pass.
+tmux -L "$SOCK" rename-window one 2>/dev/null
+tmux -L "$SOCK" new-window -n two 2>/dev/null
+tmux -L "$SOCK" new-window -n three 2>/dev/null
+tmux -L "$SOCK" select-window -t two 2>/dev/null
+line=$(tmux -L "$SOCK" display-message -p "#{E:status-format[0]}" 2>/dev/null)
+# Drop the #[...] style directives, leaving what a person would read.
+visible=$(printf '%s' "$line" | sed 's/#\[[^]]*\]//g')
+
+missing=""
+for w in one two three; do
+  case "$visible" in
+    *"$w"*) ;;
+    *) missing="$missing $w" ;;
+  esac
+done
+if [ -n "$missing" ]; then
+  note FAIL "window names absent from the status line:$missing"
+  fail=1
+else
+  note OK "one, two and three all named"
+fi
+
+# Then both formats on their own, expanded in each window's context. Scoped to
+# the formats rather than the whole line because status-right carries the
+# hostname by default, and the symptom of the rename is the pane title appearing
+# in the window list, which is also the hostname. Searching the whole line for
+# it can never distinguish the two.
+#
+# Both formats are checked for every window, which is the actual requirement: a
+# window is named the same whether or not it holds focus.
+host=$(tmux -L "$SOCK" display-message -p "#T" 2>/dev/null)
+formats_ok=1
+for w in one two three; do
+  for f in window-status-format window-status-current-format; do
+    got=$(tmux -L "$SOCK" display-message -p -t "$w" "#{E:$f}" 2>/dev/null \
+          | sed 's/#\[[^]]*\]//g')
+    case "$got" in
+      *"$w"*) ;;
+      *) note FAIL "$f for '$w' renders '$got', without the name"; fail=1; formats_ok=0; continue ;;
+    esac
+    # Only meaningful when the host is not also the window name.
+    if [ -n "$host" ] && [ "$host" != "$w" ]; then
+      case "$got" in
+        *"$host"*)
+          note FAIL "$f for '$w' renders the pane title, the name option is ignored"
+          fail=1; formats_ok=0 ;;
+      esac
+    fi
+  done
+done
+[ "$formats_ok" = 1 ] && note OK "both formats render #W for every window"
+
+# A background on either format is the pill look coming back.
+for opt in window-status-style window-status-current-style; do
+  got=$(tmux -L "$SOCK" show -gv "$opt" 2>/dev/null)
+  case "$got" in
+    *bg=*) note FAIL "$opt sets a background: $got"; fail=1 ;;
+    *) note OK "$opt has no background" ;;
+  esac
+done
+
+echo
 echo "== options that other things depend on =="
 # yazi's image previews need passthrough; nvim's autoread needs focus-events.
 for opt in allow-passthrough:on focus-events:on; do
