@@ -47,49 +47,6 @@ else
 fi
 
 echo
-echo "== the user bin dirs survive macOS path_helper =="
-# Another silent one. /etc/zprofile runs path_helper just before ~/.zprofile,
-# and it appends the existing PATH after the system directories. Anything
-# .zshenv prepended is demoted, so a tool in ~/.local/bin quietly loses to a
-# system binary of the same name: `dc` resolved to /usr/bin/dc, the desk
-# calculator, which just sits there reading stdin and looks like a hang.
-#
-# Replays that exact sequence in a throwaway HOME rather than trusting the real
-# one, so it asserts what the tracked files do and nothing else. .zshenv sources
-# ~/.zshenv.local, which does not exist in the fake HOME and is skipped, so no
-# machine-local config can mask a regression here.
-if [ "$(uname)" = "Darwin" ] && [ -x /usr/libexec/path_helper ]; then
-  fake=$(mktemp -d)
-  cp zsh/.zshenv zsh/.zprofile "$fake/"
-  mkdir -p "$fake/.local/bin"
-  order=$(HOME="$fake" zsh -f -c '
-    source "$HOME/.zshenv"
-    eval "$(/usr/libexec/path_helper -s)"
-    source "$HOME/.zprofile"
-    integer i=0
-    for p in $path; do
-      i=i+1
-      if [[ $p == "$HOME/.local/bin" ]]; then print "local=$i"; fi
-      if [[ $p == /usr/bin ]]; then print "usrbin=$i"; fi
-    done' 2>/dev/null)
-  loc=$(printf '%s\n' "$order" | sed -n 's/^local=//p' | head -1)
-  usr=$(printf '%s\n' "$order" | sed -n 's/^usrbin=//p' | head -1)
-  if [ -z "$loc" ]; then
-    note FAIL "user .local/bin is not on PATH at all after path_helper"; fail=1
-  elif [ -z "$usr" ]; then
-    note FAIL "/usr/bin is not on PATH, something is very wrong"; fail=1
-  elif [ "$loc" -lt "$usr" ]; then
-    note OK "user .local/bin at $loc, ahead of /usr/bin at $usr"
-  else
-    note FAIL "user .local/bin at $loc is behind /usr/bin at $usr, system tools shadow user ones"
-    fail=1
-  fi
-  rm -rf "$fake"
-else
-  note SKIP "not macOS, path_helper does not apply"
-fi
-
-echo
 echo "== every listing alias actually runs =="
 # The `l` alias broke because eza rejects BSD ls flags, and that is invisible to
 # a syntax check: `eza -lFh` is valid shell. Running each one is the only way.

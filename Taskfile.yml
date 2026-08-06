@@ -34,6 +34,7 @@ tasks:
       - task: check:nvim
       - task: check:stow
       - task: check:ghostty
+      - task: check:path
 
   check:shell:
     desc: zsh/bash syntax, shellcheck, and exercise the listing aliases
@@ -84,6 +85,11 @@ tasks:
     desc: "ghostty config validates (macOS only, skips elsewhere)"
     cmds:
       - bash ci/check-ghostty.sh
+
+  check:path:
+    desc: "user bin dirs beat the system ones (macOS only, skips elsewhere)"
+    cmds:
+      - bash ci/check-path.sh
 
   fmt:
     desc: Format the lua config in place
