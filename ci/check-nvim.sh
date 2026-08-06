@@ -13,7 +13,24 @@ cd "$(dirname "$0")/.." || exit 1
 fail=0
 note() { printf '  %-8s %s\n' "$1" "$2"; }
 
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$PWD/nvim/.config}"
+# Run against a copy of the config, never the working tree.
+#
+# `Lazy! sync` below performs an update, which ignores lazy-lock.json, moves each
+# plugin to the latest commit on its branch and then writes the lock back out
+# to $XDG_CONFIG_HOME/nvim. Point that at the repo and simply running the check
+# rewrites tracked plugin pins, so an unrelated commit can carry a plugin bump
+# nobody asked for. CI throws its checkout away and never noticed; locally it
+# shows up as a dirty `git status`.
+#
+# An explicit XDG_CONFIG_HOME still wins, which is how you point the check at an
+# already-installed config.
+if [ -z "${XDG_CONFIG_HOME:-}" ]; then
+  cfgcopy=$(mktemp -d)
+  trap 'rm -rf "$cfgcopy"' EXIT
+  mkdir -p "$cfgcopy/nvim"
+  cp -R nvim/.config/nvim/. "$cfgcopy/nvim/"
+  export XDG_CONFIG_HOME="$cfgcopy"
+fi
 
 echo "== every lua file parses =="
 while IFS= read -r f; do
