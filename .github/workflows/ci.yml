@@ -122,3 +122,11 @@ jobs:
 
       # Needs the real macOS path_helper, so it cannot run on the Linux job.
       - run: task check:path
+
+      # zsh-autosuggestions is sourced from a Homebrew path, so it is absent on
+      # the Linux job and the "suggestions stay off" assertion skips there. Run
+      # the shell check here too, with the plugin present, or that assertion
+      # would never actually execute anywhere in CI.
+      - name: Install zsh-autosuggestions
+        run: brew install zsh-autosuggestions
+      - run: task check:shell
