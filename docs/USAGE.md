@@ -74,6 +74,12 @@ quit from. `C-x C-x` edits the current command line in nvim. `C-r` is a
 pattern-capable history search. `C-z` backgrounds, and foregrounds again on an
 empty line.
 
+The shell proposes nothing while you type. `C-o` fetches a suggestion for what
+is already in the buffer, `C-e` accepts it, and typing past it drops it. The
+reason is vi mode: the keys that accept a suggestion are `$` and `A`, which are
+also ordinary editing keys, so anything offered unprompted gets taken by
+accident. Completion in nvim works the same way, on `C-l`.
+
 Image previews work in yazi inside tmux because tmux has `allow-passthrough on`
 and Ghostty speaks the Kitty graphics protocol.
 

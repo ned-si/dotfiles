@@ -59,14 +59,18 @@ echo "== the config under test is the one that loads =="
 # reported OK for options and completion while only the two sections that assert
 # something is present failed. Assert the basics up front so a later OK means
 # something was actually examined.
+# Tagged with a sentinel and grepped back out, because this is the first nvim
+# invocation of the run: on a cold cache lazy.nvim bootstraps here and prints its
+# clone progress to stdout, which otherwise lands in the middle of the answer.
+# That is what made this fail in CI while passing locally, where the cache is warm.
 probe=$(nvim --headless -c 'lua
 local lazy_ok = pcall(require, "lazy.core.config")
-io.write(table.concat({
+io.write("\nPROBE|" .. table.concat({
   vim.fn.stdpath("config"),
   tostring(lazy_ok),
   tostring(vim.g.mapleader),
   tostring(pcall(require, "config.keymaps")),
-}, "|"))' -c 'qa!' 2>/dev/null)
+}, "|") .. "\n")' -c 'qa!' 2>/dev/null | sed -n 's/.*PROBE|//p' | tail -1)
 if [ -z "$probe" ]; then
   note FAIL "nvim printed nothing at all, so nothing below would be tested"
   exit 1

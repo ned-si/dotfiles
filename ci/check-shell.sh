@@ -47,6 +47,40 @@ else
 fi
 
 echo
+echo "== suggestions are off until asked for =="
+# The accept widgets in vi mode are $ and A, keys used for ordinary editing, so
+# a suggestion offered after every keystroke gets accepted by accident. Nothing
+# errors if this regresses, the shell just starts proposing again, so assert it.
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  # In a throwaway HOME holding the tracked files, so this asserts what the repo
+  # does. `zsh -i` reads $HOME/.zshrc, which is these files only because they are
+  # stowed here; on a CI runner it is whatever that machine happens to have, so
+  # the same command would test something else entirely and fail for the wrong
+  # reason. ~/.zshrc.local does not exist in the fake HOME and is skipped, so
+  # machine-local config cannot mask a regression either.
+  fakehome=$(mktemp -d)
+  cp zsh/.zshrc zsh/.zshenv "$fakehome/"
+
+  # Findings carry a sentinel and are grepped back out, because an interactive
+  # zsh also writes prompt and shell-integration escape sequences to stdout, on
+  # the same line as the first output. Anchoring the match means the first
+  # finding is silently swallowed and only later ones are ever reported.
+  sug=$(HOME="$fakehome" zsh -i -c '
+    (( ${+_ZSH_AUTOSUGGEST_DISABLED} )) || print "BAD: suggestions are enabled at startup"
+    [[ "$(bindkey -M viins "^o")" == *autosuggest-fetch* ]] \
+      || print "BAD: C-o does not fetch a suggestion in insert mode"
+  ' 2>/dev/null | sed -n 's/.*BAD: //p')
+  rm -rf "$fakehome"
+  if [ -n "$sug" ]; then
+    note FAIL "$sug"; fail=1
+  else
+    note OK "disabled at startup, C-o fetches one"
+  fi
+else
+  note SKIP "zsh-autosuggestions not installed"
+fi
+
+echo
 echo "== every listing alias actually runs =="
 # The `l` alias broke because eza rejects BSD ls flags, and that is invisible to
 # a syntax check: `eza -lFh` is valid shell. Running each one is the only way.

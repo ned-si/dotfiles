@@ -205,10 +205,31 @@ command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
 command -v pyenv  >/dev/null 2>&1 && eval "$(pyenv init - zsh)"
 command -v fzf    >/dev/null 2>&1 && source <(fzf --zsh)
 
+# --- suggestions, on demand only ------------------------------------------
+# Nothing is proposed while typing. C-o fetches a suggestion for what is in the
+# buffer; C-e or End accepts it, and typing on past it drops it.
+#
+# Proposing after every keystroke means the accept widgets are always live, and
+# in vi mode those are keys used for ordinary editing (vi-end-of-line and
+# vi-add-eol, i.e. $ and A), so a suggestion gets taken by accident rather than
+# on purpose. Same reasoning as completion in nvim: offered when asked for.
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=59'
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 [[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] \
   && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+if (( ${+functions[_zsh_autosuggest_fetch]} )); then
+  # Exactly what the plugin's own disable widget sets. There is no documented
+  # option for "start disabled", and its presence, not its value, is what the
+  # plugin tests.
+  typeset -g _ZSH_AUTOSUGGEST_DISABLED
+
+  # autosuggest-fetch does not consult that flag, so it still works while
+  # suggestions are off, and no re-enabling dance is needed. Only the automatic
+  # path in _zsh_autosuggest_modify bails out early.
+  bindkey -M viins '^o' autosuggest-fetch
+  bindkey -M vicmd '^o' autosuggest-fetch
+fi
 
 # --- machine-local overrides ---------------------------------------------
 # Untracked. Interactive-only work config: aliases, functions, completions for
