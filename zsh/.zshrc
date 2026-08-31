@@ -236,7 +236,10 @@ fi
 # space are deliberately not accept keys: in the default menuselect keymap both
 # commit whatever happens to be highlighted, which is the shell version of the
 # <CR>-accepts-a-completion problem fixed in nvim.
-zstyle ':completion:*' menu select
+# No `menu select` here on purpose. Turning it on makes the menu open and
+# highlight an entry as soon as a completion is generated, which for zoxide's `z`
+# means a list of scored directories appears while typing, with the first one
+# already selected. That is the popup this setup is meant not to have.
 zmodload zsh/complist 2>/dev/null
 if [[ -n "${modules[zsh/complist]}" ]]; then
   bindkey -M menuselect '^n' down-line-or-history
