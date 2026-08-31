@@ -231,6 +231,24 @@ if (( ${+functions[_zsh_autosuggest_fetch]} )); then
   bindkey -M vicmd '^o' autosuggest-fetch
 fi
 
+# --- completion menu: same keys as nvim -----------------------------------
+# C-n and C-p move, C-y takes the highlighted entry, C-e dismisses. Enter and
+# space are deliberately not accept keys: in the default menuselect keymap both
+# commit whatever happens to be highlighted, which is the shell version of the
+# <CR>-accepts-a-completion problem fixed in nvim.
+zstyle ':completion:*' menu select
+zmodload zsh/complist 2>/dev/null
+if [[ -n "${modules[zsh/complist]}" ]]; then
+  bindkey -M menuselect '^n' down-line-or-history
+  bindkey -M menuselect '^p' up-line-or-history
+  bindkey -M menuselect '^y' accept-line
+  bindkey -M menuselect '^e' send-break
+  # undo leaves the menu and puts the buffer back as it was, so neither key
+  # silently inserts a completion.
+  bindkey -M menuselect ' ' undo
+  bindkey -M menuselect '^M' undo
+fi
+
 # --- machine-local overrides ---------------------------------------------
 # Untracked. Interactive-only work config: aliases, functions, completions for
 # internal tools. Environment variables belong in ~/.zshenv.local instead.
