@@ -392,6 +392,7 @@ deliberately not set, since the agent can read and write the working tree.
 
 | What | Why | Where |
 | --- | --- | --- |
+| `task kiro:quiet` | silence Kiro CLI's terminal popup | once per machine |
 | `gh auth login` | Octo and gh-dash | once |
 | Atlassian API token | Bitbucket PRs and Jira in nvim | `~/.zshenv.local` |
 | Default git identity | kept out of a public repo | `~/.gitconfig.local` |

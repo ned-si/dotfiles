@@ -91,6 +91,28 @@ tasks:
     cmds:
       - bash ci/check-path.sh
 
+  kiro:quiet:
+    desc: Stop Kiro CLI proposing things in the terminal (run once per machine)
+    # Not shell config, so stow cannot carry it: these live in Kiro CLI's own
+    # settings and default to on. The popup with icons and a score is
+    # `autocomplete`, the grey ghost text is `inline`, and they are separate
+    # settings, so turning one off leaves the other running.
+    #
+    # The restart matters. The popup is drawn by a long-running app that reads
+    # its settings at startup, so writing the flags changes nothing in sessions
+    # until it reloads.
+    cmds:
+      - |
+        if command -v kiro-cli >/dev/null 2>&1; then
+          kiro-cli settings autocomplete.disable true
+          kiro-cli inline disable
+          kiro-cli restart >/dev/null 2>&1 || true
+          kiro-cli settings list | grep -E 'autocomplete\.disable|inline\.enabled' \
+            || echo "  settings written but not listed, check kiro-cli settings list"
+        else
+          echo "  SKIP     kiro-cli not installed"
+        fi
+
   fmt:
     desc: Format the lua config in place
     cmds:
